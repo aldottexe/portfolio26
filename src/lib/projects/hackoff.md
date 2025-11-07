@@ -1,6 +1,6 @@
 ---
 emoji: 👾
-featureImage: https://www.alexlutz.com/projects/200kmi/1.png
+featureImage: https://www.alexlutz.com/projects/HackOff/boxt.png
 title: Hackoff!
 desc: hack off is a 2 player strategy cardgame.
 accent: 6bd1d0 

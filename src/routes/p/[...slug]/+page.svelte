@@ -20,35 +20,34 @@
 <Border primary={accent} />
 <Backdrop primaryC={accent} />
 
-<div
-	class="absolute z-[-1] h-screen w-full"
-	style="background-size:cover"
-	style:background-image="url({meta.featureImage})"
-></div>
-
-<div class="z-20 flex h-screen items-end gap-4 p-10">
+<div class="relative">
 	<div
-		class="content fixed right-5 left-5 flex flex-wrap items-center rounded-lg bg-main-black px-5"
+		class="content sticky top-8 right-20 left-20 mx-auto flex h-[52px] w-fit flex-wrap items-center rounded-xl bg-main-black px-5"
 	>
 		<h1 class="tracking-[-5px]">
 			{meta.title}
 		</h1>
-		<p class="w-1/2 min-w-fit p-4 {colorClass}">
-			{meta.desc}
-		</p>
+		<!-- <p class="w-1/2 min-w-fit p-4 {colorClass}"> -->
+		<!-- 	{meta.desc} -->
+		<!-- </p> -->
 	</div>
-</div>
+	<img
+		class="z-[-1] mx-auto box-border h-screen rounded-4xl p-15"
+		style="background-size:cover"
+		src={meta.featureImage}
+	/>
 
-<div class="mx-auto prose min-h-screen p-20 prose-p:text-main-black">
-	<Post />
+	<div class="mx-auto prose min-h-screen p-20 prose-p:text-main-black">
+		<Post />
+	</div>
 </div>
 
 <style>
 	.content::before {
 		position: absolute;
 		content: '';
-		inset: 5px;
+		inset: 4px;
 		border: 2px solid var(--color-main-white);
-		border-radius: 5px;
+		border-radius: 10px;
 	}
 </style>

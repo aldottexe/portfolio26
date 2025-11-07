@@ -57,12 +57,7 @@
 	</div>
 </div>
 <div class="mx-10">
-	<Recent
-		title="200kmi"
-		link="#"
-		imgsrc="https://www.alexlutz.com/projects/200kmi/1.png"
-		imgalt="web project"
-	/>
+	<Recent title="200kmi" link="#" imgsrc="200kmi/200kmiHero.gif" imgalt="web project" />
 </div>
 <div class="box-border h-[100vh] p-10 md:p-20">
 	<h2 id="projects" class=" mb-5 text-[100px] tracking-[-25px] md:text-[180px] md:tracking-[-35px]">
