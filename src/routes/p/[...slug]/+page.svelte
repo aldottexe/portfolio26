@@ -31,11 +31,9 @@
 		<!-- 	{meta.desc} -->
 		<!-- </p> -->
 	</div>
-	<img
-		class="z-[-1] mx-auto box-border h-screen rounded-4xl p-15"
-		style="background-size:cover"
-		src={meta.featureImage}
-	/>
+	<div class="align-center flex h-screen justify-center">
+		<img class="z-[-1] rounded-4xl p-15" style="object-fit:cover" src={meta.featureImage} />
+	</div>
 
 	<div class="mx-auto prose min-h-screen p-20 prose-p:text-main-black">
 		<Post />
