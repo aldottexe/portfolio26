@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-main-white: #eee;
+  --color-border-gray: #cbcbcb;
+  --color-main-gray: #d9d9d9;
+  --color-main-black: #252525;
+  --color-alt-black: #3f3f3f;
+  --color-main-green: #47C16B;
+  --color-dark-green: #29a452;
+  --color-main-orange: #EC4E20;
+  --color-main-blue: #4964D1;
+  --color-main-yellow: #f9e042;
+}
+
+@layer base {
+  * {
+    font-family: cofo-sans-mono-variable, sans-serif;
+    font-variation-settings: "wght" 400;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--color-main-white);
+  }
+
+  h1 {
+    @apply text-4xl;
+    font-variation-settings: "wght" 600;
+    letter-spacing: -1px;
+  }
+
+  h2 {
+    @apply text-4xl;
+    font-variation-settings: "wght" 600;
+    letter-spacing: -1px;
+  }
+}
