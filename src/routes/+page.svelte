@@ -24,7 +24,7 @@
 	<div class="flex h-[320px] max-w-110 flex-col justify-between">
 		<div>
 			<div class="mb-1 flex gap-1">
-				<Pill>👋</Pill>
+				<!-- <Pill>👋</Pill> -->
 			</div>
 			<!-- 	<h1 class="mb-5 uppercase">alexlutz.com</h1> -->
 			<!-- 	<p class="leading-[1.3] tracking-tight"> -->
@@ -35,11 +35,7 @@
 			<!-- 			>get in touch</a -->
 			<!-- 		>. -->
 			<!-- 	</p> -->
-			<img
-				src="name.svg"
-				alt="Alex Lutz"
-				class="box-border w-full scale-110 px-3 pb-3 md:max-h-45"
-			/>
+			<img src="name.svg" alt="Alex Lutz" class="box-border w-full scale-110 px-3 md:max-h-45" />
 		</div>
 		<div class="flex flex-col gap-2">
 			<ContactCta
@@ -56,10 +52,12 @@
 		</div>
 	</div>
 </div>
-<div class="mx-10">
+
+<div class="mx-10 mb-50">
 	<Recent title="200kmi" link="#" imgsrc="200kmi/200kmiHero.gif" imgalt="web project" />
 </div>
-<div class="box-border h-[100vh] p-10 md:p-20">
+
+<div class="box-border p-10 md:p-20">
 	<h2 id="projects" class=" mb-5 text-[100px] tracking-[-25px] md:text-[180px] md:tracking-[-35px]">
 		Projects
 	</h2>

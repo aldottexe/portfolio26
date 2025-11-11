@@ -14,6 +14,7 @@
 		<a href={resolve(link)}>
 			<img src={imgsrc} alt={imgalt} />
 		</a>
+		<div class="widget">FEATURED</div>
 		<div class="lower">
 			<div class="text">
 				<p class="text-main-orange">FEATURED</p>
@@ -50,12 +51,15 @@
 		aspect-ratio: 1/1;
 		box-sizing: border-box;
 		background-color: var(--color-main-black);
-		border-radius: 50px;
-		transition: padding 400ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 150ms;
+		border-radius: 20px;
+		padding: 10px;
+		transition:
+			padding 400ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 150ms,
+			border-radius 400ms ease-in-out;
 	}
 
 	img {
-		border-radius: 50px;
+		border-radius: 10px;
 		aspect-ratio: 1/1;
 		object-fit: cover;
 		transition: border-radius 100ms ease-in-out 150ms;
@@ -84,19 +88,35 @@
 		align-items: center;
 		justify-content: center;
 		width: 60px;
-		border-radius: 10px 10px 35px 10px;
+		border-radius: 5px;
 		margin: 0 5px 5px 0;
 		transition: background-color 150ms;
 		&:hover {
 			background-color: var(--color-dark-green);
 		}
 	}
+	.widget {
+		position: absolute;
+		color: var(--color-main-orange);
+		left: 2px;
+		top: 7px;
+		border-top-left-radius: 15px;
+		border-bottom-right-radius: 15px;
+		padding: 0px 12px 4px;
+		background-color: var(--color-main-black);
+		width: 120px;
+		max-width: fit-content;
+		transition: all 200ms ease-in-out 300ms;
+		overflow: hidden;
+		text-align: right;
+	}
 
 	.main:hover {
 		padding: 10px;
-		transition: padding 400ms cubic-bezier(0.33, 0.13, 0.02, 1.12);
+		transition:
+			padding 400ms cubic-bezier(0.33, 0.13, 0.02, 1.12),
+			border-radius 100ms ease-in-out;
 		img {
-			border-radius: 40px;
 			transition: border-radius 100ms ease-in-out;
 		}
 		.lower {
@@ -107,6 +127,11 @@
 				margin 300ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 50ms;
 		}
 		animation-play-state: running;
+		.widget {
+			0px;
+			transition: all 100ms ease-in-out;
+			padding: 0px 0px 4px;
+		}
 	}
 	.scroller {
 		max-width: 200px;

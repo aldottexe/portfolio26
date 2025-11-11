@@ -21,18 +21,15 @@
 <Backdrop primaryC={accent} />
 
 <div class="relative">
+	<div class="grid h-screen w-full place-content-center">
+		<img class="max-h-screen rounded-4xl px-5 py-20" src={meta.featureImage} />
+	</div>
 	<div
-		class="content sticky top-8 right-20 left-20 mx-auto flex h-[52px] w-fit flex-wrap items-center rounded-xl bg-main-black px-5"
+		class="content sticky top-8 right-20 bottom-8 left-20 mx-auto flex h-[52px] w-fit flex-wrap items-center rounded-xl bg-main-black px-5"
 	>
 		<h1 class="tracking-[-5px]">
 			{meta.title}
 		</h1>
-		<!-- <p class="w-1/2 min-w-fit p-4 {colorClass}"> -->
-		<!-- 	{meta.desc} -->
-		<!-- </p> -->
-	</div>
-	<div class="align-center flex h-screen justify-center">
-		<img class="z-[-1] rounded-4xl p-15" style="object-fit:cover" src={meta.featureImage} />
 	</div>
 
 	<div class="mx-auto prose min-h-screen p-20 prose-p:text-main-black">

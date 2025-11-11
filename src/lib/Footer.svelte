@@ -17,7 +17,7 @@
 			poppups.push({ l, x, y, r, key: elements });
 			elements++;
 			if (poppups.length > 200) poppups.shift();
-		}, 5000);
+		}, 3000);
 	});
 	onDestroy(() => {
 		if (browser) window.clearInterval(interval);

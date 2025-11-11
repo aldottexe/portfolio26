@@ -38,16 +38,12 @@
 	}
 
 	// effectively onResize
-	let resizeThrottler: number;
 	function resize() {
-		clearTimeout(resizeThrottler);
-		resizeThrottler = window.setTimeout(() => {
-			renderer?.setSize(window.innerWidth, window.innerHeight);
-			composer?.setSize(window.innerWidth, window.innerHeight);
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-			parts.forEach((p) => alignPatternToScreen(p));
-		}, 50);
+		renderer?.setSize(window.innerWidth, window.innerHeight);
+		composer?.setSize(window.innerWidth, window.innerHeight);
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		parts.forEach((p) => alignPatternToScreen(p));
 	}
 	let accent = new THREE.Color(accentC);
 	// const gray = new THREE.Color('#ec4e20');
@@ -188,7 +184,7 @@
 	onresize={resize}
 />
 <!-- <div class="fixed h-full w-full"></div> -->
-<canvas use:setup class="fixed top-0 left-0 z-[-2] h-full w-full"></canvas>
+<canvas use:setup class="fixed top-0 left-0 z-[-2] h-screen w-screen"></canvas>
 
 <style>
 	div {

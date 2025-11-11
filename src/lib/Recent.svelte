@@ -54,31 +54,27 @@
 <style lang="postcss">
 	@reference "tailwindcss";
 	.holder {
-		max-height: 90vh;
-		height: max-content;
+		max-height: min(90vh, 130vw);
+		min-height: min-content;
+		height: 100vh;
 		display: flex;
 		box-sizing: border-box;
 		background-color: var(--color-main-black);
-		border-radius: 50px;
+		border-radius: 20px;
 		transition: padding 600ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 100ms;
 		flex-direction: column;
-		width: max-content;
-		max-width: 100%;
+		width: 100%;
 		margin: 0 auto;
 	}
 	.imgHolder {
 		display: block;
-		aspect-ratio: 4 / 3;
-		border-radius: 50px;
+		width: 100%;
+		border-radius: 20px;
 		background-position: center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		transition: border-radius 600ms ease-in-out 100ms;
 		flex: 1 1 auto;
-		height: 100vh;
-		min-height: 300px;
-		max-height: 600px;
-		min-width: 200px;
 		max-width: 1000px;
 	}
 	.lower {
@@ -107,7 +103,7 @@
 		justify-content: center;
 		width: 60px;
 		min-height: 70px;
-		border-radius: 10px 10px 35px 10px;
+		border-radius: 5px;
 		margin: 0 5px 5px 0;
 		transition: background-color 150ms;
 		&:hover {
@@ -119,7 +115,7 @@
 		padding: 10px;
 		transition: padding 600ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 100ms;
 		.imgHolder {
-			border-radius: 40px;
+			border-radius: 10px;
 			transition: border-radius 100ms ease-in-out;
 		}
 		.lower {
@@ -163,6 +159,8 @@
 			flex-direction: row;
 			justify-content: stretch;
 			align-items: stretch;
+			width: 100%;
+			max-width: 1300px;
 		}
 		.lower {
 			padding-top: 10px;
@@ -180,7 +178,8 @@
 			align-self: end;
 		}
 		.imgHolder {
-			aspect-ratio: 4 / 1;
+			width: 100%;
+			max-width: unset;
 		}
 
 		.open {

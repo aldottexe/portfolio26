@@ -35,7 +35,22 @@
 	}}
 />
 
-<div class="">
+{#snippet important(name: string, path: string, metadata: unknown, i: number)}
+	<a
+		class={`block rounded-lg rounded-r-xl p-2 ${checker(i)} flex justify-between transition-colors duration-150 hover:bg-main-blue`}
+		href={resolve(`/p/${path}`)}
+		onmouseenter={() => (img = (metadata?.featureImage as string) || '')}
+		onmouseleave={() => (img = '')}
+		><span class="block">{metadata?.emoji || '📎'} {name}</span><img
+			class="max-h-20 rounded-md border-2"
+			style:border-color="#{metadata?.accent || ''}"
+			src={metadata?.featureImage as string}
+			alt="click to explore!"
+		/></a
+	>
+{/snippet}
+
+<div>
 	{#each Object.entries(tree.subdirs) as [name, d], i (i)}
 		<div class="">
 			<button
@@ -55,12 +70,16 @@
 		</div>
 	{/each}
 	{#each Object.entries(tree.pages) as [name, [path, metadata]], i (i)}
-		<a
-			class={`block rounded-md p-2 ${checker(i)} transition-colors duration-150 hover:bg-main-blue`}
-			href={resolve(`/p/${path}`)}
-			onmouseenter={() => (img = (metadata?.featureImage as string) || '')}
-			onmouseleave={() => (img = '')}>{metadata?.emoji || '📎'} {name}</a
-		>
+		{#if metadata?.important || false}
+			{@render important(name, path, metadata, i)}
+		{:else}
+			<a
+				class={`block rounded-md p-2 ${checker(i)} transition-colors duration-150 hover:bg-main-blue`}
+				href={resolve(`/p/${path}`)}
+				onmouseenter={() => (img = (metadata?.featureImage as string) || '')}
+				onmouseleave={() => (img = '')}>{metadata?.emoji || '📎'} {name}</a
+			>
+		{/if}
 	{/each}
 	{#key img}
 		{#if img.length > 0}
