@@ -68,8 +68,8 @@
 		display: flex;
 		justify-content: space-between;
 		overflow: hidden;
-		height: 0px;
-		margin: 0px 30px 0px 60px;
+		height: 0;
+		margin: 0 30px 0px 60px;
 		transition:
 			height 200ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 100ms,
 			margin 300ms ease-in-out 100ms;
@@ -102,7 +102,7 @@
 		top: 7px;
 		border-top-left-radius: 15px;
 		border-bottom-right-radius: 15px;
-		padding: 0px 12px 4px;
+		padding: 0 12px 4px;
 		background-color: var(--color-main-black);
 		width: 120px;
 		max-width: fit-content;
@@ -121,14 +121,13 @@
 		}
 		.lower {
 			height: 70px;
-			margin: 30px 0 0px 30px;
+			margin: 30px 0 0 30px;
 			transition:
 				height 300ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 50ms,
 				margin 300ms cubic-bezier(0.33, 0.13, 0.02, 1.12) 50ms;
 		}
 		animation-play-state: running;
 		.widget {
-			0px;
 			transition: all 100ms ease-in-out;
 			padding: 0px 0px 4px;
 		}
