@@ -2,14 +2,18 @@
 	const { children } = $props();
 </script>
 
-<p class="w-fit rounded-2xl bg-main-green px-3">
-	<span class="relative top-[1px] filter">
-		{@render children()}
-	</span>
-</p>
+<span class="pill">
+	{@render children()}
+</span>
 
 <style>
-	.filter {
-		/* filter: grayscale() brightness(1.1); */
+	.pill {
+		border: 2px var(--color-main-orange) solid;
+		color: var(--color-main-orange);
+		font-size: 0.7rem;
+		border-radius: 100px;
+		padding: 0px 10px 1px;
+		width: fit-content;
+		display: block;
 	}
 </style>

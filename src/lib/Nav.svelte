@@ -105,7 +105,7 @@
 		content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11L11 0.999999' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M1.00781 1L11.0078 11' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A");
 	}
 	.nav {
-		@apply fixed right-0 left-0 z-10 mx-5 my-4 box-border flex w-fit rounded-xl bg-main-black p-4 md:mx-10 md:my-8;
+		@apply fixed left-0 z-10 mx-5 my-4 box-border flex w-fit rounded-xl bg-main-black p-4 md:mx-10 md:my-8;
 		transition: width 200ms ease-in-out;
 		&::after {
 			content: ' ';

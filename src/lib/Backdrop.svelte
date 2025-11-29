@@ -110,7 +110,7 @@
 		effect.uniforms['cylindricalRatio'].value = cylindricalRatio;
 
 		const effect2 = new ShaderPass(RGBShiftShader);
-		effect2.uniforms['amount'].value = 0.002;
+		effect2.uniforms['amount'].value = 0.001;
 		composer.addPass(effect2);
 
 		composer.addPass(new OutputPass());

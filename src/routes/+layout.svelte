@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import Nav from '$lib/Nav.svelte';
+	// import Nav from '$lib/Nav.svelte';
 	import Footer from '$lib/Footer.svelte';
 	import PageTransition from '$lib/PageTransition.svelte';
 	// import favicon from '$lib/assets/favicon.svg';
@@ -13,9 +13,16 @@
 </svelte:head>
 <PageTransition />
 
-<Nav></Nav>
+<!-- <Nav></Nav> -->
 
-<div class="">
+<div>
 	{@render children?.()}
 </div>
 <Footer></Footer>
+
+<style>
+	:global(body) {
+		background-color: var(--color-main-white);
+		overflow-x: hidden;
+	}
+</style>

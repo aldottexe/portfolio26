@@ -2,8 +2,9 @@
 emoji: 👾
 featureImage: https://www.alexlutz.com/projects/HackOff/boxt.png
 title: Hackoff!
-desc: hack off is a 2 player strategy cardgame.
+desc: combining 3D rendering with colage to create a product inspired by fiction with roots in reality
 accent: 6bd1d0 
+tags: Blender, Indesign
 ---
 
 

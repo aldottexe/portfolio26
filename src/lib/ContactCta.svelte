@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
-
 	interface props {
 		href: string;
 		title: string;
@@ -46,7 +44,7 @@
 		position: absolute;
 		left: 0;
 		height: var(--height);
-		background-color: var(--color-main-black);
+		background-color: var(--color-main-gray);
 		padding: 3px 5px 3px 12px;
 		border-radius: 5px;
 		display: flex;

@@ -48,7 +48,6 @@
 	.main {
 		position: relative;
 		max-width: 330px;
-		aspect-ratio: 1/1;
 		box-sizing: border-box;
 		background-color: var(--color-main-black);
 		border-radius: 20px;
@@ -60,7 +59,6 @@
 
 	img {
 		border-radius: 10px;
-		aspect-ratio: 1/1;
 		object-fit: cover;
 		transition: border-radius 100ms ease-in-out 150ms;
 	}
@@ -130,6 +128,7 @@
 		.widget {
 			transition: all 100ms ease-in-out;
 			padding: 0px 0px 4px;
+			width: 0;
 		}
 	}
 	.scroller {
