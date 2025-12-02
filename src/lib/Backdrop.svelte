@@ -193,4 +193,7 @@
 		/* background-color: #00000088; */
 		backdrop-filter: blur(2px);
 	}
+	canvas {
+		image-rendering: pixelated;
+	}
 </style>

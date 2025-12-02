@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Backdrop from '$lib/Backdrop.svelte';
+	import Border from '$lib/Border.svelte';
 	import ProjectList from '$lib/ProjectList.svelte';
-	import ContactCta from '$lib/ContactCta.svelte';
 	import Recent from '$lib/Recent.svelte';
 	import type { PageProps } from './$types';
 	let w = $state(0);
@@ -9,6 +10,8 @@
 </script>
 
 <svelte:window bind:innerWidth={w} />
+
+<Backdrop primaryC="#eee" accentC="#facdc0" />
 
 <div class="grid h-screen w-screen place-content-center">
 	<div>
@@ -19,20 +22,6 @@
 		</p>
 	</div>
 </div>
-
-<!-- <div class="flex flex-col gap-2"> -->
-<!-- 	<ContactCta -->
-<!-- 		href="mailto:alexanderlutz@yahoo.com" -->
-<!-- 		title="Email" -->
-<!-- 		copyVal="alexanderlutz@yahoo.com" -->
-<!-- 	/> -->
-<!-- 	<ContactCta -->
-<!-- 		href="https://www.linkedin.com/in/alex-lutz-1o/" -->
-<!-- 		title="Linkedin" -->
-<!-- 		copyVal="alex-lutz-1o" -->
-<!-- 	/> -->
-<!-- 	<ContactCta href="https://github.com/aldottexe" title="Github" copyVal="aldottexe" /> -->
-<!-- </div> -->
 
 {#if featuredProject?.metadata}
 	<div class="mx-auto mb-10 max-w-310 px-10">

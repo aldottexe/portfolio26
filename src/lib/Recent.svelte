@@ -2,6 +2,7 @@
 	import { resolve } from '$app/paths';
 	import type { Action } from 'svelte/action';
 	import Pill from './Pill.svelte';
+	import Arrow from './Arrow.svelte';
 
 	interface p {
 		title: string;
@@ -17,15 +18,15 @@
 	const activateOnScroll: Action<HTMLElement> = (node) => {
 		window.addEventListener('scroll', () => {
 			const rect = node.getBoundingClientRect();
-			if (rect.y + rect.height < window.innerHeight) open = true;
-			else if (rect.y + rect.height > window.innerHeight + 300) open = false;
+			if (rect.y + rect.height < window.innerHeight + 200) open = true;
+			else if (rect.y + rect.height > window.innerHeight + 400) open = false;
 		});
 	};
 
 	let open = $state(false);
 </script>
 
-<div class={`holder ${open ? 'open' : ''}`} use:activateOnScroll>
+<div class="holder {open ? 'open' : ''}" use:activateOnScroll>
 	<div class="top">
 		<span class="featured">Featured</span>
 		<div class="arrow"></div>
@@ -44,7 +45,11 @@
 					{desc}
 				</p>
 			</div>
-			<a class="button" href={link}> (view) </a>
+			<Arrow
+				href={link}
+				className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center"
+				>(view)</Arrow
+			>
 		</div>
 	</div>
 </div>
@@ -100,6 +105,7 @@
 	.side {
 		display: flex;
 		width: var(--col-w);
+		flex-shrink: 0;
 		flex-direction: column;
 		justify-content: space-between;
 		gap: 30px 0;
@@ -163,7 +169,6 @@
 		}
 		.side {
 			flex-direction: row;
-			margin-left: 10px;
 			width: 100%;
 		}
 		.button {
@@ -177,6 +182,9 @@
 		h1 {
 			min-width: unset;
 			margin-right: 10px;
+		}
+		.desc {
+			padding-left: 10px;
 		}
 	}
 	@media (max-width: 700px) {
@@ -195,7 +203,6 @@
 		}
 		.side {
 			flex-direction: column;
-			margin: 0 10px;
 		}
 		.desc {
 			width: unset;
