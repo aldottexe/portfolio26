@@ -3,6 +3,7 @@
 	import type { Action } from 'svelte/action';
 	import Pill from './Pill.svelte';
 	import Arrow from './Arrow.svelte';
+	import Glass from './Glass.svelte';
 
 	interface p {
 		title: string;
@@ -26,33 +27,35 @@
 	let open = $state(false);
 </script>
 
-<div class="holder {open ? 'open' : ''}" use:activateOnScroll>
-	<div class="top">
-		<span class="featured">Featured</span>
-		<div class="arrow"></div>
-		<h1>{title}</h1>
-	</div>
-	<div class="bottom">
-		<img src={imgsrc} alt={imgalt} />
-		<div class="side">
-			<div class="desc">
-				<div class="pillHolder">
-					{#each tags as tag (tag)}
-						<Pill>{tag}</Pill>
-					{/each}
+<Glass className="p-2 pt-0 w-fit mx-auto">
+	<div class="holder {open ? 'open' : ''}" use:activateOnScroll>
+		<div class="top">
+			<span class="featured">Featured</span>
+			<div class="arrow"></div>
+			<h1>{title}</h1>
+		</div>
+		<div class="bottom">
+			<img src={imgsrc} alt={imgalt} />
+			<div class="side">
+				<div class="desc">
+					<div class="pillHolder">
+						{#each tags as tag (tag)}
+							<Pill>{tag}</Pill>
+						{/each}
+					</div>
+					<p>
+						{desc}
+					</p>
 				</div>
-				<p>
-					{desc}
-				</p>
+				<Arrow
+					href={link}
+					className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center"
+					>(view)</Arrow
+				>
 			</div>
-			<Arrow
-				href={link}
-				className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center"
-				>(view)</Arrow
-			>
 		</div>
 	</div>
-</div>
+</Glass>
 
 <style lang="postcss">
 	@reference "tailwindcss";
@@ -66,13 +69,14 @@
 		@apply text-5xl;
 		height: 60px;
 		margin-left: 10px;
+		margin-top: 5px;
 		display: flex;
 		align-items: center;
 		gap: 0 30px;
 		margin-bottom: 10px;
 		overflow-y: hidden;
 		overflow-x: hidden;
-		transition: height 400ms;
+		transition: height 600ms;
 	}
 	.featured {
 		font-style: italic;
@@ -84,7 +88,7 @@
 		gap: 15px 20px;
 		width: 100%;
 		justify-content: space-between;
-		transition: gap 400ms 100ms;
+		transition: gap 400ms;
 	}
 	.desc {
 		width: var(--col-w);
@@ -99,8 +103,6 @@
 		border-radius: 7px;
 		max-width: fit-content;
 		margin: 0 auto;
-		transform: translateY(0);
-		transition: transform 400ms;
 	}
 	.side {
 		display: flex;
@@ -110,7 +112,7 @@
 		justify-content: space-between;
 		gap: 30px 0;
 		overflow: hidden;
-		transition: width 400ms 100ms;
+		transition: width 400ms;
 	}
 	.button {
 		background-color: var(--color-main-green);
@@ -215,6 +217,7 @@
 		.top {
 			height: 0px;
 			transition: height 400ms 100ms;
+			margin-top: 0;
 		}
 		.bottom {
 			gap: 0;
@@ -223,10 +226,6 @@
 		.side {
 			width: 0px;
 			transition: width 400ms;
-		}
-		img {
-			transform: translateY(-40px);
-			transition: transform 400ms 100ms;
 		}
 		@media (max-width: 1100px) {
 			.side {

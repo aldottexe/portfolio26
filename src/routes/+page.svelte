@@ -11,9 +11,9 @@
 
 <svelte:window bind:innerWidth={w} />
 
-<Backdrop primaryC="#eee" accentC="#facdc0" />
+<Backdrop primaryC="#f1b49f" accentC="#facdc0" />
 
-<div class="grid h-screen w-screen place-content-center">
+<div class="grid h-[calc(100vh-50px)] w-screen place-content-center">
 	<div>
 		<img src="logo.svg" alt="Welcome!" class="mx-auto w-50" />
 		<p class="max-w-100 text-center text-xl">
