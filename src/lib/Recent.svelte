@@ -47,11 +47,12 @@
 						{desc}
 					</p>
 				</div>
-				<Arrow
-					href={link}
-					className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center"
-					>(view)</Arrow
-				>
+				<a href={link} class="button"> (view) </a>
+				<!-- <Arrow -->
+				<!-- 	href={link} -->
+				<!-- 	className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center" -->
+				<!-- 	>(view)</Arrow -->
+				<!-- > -->
 			</div>
 		</div>
 	</div>
