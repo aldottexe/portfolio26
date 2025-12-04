@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Backdrop from '$lib/Backdrop.svelte';
+	import Backdrop2 from '$lib/Backdrop2.svelte';
 	import Border from '$lib/Border.svelte';
 	import ProjectList from '$lib/ProjectList.svelte';
 	import Recent from '$lib/Recent.svelte';

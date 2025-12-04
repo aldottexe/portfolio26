@@ -18,7 +18,6 @@
 	const light = new THREE.PointLight(0xffffff, 10);
 	light.position.set(0, 0, 2);
 	scene.add(light);
-	scene.add(new THREE.PointLightHelper(light));
 
 	scene.add(new THREE.AmbientLight(0xffffff, 1));
 
@@ -36,7 +35,7 @@
 				y: window.scrollY, // ✅ THIS is the correct offset
 				width: window.innerWidth,
 				height: window.innerHeight,
-				scale: window.devicePixelRatio,
+				scale: 0.5,
 				windowWidth: document.documentElement.clientWidth,
 				windowHeight: document.documentElement.clientHeight,
 
@@ -46,6 +45,7 @@
 			domTexture.needsUpdate = true;
 			mat.uniforms.screenTex.value = domTexture;
 			mat.uniforms.resolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
+			mat.uniforms.aspect.value = window.innerWidth / window.innerHeight;
 			mat.needsUpdate = true;
 		}, 100);
 
@@ -68,22 +68,24 @@
 		const timer = new THREE.Timer();
 		renderer.setAnimationLoop(() => {
 			const d = timer.getDelta();
-			mesh.rotateZ(d);
+			mesh.rotateZ(-d / 5);
 			renderer.render(scene, camera);
 			timer.update();
 		});
 
-		let to = 0;
-		window.addEventListener('scroll', () => {
-			window.clearTimeout(to);
+		let capturePending = false;
 
-			to = window.setTimeout(async () => {
+		window.addEventListener('scroll', () => {
+			if (capturePending) return;
+			capturePending = true;
+
+			requestAnimationFrame(async () => {
 				const c = await html2canvas(document.body, {
 					x: 0,
 					y: window.scrollY, // ✅ THIS is the correct offset
 					width: window.innerWidth,
 					height: window.innerHeight,
-					scale: window.devicePixelRatio,
+					scale: 0.5,
 					windowWidth: document.documentElement.clientWidth,
 					windowHeight: document.documentElement.clientHeight,
 
@@ -92,7 +94,8 @@
 
 				mat.uniforms.screenTex.value.image = c;
 				mat.uniforms.screenTex.value.needsUpdate = true;
-			}, 100);
+				capturePending = false;
+			});
 		});
 	}
 	const setup: Action<HTMLCanvasElement> = (node) => {
@@ -115,8 +118,3 @@
 	class="pointer-events-none fixed top-0 left-0 z-[2] h-screen w-screen"
 	data-three-glass
 ></canvas>
-
-<style>
-	canvas {
-	}
-</style>
