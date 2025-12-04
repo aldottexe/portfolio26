@@ -65,7 +65,7 @@
 	bind:offsetWidth={w}
 	bind:offsetHeight={h}
 	style:border-radius={radius + 'px'}
-	style:backdrop-filter="url(#shader{shaderid}) blur(0.5px)"
+	style:backdrop-filter="url(#shader{shaderid}) blur(1px)"
 >
 	{@render children()}
 </div>

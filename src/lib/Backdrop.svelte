@@ -1,171 +1,103 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
 	import * as THREE from 'three';
-	import {
-		GLTFLoader,
-		OutputPass,
-		RenderPass,
-		RGBShiftShader,
-		ShaderPass
-	} from 'three/examples/jsm/Addons.js';
-	import { EffectComposer } from 'three/examples/jsm/Addons.js';
-	import { getDistortionShaderDefinition } from './fisheye';
+	import { GLTFLoader } from 'three/examples/jsm/Addons.js';
+	import { material } from './GlassMaterial';
+	import html2canvas from 'html2canvas';
 	import { onDestroy } from 'svelte';
 
 	const { primaryC = '#4964D1', accentC = '#bfc9ef' }: { primaryC: string; accentC: string } =
 		$props();
 
-	let renderer: THREE.WebGLRenderer;
-	let composer: EffectComposer;
-	let scene = new THREE.Scene();
+	const scene = new THREE.Scene();
 
-	let camera = new THREE.PerspectiveCamera(120, 1, 0.1, 1000);
+	const camera = new THREE.PerspectiveCamera(120, 1, 0.1, 1000);
 	camera.position.z = 7;
+	scene.add(camera);
 
-	let mat = new THREE.MeshBasicMaterial({ name: 'base', color: '#FFF' });
+	const light = new THREE.PointLight(0xffffff, 10);
+	light.position.set(0, 0, 2);
+	scene.add(light);
+	scene.add(new THREE.PointLightHelper(light));
 
-	const mouse = new THREE.Vector2(9999, 9999);
-	const rc = new THREE.Raycaster();
-	const tempMtrx = new THREE.Matrix4();
+	scene.add(new THREE.AmbientLight(0xffffff, 1));
 
-	let parts: THREE.InstancedMesh[] = [];
-
-	function alignPatternToScreen(part: THREE.InstancedMesh) {
-		const bounds = { tl: new THREE.Vector2(), br: new THREE.Vector2() };
-		camera.getViewBounds(20, bounds.tl, bounds.br);
-		part.position.setX(bounds.tl.x);
-		part.position.setY(-bounds.tl.y / 2);
-	}
-
-	// effectively onResize
-	function resize() {
-		renderer?.setSize(window.innerWidth, window.innerHeight);
-		composer?.setSize(window.innerWidth, window.innerHeight);
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-		parts.forEach((p) => alignPatternToScreen(p));
-	}
-	let accent = new THREE.Color(accentC);
-	// const gray = new THREE.Color('#ec4e20');
-	const gray = new THREE.Color(primaryC);
+	const mat = material;
+	let renderer: THREE.WebGLRenderer;
 
 	async function createScene(node: HTMLCanvasElement) {
-		console.log('Initial size:', window.innerWidth, window.innerHeight);
-		renderer = new THREE.WebGLRenderer({ depth: false, antialias: true, canvas: node });
-
+		renderer = new THREE.WebGLRenderer({ antialias: false, canvas: node, alpha: true });
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(gray);
 		renderer.setPixelRatio(window.devicePixelRatio);
 
+		window.setTimeout(async () => {
+			const c = await html2canvas(document.body, {
+				x: 0,
+				y: window.scrollY, // ✅ THIS is the correct offset
+				width: window.innerWidth,
+				height: window.innerHeight,
+				scale: window.devicePixelRatio,
+				windowWidth: document.documentElement.clientWidth,
+				windowHeight: document.documentElement.clientHeight,
+
+				ignoreElements: (el) => el.hasAttribute('data-three-glass')
+			});
+			const domTexture = new THREE.CanvasTexture(c);
+			domTexture.needsUpdate = true;
+			mat.uniforms.screenTex.value = domTexture;
+			mat.uniforms.resolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
+			mat.needsUpdate = true;
+		}, 100);
+
+		// const oc = new OrbitControls(camera, node);
 		camera.aspect = window.innerWidth / window.innerHeight;
-		scene.add(camera);
-
-		const logo = (await new GLTFLoader().loadAsync('/logo.glb')).scene;
-
-		const w = 20;
-		const h = 20;
-
-		//theres three meshes that makeup the logo
-		logo.children.forEach((c) => {
-			// make enough instances to fill the screen
-			const part = new THREE.InstancedMesh(c.geometry, mat, w * h);
-			part.rotateX(Math.PI / 2);
-			part.rotateY(-Math.PI / 2);
-			const scale = 1.2;
-			part.scale.set(scale, scale, scale);
-
-			for (let j = 0; j < part.count; j++) {
-				part.getMatrixAt(j, tempMtrx);
-				part.setMatrixAt(j, tempMtrx.makeTranslation(Math.floor(j / w) * 2, 0, -(j % w) * 5));
-				part.setColorAt(j, gray);
-			}
-			scene.add(part);
-			parts.push(part);
-		});
-
-		///////////////////////////////// effects ////////////////////////////////////////////////////
-		composer = new EffectComposer(renderer);
-		composer.addPass(new RenderPass(scene, camera));
-
-		// const bloomPass = new BloomPass(
-		// 	0.5, // strength
-		// 	10, // kernel size
-		// 	2 // sigma ?
-		// );
-		// composer.addPass(bloomPass);
-
-		const effect = new ShaderPass(getDistortionShaderDefinition());
-		composer.addPass(effect);
-		// Setup distortion effect
-		var strength = 0.5;
-		var cylindricalRatio = 1;
-		var height = Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) / camera.aspect;
-
-		// camera.fov = (Math.atan(height) * 2 * 180) / 3.1415926535;
 		camera.updateProjectionMatrix();
 
-		effect.uniforms['strength'].value = strength;
-		effect.uniforms['height'].value = height;
-		effect.uniforms['aspectRatio'].value = camera.aspect;
-		effect.uniforms['cylindricalRatio'].value = cylindricalRatio;
-
-		const effect2 = new ShaderPass(RGBShiftShader);
-		effect2.uniforms['amount'].value = 0.001;
-		composer.addPass(effect2);
-
-		composer.addPass(new OutputPass());
-
-		parts.forEach((p) => {
-			alignPatternToScreen(p);
+		const mesh = (await new GLTFLoader().loadAsync('ovallogo.glb')).scene;
+		mesh.rotateX(Math.PI / 2);
+		const scale = 6;
+		mesh.scale.set(scale, scale, scale);
+		mesh.traverse((o) => {
+			if (o.isMesh) {
+				o.material = mat;
+			}
 		});
-		renderer.setAnimationLoop(() => animate(parts));
+		scene.add(mesh);
+		console.log(mesh);
+
+		const timer = new THREE.Timer();
+		renderer.setAnimationLoop(() => {
+			const d = timer.getDelta();
+			mesh.rotateZ(d);
+			renderer.render(scene, camera);
+			timer.update();
+		});
+
+		let to = 0;
+		window.addEventListener('scroll', () => {
+			window.clearTimeout(to);
+
+			to = window.setTimeout(async () => {
+				const c = await html2canvas(document.body, {
+					x: 0,
+					y: window.scrollY, // ✅ THIS is the correct offset
+					width: window.innerWidth,
+					height: window.innerHeight,
+					scale: window.devicePixelRatio,
+					windowWidth: document.documentElement.clientWidth,
+					windowHeight: document.documentElement.clientHeight,
+
+					ignoreElements: (el) => el.hasAttribute('data-three-glass')
+				});
+
+				mat.uniforms.screenTex.value.image = c;
+				mat.uniforms.screenTex.value.needsUpdate = true;
+			}, 100);
+		});
 	}
-
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	const tempC = new THREE.Color();
-	// const accent = new THREE.Color(0x4964d1);
-
-	const tempPos = new THREE.Vector3();
-	const tempScl = new THREE.Vector3();
-	const tempRos = new THREE.Quaternion();
-
-	const animate = (parts: THREE.InstancedMesh[]) => {
-		rc.setFromCamera(mouse, camera);
-		parts.forEach((part) => {
-			//bring all colors back to gray
-			for (let i = 0; i < part.count; i++) {
-				part.getColorAt(i, tempC);
-				tempC.r = tempC.r + (gray.r - tempC.r) / 40;
-				tempC.g = tempC.g + (gray.g - tempC.g) / 40;
-				tempC.b = tempC.b + (gray.b - tempC.b) / 40;
-				part.setColorAt(i, tempC);
-				part.getMatrixAt(i, tempMtrx);
-				tempMtrx.decompose(tempPos, tempRos, tempScl);
-				tempPos.setY(tempPos.y / 1.1);
-				part.setMatrixAt(i, tempMtrx.compose(tempPos, tempRos, tempScl));
-			}
-
-			//raycast stuff
-			const intersect = rc.intersectObject(part);
-			if (intersect.length > 0) {
-				const instanceID = intersect[0].instanceId || 0;
-				part.setColorAt(instanceID, accent);
-				part.getMatrixAt(instanceID, tempMtrx);
-				tempMtrx.decompose(tempPos, tempRos, tempScl);
-				tempPos.setY(-0.1);
-				part.setMatrixAt(instanceID, tempMtrx.compose(tempPos, tempRos, tempScl));
-			}
-
-			if (part.instanceColor) part.instanceColor.needsUpdate = true;
-			if (part.instanceMatrix) part.instanceMatrix.needsUpdate = true;
-		});
-		composer.render();
-	};
-
 	const setup: Action<HTMLCanvasElement> = (node) => {
 		createScene(node);
 	};
-
 	onDestroy(() => {
 		renderer?.dispose();
 		scene.traverse((obj) => {
@@ -178,22 +110,13 @@
 	});
 </script>
 
-<svelte:window
-	onmousemove={(e) =>
-		mouse.set((e.x / window.innerWidth) * 2 - 1, -(e.y / window.innerHeight) * 2 + 1)}
-	onresize={resize}
-/>
-<!-- <div class="fixed h-full w-full"></div> -->
-<canvas use:setup class="fixed top-0 left-0 z-[-2] h-screen w-screen"></canvas>
+<canvas
+	use:setup
+	class="pointer-events-none fixed top-0 left-0 z-[2] h-screen w-screen"
+	data-three-glass
+></canvas>
 
 <style>
-	div {
-		z-index: -1;
-		mask: radial-gradient(#00000022, #000000ff);
-		/* background-color: #00000088; */
-		backdrop-filter: blur(2px);
-	}
 	canvas {
-		image-rendering: pixelated;
 	}
 </style>

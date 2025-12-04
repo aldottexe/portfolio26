@@ -19,7 +19,6 @@
 	let pos = new Spring({ x: 10000, y: 10000 });
 
 	const { projects }: Props = $props();
-	console.log(projects);
 
 	function checker(i: number): string {
 		return i % 2 ? 'bg-main-black' : 'bg-alt-black';
