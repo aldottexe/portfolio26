@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageProps } from '../$types';
-	import Backdrop from '$lib/Backdrop.svelte';
-	import Border from '$lib/Border.svelte';
+	// import Backdrop from '$lib/Backdrop.svelte';
+	// import Border from '$lib/Border.svelte';
 
 	const { data }: PageProps = $props();
 	const Post = data.component;
@@ -17,8 +17,8 @@
 		luminosity > 127 ? 'text-main-black border-main-black' : 'text-main-white border-main-white';
 </script>
 
-<Border primary={accent} />
-<Backdrop primaryC={accent} />
+<!-- <Border primary={accent} /> -->
+<!-- <Backdrop primaryC={accent} /> -->
 
 <div class="relative">
 	<div class="grid h-screen w-full place-content-center">
