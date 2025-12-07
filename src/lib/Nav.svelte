@@ -48,8 +48,8 @@
 	<link rel="preload" as="image" href="/x.svg" />
 </svelte:head>
 
-<a href="/" class="fixed mx-5 my-4 md:mx-10 md:my-8">
-	<img src="/logo.svg" alt="site logo" width="50" />
+<a href="/" class="fixed z-10 mx-5 my-4 md:mx-10 md:my-8">
+	<img src="/logo small.svg" alt="site logo" width="50" />
 </a>
 
 <button class="nav" onclick={() => (open = !open)}>
