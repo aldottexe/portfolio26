@@ -3,7 +3,7 @@
 	import type { Action } from 'svelte/action';
 	import Pill from './Pill.svelte';
 	import Arrow from './Arrow.svelte';
-	import Glass from './Glass.svelte';
+	import div from './Glass.svelte';
 
 	interface p {
 		title: string;
@@ -27,7 +27,7 @@
 	let open = $state(false);
 </script>
 
-<Glass className="p-2 pt-0 w-fit mx-auto">
+<div className="p-2 pt-0 w-fit mx-auto">
 	<div class="holder {open ? 'open' : ''}" use:activateOnScroll>
 		<div class="top">
 			<span class="featured">Featured</span>
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-</Glass>
+</div>
 
 <style lang="postcss">
 	@reference "tailwindcss";

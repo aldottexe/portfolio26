@@ -2,6 +2,7 @@
 	import ProjectList from '$lib/ProjectList.svelte';
 	import Recent from '$lib/Recent.svelte';
 	import type { PageProps } from './$types';
+	import Slashes from '$lib/Slashes.svelte';
 	let w = $state(0);
 	const { data }: PageProps = $props();
 	const featuredProject = data.projects.find((e) => e.slug === '200kmi');
@@ -36,6 +37,7 @@
 	</div>
 {/if}
 
+<Slashes name="Projects" />
 <div class="mx-auto mb-10 max-w-310 px-10">
 	<ProjectList projects={data.projects} />
 </div>

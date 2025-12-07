@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	// import Nav from '$lib/Nav.svelte';
+	import Nav from '$lib/Nav.svelte';
 	import Footer from '$lib/Footer.svelte';
 	import PageTransition from '$lib/PageTransition.svelte';
 	// import favicon from '$lib/assets/favicon.svg';
@@ -13,7 +13,7 @@
 </svelte:head>
 <PageTransition />
 
-<!-- <Nav></Nav> -->
+<Nav></Nav>
 
 <div>
 	{@render children?.()}
