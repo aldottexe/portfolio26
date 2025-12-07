@@ -16,7 +16,7 @@
 </script>
 
 <div
-	class={`fixed ${transitioning ? 'bottom-0 h-full ease-out' : 'top-0 h-0 ease-in'} z-50 w-full bg-main-black transition-[height] duration-300`}
+	class={`fixed ${transitioning ? 'bottom-0 h-full ease-out' : 'top-0 h-0 ease-in'} z-50 w-full bg-main-orange transition-[height] duration-300`}
 ></div>
 
 <style lang="postcss">

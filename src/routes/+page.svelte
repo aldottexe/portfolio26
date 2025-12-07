@@ -3,6 +3,7 @@
 	import Recent from '$lib/Recent.svelte';
 	import type { PageProps } from './$types';
 	import Slashes from '$lib/Slashes.svelte';
+	import Squiggle from '$lib/squiggle.svelte';
 	let w = $state(0);
 	const { data }: PageProps = $props();
 	const featuredProject = data.projects.find((e) => e.slug === '200kmi');
@@ -19,7 +20,7 @@
 		/>
 		<p class="max-w-120 px-10 text-center text-xl">
 			Hey there, I’m Alex—a designer, developer, and dungeon delver based out of Philadelphia, PA.
-			Feel free to explore my work, or get in touch.
+			Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch.</a>
 		</p>
 	</div>
 </div>
@@ -37,7 +38,10 @@
 	</div>
 {/if}
 
-<Slashes name="Projects" />
+<!-- <Slashes name="Projects" /> -->
+<Squiggle>
+	<h2>Projects</h2>
+</Squiggle>
 <div class="mx-auto mb-10 max-w-310 px-10">
 	<ProjectList projects={data.projects} />
 </div>

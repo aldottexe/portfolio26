@@ -39,4 +39,11 @@
       @apply text-4xl;
       letter-spacing: -1px;
    }
+
+   .gold-text {
+      background: linear-gradient(to bottom, #eeb32d, #90603f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+   }
 }
