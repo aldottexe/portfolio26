@@ -11,7 +11,7 @@
 
 		return {
 			delay: params.delay || 0,
-			duration: params.duration || 200,
+			duration: params.duration || 290,
 			easing: params.easing || expoOut,
 			css: (t: number, u: number) => `
 				transform-origin: bottom;
