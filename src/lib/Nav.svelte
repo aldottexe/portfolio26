@@ -48,7 +48,9 @@
 	<link rel="preload" as="image" href="/x.svg" />
 </svelte:head>
 
-<!-- <img src="/logo.svg" alt="open menu" width="50" /> -->
+<a href="/" class="fixed mx-5 my-4 md:mx-10 md:my-8">
+	<img src="/logo.svg" alt="site logo" width="50" />
+</a>
 
 <button class="nav" onclick={() => (open = !open)}>
 	<span class="relative bottom-[.5px] block pr-2 text-sm text-main-white"> Menu </span>
@@ -87,7 +89,7 @@
 				<a href={resolve('/#projects')}> Projects</a>
 				<a href={resolve('/#contact')}> Contact</a>
 			</div>
-			<hr class="my-2 border-1" />
+			<hr class="my-2 border-1 border-main-orange" />
 			<button class="close">Close</button>
 		</div>
 	</div>
