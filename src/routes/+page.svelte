@@ -39,9 +39,9 @@
 {/if}
 
 <!-- <Slashes name="Projects" /> -->
-<Squiggle>
-	<h2>Projects</h2>
+<Squiggle className="py-5 px-8 mx-10">
+	<h2 class="my-5 text-center">Projects</h2>
+	<div class="mx-auto mb-10 max-w-310 px-10">
+		<ProjectList projects={data.projects} />
+	</div>
 </Squiggle>
-<div class="mx-auto mb-10 max-w-310 px-10">
-	<ProjectList projects={data.projects} />
-</div>

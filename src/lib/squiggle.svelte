@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	const { children }: { children: Snippet } = $props();
+	const { children, className = 'p-5 p-5' }: { children: Snippet; className?: string } = $props();
 
 	const wl = 15; // squiggle width
 	const amp = 20; // squiggle height
@@ -34,7 +34,7 @@
 		p4: { x: number; y: number };
 	}
 
-	const keyframeToString = (f) =>
+	const keyframeToString = (f: unknown) =>
 		`M${(f as frame_T).p1.x},${(f as frame_T).p1.y}` +
 		`c${(f as frame_T).p2.x},${(f as frame_T).p2.y},` +
 		`${(f as frame_T).p3.x},${(f as frame_T).p3.y},` +
@@ -150,9 +150,9 @@
 	});
 </script>
 
-<div class="relative w-fit p-5" bind:clientWidth bind:clientHeight>
+<div class="relative {className}" bind:clientWidth bind:clientHeight>
 	{@render children()}
-	<svg viewBox="0 0 {wRounded} {hRounded}" class="absolute inset-0 z-[999]">
+	<svg viewBox="0 0 {wRounded} {hRounded}" class="absolute inset-0 z-[-1]">
 		<defs>
 			<!-- top -->
 			<pattern id="tpattern" width={2 * wl} height={amp} patternUnits="userSpaceOnUse" x={amp - wl}>
@@ -176,7 +176,14 @@
 				</path>
 			</pattern>
 			<!-- bottom -->
-			<pattern id="bpattern" width={2 * wl} height={amp} patternUnits="userSpaceOnUse" x={amp - wl}>
+			<pattern
+				id="bpattern"
+				width={2 * wl}
+				height={amp}
+				patternUnits="userSpaceOnUse"
+				x={amp - wl}
+				y={hRounded}
+			>
 				<path
 					class="fill-transparent stroke-main-orange stroke-2"
 					stroke-width="2"
