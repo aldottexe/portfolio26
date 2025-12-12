@@ -4,7 +4,7 @@
 
 	const wl = 15; // squiggle width
 	const amp = 20; // squiggle height
-	const duration = '3s';
+	const duration = '1s';
 	const slope = (2 * amp) / wl;
 	const period = wl * 2;
 	console.log('slope' + slope);

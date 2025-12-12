@@ -2,8 +2,8 @@
 	import ProjectList from '$lib/ProjectList.svelte';
 	import Recent from '$lib/Recent.svelte';
 	import type { PageProps } from './$types';
-	import Slashes from '$lib/Slashes.svelte';
 	import Squiggle from '$lib/squiggle.svelte';
+	import Border from '$lib/Border.svelte';
 	let w = $state(0);
 	const { data }: PageProps = $props();
 	const featuredProject = data.projects.find((e) => e.slug === '200kmi');
@@ -38,10 +38,9 @@
 	</div>
 {/if}
 
-<!-- <Slashes name="Projects" /> -->
-<Squiggle className="py-5 px-8 mx-10">
-	<h2 class="my-5 text-center">Projects</h2>
-	<div class="mx-auto mb-10 max-w-310 px-10">
+<Squiggle className="max-w-310 mx-auto">
+	<div class="mx-auto p-10">
+		<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Projects</h2>
 		<ProjectList projects={data.projects} />
 	</div>
 </Squiggle>
