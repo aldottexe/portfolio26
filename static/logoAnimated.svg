@@ -4,27 +4,64 @@
   <defs>
     <style>
     * {
-      --accent: #ec4e20;
-      }
+      --accent: #0f8064;      
+    }
       .st0 {
         fill: none;
         stroke: var(--accent);
         stroke-miterlimit: 10;
         stroke-width: 3px;
-        <!-- filter: url(#displacementFilter); -->
       }
 
       .st1 {
-        fill: var(--accent);
+        fill: #23ba96;
       }
     </style>
-    <filter id="displacementFilter">
-      <!-- Creates the noise -->
-      <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="1" result="noise" />
-      <!-- Displaces the original image -->
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
-    </filter>
   </defs>
+  <g>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="846.7" ry="523.1">
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="736.3" ry="454.9">
+  <animate attributeName="rx" dur="3s" from="736.3" to="846.7" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="454.9" to="523.1" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="640.3" ry="395.6">
+  <animate attributeName="rx" dur="3s" from="640.3" to="736.3" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="395.6" to="454.9" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="556.7" ry="344">
+  <animate attributeName="rx" dur="3s" from="556.7" to="640.3" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="344" to="395.6" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="484.1" ry="299.1">
+  <animate attributeName="rx" dur="3s" from="484.1" to="556.7" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="299.1" to="344" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="421" ry="260.1">
+  <animate attributeName="rx" dur="3s" from="421" to="484.1" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="260.1" to="299.1" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="366.1" ry="226.2">
+  <animate attributeName="rx" dur="3s" from="366.1" to="421" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="226.2" to="260.1" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="318.3" ry="196.7">
+  <animate attributeName="rx" dur="3s" from="318.3" to="366.1" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="196.7" to="226.2" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="276.8" ry="171">
+  <animate attributeName="rx" dur="3s" from="276.8" to="318.3" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="171" to="196.7" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="240.7" ry="148.7">
+  <animate attributeName="rx" dur="3s" from="240.7" to="276.8" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="148.7" to="171" repeatCount="indefinite" />
+    </ellipse>
+    <ellipse class="st0" cx="571.7" cy="306.6" rx="209.3" ry="129.3">
+  <animate attributeName="rx" dur="3s" from="209.3" to="240.7" repeatCount="indefinite" />
+  <animate attributeName="ry" dur="3s" from="129.3" to="148.7" repeatCount="indefinite" />
+    </ellipse>
+  </g>
   <g>
     <path class="st1" d="M401,323.9c1.3-.4,1.6,3.6,1.9,5,.6,3.6,2.1,7,2.9,10.5.8,3.6,1.1,7.2,2.1,10.7s2,7,3.3,10.4,3.4,6.5,4.9,9.8,3.3,6.5,5.1,9.6c1.6,3.1,3.3,6,5.9,8.3,2.5,2.2,5.6,3.9,8.6,5.6s6.1,3.3,9,4.8c4.5,1.8,3.2-1.3,1.4-4.2-1.9-3-3.6-6-5.3-9.1s-3.8-6-5.3-9.2-2.6-6.6-3.9-9.9-2-6.8-3.1-10.1-2.1-6.7-2.9-10.2-1.4-6.9-2-10.4-1.3-6.9-1.7-10.4c-.4-3.6-1.2-7.3-1.4-10.9s.5-7.3.6-11c0-3.7-.6-7.4-.3-11.1s.9-7.3,1.5-10.9,1.3-7.3,2.1-10.8c.8-3.6,1.7-7.2,2.7-10.7s2.6-6.9,3.9-10.3c1.3-3.5,2.5-6.9,4-10.3s2.5-7,4.2-10.2c1.7-3.3,4-6.2,5.9-9.3,1.6-2.7,4.8-8.1-.9-5.5-3.2,1.6-6.2,3.9-9.3,5.6-3.2,1.8-6.5,3.2-9.5,5.2s-5.3,4.9-8.1,7.2c-2.7,2.7-5.7,5.1-8.2,8s-4.7,6-6.9,9.1c-2.2,3.1-4.3,6.3-6.2,9.6-1.9,3.3-3.3,6.9-5,10.3s-3.6,6.7-5,10.3-3.1,7-4.1,10.7-1.6,7.5-2.4,11.2-1.4,7.5-1.8,11.3c-.5,3.8-.6,7.6-.8,11.4,0,3.3.5,6.9,1.7,10.4,1,3.2,2.3,6.6,4,9.8s3.7,6,5.8,8.9,4.1,6,6.3,8.6c2.5,2.8,5.5,4.9,7.9,7.1,2.4,1.8,1.9.2,1.5-1.9-1-4-1.5-8.1-2.2-12.2-.7-4-1.1-8.2-1.5-12.3-.4-4.1-.4-8.2-.4-12.3s-.5-5.3.6-6.6c0,0,.2.3.3.3h0ZM399.7,292.4c-1.2-.8-.2-6.2,2.1-12,1.4-3.6,3.8-7.4,5.5-10.9,2.7-5.6,5.4-10.3,6.4-10.6,0,1.3-.8,4.1-1.3,5.7-1.2,3.5-3.1,6.9-4.1,10.5-1.1,3.8-1.5,7.6-2.3,11-.4,2.4-3.2,8.1-6,6-.1,0-.3.3-.3.3h0Z"/>
     <path class="st1" d="M525.2,420.9c-1.6,1.9-5,.7-7.3.4-5.3-.9-10.7-1.6-15.9-2.8-3.2-.7-6.4-1.6-9.6-2.5-3.2-.8-6.3-1.8-9.5-2.7s-6.3-1.9-9.4-2.9c-3.1-1.1-6.1-2.3-9.2-3.5-3.6-1.4-6.9-3.2-9.7-5.8-2.9-2.7-5.4-5.8-7.4-9.3-1.9-3.3-2.9-7-4.6-10.4-1.6-3.4-3.8-6.6-5.2-10.1-1.3-3.3-2.2-6.8-3.3-10.3s-1.9-6.9-2.8-10.4-1.5-7-2.1-10.5c-.7-3.5-2-6.9-2.4-10.5-.5-3.6,0-7.2-.3-10.8-.2-3.6-.4-7.2-.4-10.7s-.5-7.2-.3-10.8c.2-3.6.7-7.2,1.1-10.7s.6-7.2,1.2-10.7c.6-3.6,1.1-7.2,1.9-10.6.8-3.5,2.3-6.9,3.4-10.3,1.1-3.5,2-6.9,3.3-10.3,1.1-3,2.6-5.8,3.9-8.7s2.2-6,3.7-8.9c1.5-2.8,3.3-5.5,5-8.2,1.3-2.2,3-4.1,4.8-5.9,2.9-3,6.7-5,10.9-6.5,1.9-.7,4-2.1,5.9-2.1,3,0-.2,5.2-1.1,6.9-1.5,2.7-2.7,5.5-4.1,8.3-1.4,2.7-2.5,5.6-3.8,8.5s-3.3,5.3-4.4,8.2c-1.4,3.6-2.7,7.3-3.8,11-1.1,3.7-2.1,7.4-3.1,11.2-.9,3.7-1,7.7-1.7,11.5s-1.5,7.5-2,11.4-.5,7.7-.7,11.5c-.3,3.8-1.3,7.7-1.4,11.5s.2,7.7.4,11.6c.2,3.9.7,7.7,1.1,11.5.4,3.9,1.2,7.6,1.8,11.4.6,3.8,1.1,7.7,1.9,11.4s2,7.5,3.1,11.1c1.1,3.7,2.3,7.3,3.6,11,1.3,3.8,2.7,7.5,5.9,9.8,3.2,2.2,8.1,4.6,10.9,4,1.9-.4,1-4.1.2-6.1-1.6-4.8-3.6-9.8-5-15-.9-3.5-.8-7.3-1.6-10.9-.7-3.6-2-7.1-2.6-10.7s-1.5-7.2-1.9-10.9c-.4-3.6-.1-7.4-.4-11-.2-3.7-.4-7.3-.4-11s.2-7.3.3-11c.1-3.7.2-7.3.5-11s.2-7.3.6-11,1.5-7.2,2.2-10.8c.6-3.6.8-7.3,1.6-10.9.8-3.6,1.9-7.1,2.9-10.6s1.7-7.2,2.9-10.6c1.2-3.5,2.7-6.9,4.1-10.3s2.9-6.7,4.5-10,3.1-6.7,4.9-9.9c2.7-4.9,7.8-7.4,13.1-8.6,3.2-.8,6.2-2.1,9.3-2.8,3.2-.6,6.4-1.2,9.6-1.8,2.7-.5,7.3-.5,7.2,3.2,0,2.8-2,5.4-2.8,8.2-1.3,4.8-2.4,8.3-4.7,11.1-2.2,2.7-5.1,4.7-10.4,5.4-3.3.5-5.9,1.9-8.1,3.5s-4.2,3.9-5,7.1c-.9,3.1-1.6,6.3-2.5,9.5-.8,3.1-1.9,6.2-2.6,9.5-.7,3.2-1.3,6.4-1.9,9.7-.6,3.2-1,6.5-1.4,9.7s-.9,7.6.6,10.4c3.2,4.8,9.8,1.7,14.4,3.9,4.8,2.5,3.4,7.8,3.5,13.2,0,3.8-.3,9.2-3.5,11-2.9,1.7-6.9,1.1-10.4,1.5s-6,2-6.3,7.2c0,3.9.2,7.9.4,11.9.2,3.9.7,7.9,1.1,11.9s.7,7.9,1.3,11.9c.6,4,.9,8,1.6,11.8.8,4,2.6,7.6,3.5,11.4,1,4,1.6,7.9,2.8,11.6,1.2,4.1,3.8,7.4,7.9,8.7,3,1.1,6.6,1.6,9.9,2.6,3.3,1,6.3,2.7,7.7,6.3.7,1.6,1.6,3.2,2.2,4.9,1.2,4.5,3.2,8.8,1.8,12.2,0,.2.6.3.5.4h0Z"/>
@@ -36,49 +73,5 @@
     <g id="L2">
       <path class="st1" d="M617.1,399.2c2,2.9-.6,8.4-1.5,11.8-1.3,3.8-2.2,8.1-5.6,10.5-2.3,1.6-5.6,1.6-9,2-3.2.3-6.5.3-9.3.6-4.5,0-10.3,2.2-14.1-.6-1.5-1.2-2-4.1-1.9-6.3.2-4.4.9-9,1-13.5.2-4.6.6-9.1.7-13.5,0-3.5,0-7.2,0-10.9s-.4-7.2-.3-10.9c0-3.6.9-7.2.9-10.9s0-7.2,0-10.9c0-3.6-.2-7.2-.2-10.9s-.4-7.3-.3-10.9.7-7.3.7-10.9-.4-7.3-.4-10.9.2-7.3.2-10.9v-10.9c0-3.7-.7-7.3-.7-10.9v-10.9c0-3.7.5-7.3.4-10.9,0-3.7-.7-7.3-.8-10.9,0-3.7.5-7.4.4-10.9,0-3.4-1-6.8-1.1-10.3,0-3.4,0-6.9,0-10.3s.2-6.9,0-10.3c-.5-4.1,1.1-6,3.8-6.9s5.9-.8,8.8.2c3.4,1.2,4.8,4.8,5.4,8.1.6,3,1.6,6.2,2.1,9.4.5,3.3,0,6.7.6,9.6.5,3.8,1.2,7.5,1.6,11.2.4,3.8.7,7.5,1.1,11.3s.9,7.5,1.2,11.3c.3,3.7.4,7.5.6,11.3.2,3.7.8,7.5,1,11.3.2,3.7,0,7.5,0,11.4,0,3.7.3,7.5.4,11.4,0,3.7.7,7.5.7,11.4s-.6,6.9-.6,10.5,0,6.9-.2,10.5-.2,7-.4,10.5-.4,7-.6,10.5c-.2,3.5.4,7,0,10.5-.2,3.5-.9,7-1.2,10.4-.3,3.6-.6,7-1,10.4-.4,3.6-.8,7-1.3,10.4-.3,1.9-.8,4.8,0,6.2,2.1,2.5,5.9,1.6,9.3,1.2s7.2-.8,9.4,1.2v.2h0Z"/>
     </g>
-  </g>
-  <g>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="846.7" ry="523.1">
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="736.3" ry="454.9">
-  <animate attributeName="rx" dur="4s" from="736.3" to="846.7" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="454.9" to="523.1" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="640.3" ry="395.6">
-  <animate attributeName="rx" dur="4s" from="640.3" to="736.3" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="395.6" to="454.9" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="556.7" ry="344">
-  <animate attributeName="rx" dur="4s" from="556.7" to="640.3" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="344" to="395.6" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="484.1" ry="299.1">
-  <animate attributeName="rx" dur="4s" from="484.1" to="556.7" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="299.1" to="344" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="421" ry="260.1">
-  <animate attributeName="rx" dur="4s" from="421" to="484.1" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="260.1" to="299.1" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="366.1" ry="226.2">
-  <animate attributeName="rx" dur="4s" from="366.1" to="421" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="226.2" to="260.1" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="318.3" ry="196.7">
-  <animate attributeName="rx" dur="4s" from="318.3" to="366.1" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="196.7" to="226.2" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="276.8" ry="171">
-  <animate attributeName="rx" dur="4s" from="276.8" to="318.3" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="171" to="196.7" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="240.7" ry="148.7">
-  <animate attributeName="rx" dur="4s" from="240.7" to="276.8" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="148.7" to="171" repeatCount="indefinite" />
-    </ellipse>
-    <ellipse class="st0" cx="571.7" cy="306.6" rx="209.3" ry="129.3">
-  <animate attributeName="rx" dur="4s" from="209.3" to="240.7" repeatCount="indefinite" />
-  <animate attributeName="ry" dur="4s" from="129.3" to="148.7" repeatCount="indefinite" />
-    </ellipse>
   </g>
 </svg>

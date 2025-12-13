@@ -49,7 +49,10 @@
 </svelte:head>
 
 <a href="/" class="fixed z-10 mx-5 my-4 md:mx-10 md:my-8">
-	<img src="/logo small.svg" alt="site logo" width="50" />
+	<!-- <img src="/logo small.svg" alt="site logo" width="50" /> -->
+	<svg class="fill-main-orange" width="50" height="34">
+		<use href="logo small.svg#shape" class="scale-[0.44]" />
+	</svg>
 </a>
 
 <button class="nav" onclick={() => (open = !open)}>
@@ -111,30 +114,27 @@
 		right: -10px;
 		bottom: -10px;
 		left: -10px;
-		background-color: var(--color-main-white);
+		background-color: var(--color-main-black);
 		border-radius: 10px;
 	}
-	a,
-	button:not(.nav) {
-		@apply mb-1 flex w-full transform justify-between gap-20 px-0 hover:text-main-blue hover:underline;
+	.item-list a,
+	.close {
+		@apply mb-1 flex w-full transform justify-between gap-20 hover:bg-alt-black;
 		&::after {
-			content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.707159 0.999814C0.707328 0.447708 1.15492 -2.17056e-05 1.70705 -7.94046e-05L10.7075 -7.95521e-05C11.2595 8.94357e-05 11.7072 0.447777 11.7074 0.999814V10.0002C11.7073 10.5524 11.2596 11 10.7075 11.0001C10.1552 11.0001 9.70764 10.5525 9.70758 10.0002L9.70689 3.41461L1.41427 11.7072L5.16866e-05 10.293L8.29267 2.0004L1.70705 1.99971C1.15482 1.99965 0.707159 1.55206 0.707159 0.999814Z' fill='rgb(236 78 32)' /%3E%3C/svg%3E%0A");
+			content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.707159 0.999814C0.707328 0.447708 1.15492 -2.17056e-05 1.70705 -7.94046e-05L10.7075 -7.95521e-05C11.2595 8.94357e-05 11.7072 0.447777 11.7074 0.999814V10.0002C11.7073 10.5524 11.2596 11 10.7075 11.0001C10.1552 11.0001 9.70764 10.5525 9.70758 10.0002L9.70689 3.41461L1.41427 11.7072L5.16866e-05 10.293L8.29267 2.0004L1.70705 1.99971C1.15482 1.99965 0.707159 1.55206 0.707159 0.999814Z' fill='rgb(15 128 100)' /%3E%3C/svg%3E%0A");
+
+			transition: rotate 100ms ease-in-out;
+			rotate: 0deg;
 		}
+	}
+	.item-list a:hover::after {
+		rotate: 45deg;
 	}
 	.close::after {
-		content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11L11 0.999999' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M1.00781 1L11.0078 11' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+		content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11L11 0.999999' stroke='rgb(15 128 100)' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M1.00781 1L11.0078 11' stroke='rgb(15 128 100)' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A") !important;
 	}
 	.nav {
-		@apply fixed right-0 z-10 mx-5 my-4 box-border flex w-fit items-center justify-center rounded-sm bg-main-orange px-2 py-1 md:mx-10 md:my-8;
+		@apply fixed right-0 z-10 mx-5 my-4 box-border flex w-fit items-center justify-center rounded-sm px-2 py-1 md:mx-10 md:my-8;
 		transition: width 200ms ease-in-out;
-		&::after {
-			content: ' ';
-			position: absolute;
-			z-index: 10;
-			inset: 4px;
-			border: 2px solid var(--color-main-orange);
-			border-radius: 8px;
-			transition: border 200ms;
-		}
 	}
 </style>

@@ -29,9 +29,9 @@
 
 <div>
 	{#each projects as p, i (i)}
-		<Glass className="mb-10 lg:mb-5">
+		<div class="mb-10 lg:mb-5">
 			<a
-				class="relative flex flex-col justify-center rounded-xl border-main-white p-2 transition-all hover:border-2 lg:h-20"
+				class="hover:bg-dark-gray relative flex flex-col justify-center rounded-xl border-main-white p-2 transition-all lg:h-20"
 				href={resolve(`/p/${p.slug}`)}
 				onmouseenter={() => (img = (p.metadata?.featureImage as string) || '')}
 				onmouseleave={() => (img = '')}
@@ -59,7 +59,7 @@
 					</p>
 				</div>
 			</a>
-		</Glass>
+		</div>
 	{/each}
 	{#key img}
 		{#if img.length > 0}

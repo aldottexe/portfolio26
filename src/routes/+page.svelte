@@ -20,7 +20,7 @@
 		/>
 		<p class="max-w-120 px-10 text-center text-xl">
 			Hey there, I’m Alex—a designer, developer, and dungeon delver based out of Philadelphia, PA.
-			Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch.</a>
+			Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch!</a>
 		</p>
 	</div>
 </div>

@@ -22,7 +22,7 @@
 
 <style>
 	:global(body) {
-		background-color: var(--color-main-white);
+		background-color: var(--color-main-black);
 		overflow-x: hidden;
 	}
 </style>

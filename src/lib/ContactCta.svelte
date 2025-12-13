@@ -27,13 +27,13 @@
 	</a>
 </div>
 
-<style lang="postcss">
+<style>
 	@reference "tailwindcss";
 
 	.outer {
 		transform: scale(1);
 		transition: transform 300ms cubic-bezier(0.37, 0.01, 0.04, 1.23);
-		--height: 30px;
+		--height: 35px;
 		--gap: 5px;
 		display: flex;
 		gap: var(--gap);
@@ -44,8 +44,8 @@
 		position: absolute;
 		left: 0;
 		height: var(--height);
-		background-color: var(--color-main-gray);
-		padding: 3px 5px 3px 12px;
+		background-color: var(--color-alt-black);
+		padding: 2px 5px 2px 12px;
 		border-radius: 5px;
 		display: flex;
 		justify-content: space-between;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Pill from '$lib/Pill.svelte';
 	import type { PageProps } from '../$types';
 	// import Backdrop from '$lib/Backdrop.svelte';
 	// import Border from '$lib/Border.svelte';
@@ -22,27 +23,27 @@
 
 <div class="relative">
 	<div class="grid h-screen w-full place-content-center">
-		<img class="max-h-screen rounded-4xl px-5 py-20" src={meta.featureImage} />
+		<img class="rounded-5xl max-h-screen px-5 py-20" src={meta.featureImage} />
 	</div>
 	<div
-		class="content sticky top-8 right-20 bottom-8 left-20 mx-auto flex h-[52px] w-fit flex-wrap items-center rounded-xl bg-main-black px-5"
+		class="content sticky top-20 right-2 bottom-8 left-2 mx-5 flex h-[52px] flex-wrap items-baseline justify-between px-5"
 	>
-		<h1 class="tracking-[-5px]">
+		<h1 class="font-light tracking-[-2px] italic">
 			{meta.title}
 		</h1>
+		<div class="flex flex-wrap gap-1">
+			{#each meta.tags.split(',') as tag}
+				<Pill>{tag}</Pill>
+			{/each}
+		</div>
 	</div>
 
-	<div class="mx-auto prose min-h-screen p-20 prose-p:text-main-black">
+	<div
+		class="prose min-h-screen px-10 pt-20 prose-headings:text-main-white prose-p:text-main-white"
+	>
 		<Post />
 	</div>
 </div>
 
 <style>
-	.content::before {
-		position: absolute;
-		content: '';
-		inset: 4px;
-		border: 2px solid var(--color-main-white);
-		border-radius: 10px;
-	}
 </style>
