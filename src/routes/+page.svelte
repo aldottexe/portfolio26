@@ -3,13 +3,14 @@
 	import Recent from '$lib/Recent.svelte';
 	import type { PageProps } from './$types';
 	import Squiggle from '$lib/squiggle.svelte';
-	import Border from '$lib/Border.svelte';
+	import Background from '$lib/Background.svelte';
 	let w = $state(0);
 	const { data }: PageProps = $props();
 	const featuredProject = data.projects.find((e) => e.slug === '200kmi');
 </script>
 
 <svelte:window bind:innerWidth={w} />
+<Background />
 
 <div class="grid h-[calc(100vh-50px)] w-screen place-content-center">
 	<div>
@@ -26,7 +27,7 @@
 </div>
 
 {#if featuredProject?.metadata}
-	<div class="mx-auto mb-10 max-w-310 px-10">
+	<div class="mx-auto mb-30 max-w-310 px-10">
 		<Recent
 			title={featuredProject.metadata.title as string}
 			tags={((featuredProject.metadata.tags as string) || '').split(',')}

@@ -2,7 +2,10 @@
 	import ContactCta from './ContactCta.svelte';
 </script>
 
-<footer class="relative flex h-screen w-full flex-col items-center justify-center overflow-clip">
+<footer
+	id="contact"
+	class="relative flex h-screen w-full flex-col items-center justify-center overflow-clip"
+>
 	<div class="flex gap-2">
 		<div class="left">
 			<h2>Lets chat!</h2>

@@ -31,7 +31,7 @@
 	{#each projects as p, i (i)}
 		<div class="mb-10 lg:mb-5">
 			<a
-				class="hover:bg-dark-gray relative flex flex-col justify-center rounded-xl border-main-white p-2 transition-all lg:h-20"
+				class="relative flex flex-col justify-center rounded-xl p-2 transition-all hover:bg-alt-black lg:h-20"
 				href={resolve(`/p/${p.slug}`)}
 				onmouseenter={() => (img = (p.metadata?.featureImage as string) || '')}
 				onmouseleave={() => (img = '')}
@@ -65,7 +65,7 @@
 		{#if img.length > 0}
 			<img
 				transition:fly|global={{ y: 10, duration: 100 }}
-				class="pointer-events-none fixed block h-60 translate-[-20px]"
+				class="pointer-events-none fixed block h-50 translate-[-20px]"
 				src={img}
 				alt="project preview"
 				style:left={`${pos.current.x}px`}
