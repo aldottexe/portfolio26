@@ -3,8 +3,9 @@
 		href: string;
 		title: string;
 		copyVal: string;
+		clickVal: string;
 	}
-	const { href, title, copyVal }: props = $props();
+	const { href, title, copyVal, clickVal }: props = $props();
 </script>
 
 <div class="outer">
@@ -20,8 +21,30 @@
 			<path d="M9 4H13V13H4V9H0V0H9V4ZM9 9H6V11H11V6H9V9ZM2 2V7H7V2H2Z" fill="white" />
 		</svg>
 	</button>
-	<a class="button grow px-3" {href} aria-label="go to link" target="_blank">
-		<div class="arrow"></div>
+	<a class="button grow" {href} aria-label="go to link" target="_blank">
+		<div class="scroller">
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+			<span>{clickVal}</span>
+		</div>
 	</a>
 </div>
 
@@ -45,7 +68,6 @@
 		padding: 0 10px;
 	}
 	.button {
-		display: block;
 		background-color: var(--color-alt-black);
 		height: var(--height);
 		display: flex;
@@ -64,38 +86,23 @@
 	svg {
 		transform: scale(1.3);
 	}
-	.arrow {
-		background-color: var(--color-main-orange);
-		border-radius: 10px;
-		height: 3px;
-		width: 100%;
-		position: relative;
+	.scroller {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow: hidden;
+		* {
+			padding-right: 30px;
+			min-width: max-content;
+			animation: scroll 2s infinite linear;
+		}
 	}
-	.arrow::after {
-		content: ' ';
-		display: block;
-		background-color: var(--color-main-orange);
-		border-radius: 10px;
-		width: 15px;
-		height: 3px;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		transform: rotate(45deg) translateY(-200%);
-	}
-	.arrow::before {
-		content: ' ';
-		display: block;
-		background-color: var(--color-main-orange);
-		border-radius: 10px;
-		width: 15px;
-		height: 3px;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		transform: rotate(-45deg) translateY(200%);
+	@keyframes scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-100%);
+		}
 	}
 
 	/* -------------------HOVER --------------------------*/

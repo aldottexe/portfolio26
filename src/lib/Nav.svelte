@@ -51,7 +51,7 @@
 <a href="/" class="fixed z-10 mx-5 my-4 md:mx-10 md:my-8">
 	<!-- <img src="/logo small.svg" alt="site logo" width="50" /> -->
 	<svg class="fill-main-white" width="50" height="34">
-		<use href="logo small.svg#shape" class="scale-[0.44]" />
+		<use href="/logo small.svg#shape" class="scale-[0.4]" />
 	</svg>
 </a>
 

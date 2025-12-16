@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ContactCta from './ContactCta.svelte';
+	import LinkWidgets from './linkWidgets.svelte';
 </script>
 
 <footer
@@ -7,23 +8,32 @@
 	class="relative flex h-screen w-full flex-col items-center justify-center overflow-clip"
 >
 	<div>
-		<a
-			href="mailto:alexanderlutz@yahoo.com"
-			class="relative text-[8vw] font-bold tracking-tight [text-decoration-thickness:4px] [text-underline-offset:3px] hover:underline"
-			>alexanderlutz@yahoo.com</a
-		>
+		<LinkWidgets copyVal="alexanderlutz@yahoo.com" linkVal="mailto:alexanderlutz@yahoo.com">
+			<a
+				href="mailto:alexanderlutz@yahoo.com"
+				class="relative text-[8vw] font-bold tracking-tight [text-decoration-thickness:4px] [text-underline-offset:3px] hover:underline"
+				>alexanderlutz@yahoo.com</a
+			>
+		</LinkWidgets>
 		<div>
 			<ContactCta
 				href="https://cal.com/alex-lutz-zenutu"
 				title="Book a meeting"
 				copyVal="https://cal.com/alex-lutz-zenutu"
+				clickVal="book now"
 			/>
 			<ContactCta
 				href="https://www.linkedin.com/in/alex-lutz-1o/"
 				title="Linkedin"
 				copyVal="alex-lutz-1o"
+				clickVal="view now"
 			/>
-			<ContactCta href="https://github.com/aldottexe" title="Github" copyVal="aldottexe" />
+			<ContactCta
+				href="https://github.com/aldottexe"
+				title="Github"
+				copyVal="aldottexe"
+				clickVal="view now"
+			/>
 		</div>
 	</div>
 </footer>
