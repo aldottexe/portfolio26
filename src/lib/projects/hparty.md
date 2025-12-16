@@ -6,4 +6,5 @@ tags: Nextjs,Supabase Realtime
 ---
 
 I love dungeon and dragon!!!
-![the dm screen](/hparty/dm screen.png)
+
+![the dm screen](hparty/dm\ screen.png)

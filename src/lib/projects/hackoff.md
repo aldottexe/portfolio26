@@ -15,3 +15,7 @@ Create a strategy card game created to mimicked the feel of a Hollywood hacking 
 
 ## Developement
 The aesthetic became a mix of 3d rendering and hand written text. The concept was that the cards and game box are a box of hard drives modified by some hacker to suit their needs
+
+![hello](https://www.alexlutz.com/projects/HackOff/greenfw.png)
+![hello](https://www.alexlutz.com/projects/HackOff/cards.jpg)
+![hello](https://www.alexlutz.com/projects/HackOff/gameplay.jpg)

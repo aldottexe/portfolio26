@@ -31,7 +31,7 @@
 	{#each projects as p, i (i)}
 		<div class="mb-10 lg:mb-5">
 			<a
-				class="relative flex flex-col justify-center rounded-xl p-2 transition-all hover:bg-alt-black lg:h-20"
+				class="relative flex flex-col justify-center rounded-xl p-2 transition-all duration-300 hover:scale-102 hover:border-main-white lg:h-20"
 				href={resolve(`/p/${p.slug}`)}
 				onmouseenter={() => (img = (p.metadata?.featureImage as string) || '')}
 				onmouseleave={() => (img = '')}
@@ -41,7 +41,7 @@
 					{p.metadata?.title || 'project'}
 				</h3>
 				<img
-					class="top-2 right-2 bottom-2 rounded-md object-contain max-md:mb-2 max-md:w-30 md:absolute md:h-[calc(100%_-_1rem)] md:border-2"
+					class="top-2 right-2 bottom-2 rounded-md object-contain max-md:mb-2 max-md:w-30 md:absolute md:h-[calc(100%_-_1rem)]"
 					style:border-color="#{p.metadata?.accent || ''}"
 					src={p.metadata?.featureImage as string}
 					alt="click to explore!"

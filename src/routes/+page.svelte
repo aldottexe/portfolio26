@@ -10,16 +10,15 @@
 </script>
 
 <svelte:window bind:innerWidth={w} />
-<Background />
 
 <div class="grid h-[calc(100vh-50px)] w-screen place-content-center">
 	<div>
-		<img
-			src="logoAnimated.svg"
-			alt="Welcome!"
-			class="mx-auto mb-3 w-[80vw] max-w-100 rounded-xl border-2 border-main-orange"
-		/>
-		<p class="max-w-120 px-10 text-center text-xl">
+		<!-- <img -->
+		<!-- 	src="logoAnimated.svg" -->
+		<!-- 	alt="Welcome!" -->
+		<!-- 	class="mx-auto mb-3 w-[80vw] max-w-100 rounded-xl border-2 border-main-orange" -->
+		<!-- /> -->
+		<p class="mt-50 max-w-120 px-10 text-center text-xl">
 			Hey there, I’m Alex—a designer, developer, and dungeon delver based out of Philadelphia, PA.
 			Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch!</a>
 		</p>
@@ -39,9 +38,11 @@
 	</div>
 {/if}
 
-<Squiggle className="max-w-310 mx-auto">
-	<div class="mx-auto p-10">
-		<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Projects</h2>
-		<ProjectList projects={data.projects} />
-	</div>
-</Squiggle>
+<div class="mx-auto max-w-310">
+	<Squiggle className="max-w-310 mx-2">
+		<div class="mx-auto p-8">
+			<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Projects</h2>
+			<ProjectList projects={data.projects} />
+		</div>
+	</Squiggle>
+</div>

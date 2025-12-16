@@ -122,6 +122,7 @@
 		border-radius: 7px;
 		font-style: italic;
 		transition: background-color 300ms;
+		color: var(--color-main-black);
 		&:hover {
 			background-color: var(--color-dark-green);
 		}

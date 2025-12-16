@@ -90,23 +90,13 @@ export function PostProcess() {
       
           // ── ANIMATED FBM DOMAIN ──
           vec2 q = st * 2.0;
-          q += vec2(u_time * 0.5, u_time * 0.07);
+          q += vec2(u_time * 0.569, u_time * 0.07);
       
           float n = noise(q);
           vec3 color = vec3(n);
       
-      
           // ── ORIGINAL SCENE ──
           vec4 texel = texture2D(tDiffuse, vUv);
-      
-         // —— COLORS ——
-         // --color-main-black: rgb(8 76 66);
-         // --color-alt-black: rgb(10 135 110);
-         // vec3 c1 = vec3(8, 76, 66) / 255.;
-         vec3 c2 = vec3(10, 135, 120) / 255.;
-         vec3 c1 = vec3(37.,37.,37.) / 255.;
-         // vec3 c2 = vec3(238.,238.,238.) / 255.;
-      
       
           // —— GRAIN ——
           float grn = grain(st*300.);

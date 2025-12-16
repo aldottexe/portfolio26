@@ -28,7 +28,7 @@
 	<div
 		class="content sticky top-20 right-2 bottom-8 left-2 mx-5 flex h-[52px] flex-wrap items-baseline justify-between px-5"
 	>
-		<h1 class="font-light tracking-[-2px] italic">
+		<h1 class="bg-main-black font-light tracking-[-2px] italic">
 			{meta.title}
 		</h1>
 		<div class="flex flex-wrap gap-1">
