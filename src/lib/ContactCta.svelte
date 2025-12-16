@@ -57,8 +57,13 @@
 		display: flex;
 		position: relative;
 	}
+	@media (max-width: 40rem) {
+		.outer {
+			--height: 30px;
+		}
+	}
 	.mainBar {
-		@apply text-3xl font-light italic;
+		@apply text-xl font-light italic sm:text-3xl;
 		background-color: var(--color-main-black);
 		height: var(--height);
 		display: flex;

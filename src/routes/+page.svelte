@@ -18,7 +18,7 @@
 		<!-- 	alt="Welcome!" -->
 		<!-- 	class="mx-auto mb-3 w-[80vw] max-w-100 rounded-xl border-2 border-main-orange" -->
 		<!-- /> -->
-		<p class="mt-50 max-w-120 px-10 text-center text-xl">
+		<p class="mt-60 max-w-120 px-10 text-center text-xl sm:mt-50">
 			Hey there, I’m Alex—a designer, developer, and dungeon delver based out of Philadelphia, PA.
 			Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch!</a>
 		</p>
@@ -31,7 +31,7 @@
 			title={featuredProject.metadata.title as string}
 			tags={((featuredProject.metadata.tags as string) || '').split(',')}
 			link="p/{featuredProject.slug}"
-			imgsrc={featuredProject.metadata.featureImage as string}
+			imgsrc="/200kmivid@720.mov"
 			imgalt="view project"
 			desc={featuredProject.metadata.desc as string}
 		/>

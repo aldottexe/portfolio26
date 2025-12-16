@@ -35,7 +35,8 @@
 			<h1>{title}</h1>
 		</div>
 		<div class="bottom">
-			<img src={imgsrc} alt={imgalt} />
+			<!-- <img src={imgsrc} alt={imgalt} /> -->
+			<video src={imgsrc} loop autoplay></video>
 			<div class="side">
 				<div class="desc">
 					<div class="pillHolder">
@@ -48,11 +49,6 @@
 					</p>
 				</div>
 				<a href={link} class="button"> (view) </a>
-				<!-- <Arrow -->
-				<!-- 	href={link} -->
-				<!-- 	className="min-[700px]:max-w-[300px] flex max-[1100px]:justify-center items-center" -->
-				<!-- 	>(view)</Arrow -->
-				<!-- > -->
 			</div>
 		</div>
 	</div>
@@ -94,7 +90,8 @@
 	.desc {
 		width: var(--col-w);
 	}
-	img {
+	img,
+	video {
 		position: relative;
 		min-width: 0;
 		min-height: 0;
