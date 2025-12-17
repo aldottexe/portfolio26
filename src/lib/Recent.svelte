@@ -9,18 +9,19 @@
 		title: string;
 		tags: Array<string>;
 		imgsrc: string;
+		vidsrc?: string;
 		imgalt: string;
 		link: string;
 		desc: string;
 	}
 
-	const { title, tags, link, desc, imgsrc, imgalt }: p = $props();
+	const { title, tags, link, desc, vidsrc, imgsrc, imgalt }: p = $props();
 
 	const activateOnScroll: Action<HTMLElement> = (node) => {
 		window.addEventListener('scroll', () => {
 			const rect = node.getBoundingClientRect();
-			if (rect.y + rect.height < window.innerHeight + 200) open = true;
-			else if (rect.y + rect.height > window.innerHeight + 400) open = false;
+			if (rect.y < window.innerHeight / 2) open = true;
+			else if (rect.y > (3 * window.innerHeight) / 4) open = false;
 		});
 	};
 
@@ -35,8 +36,11 @@
 			<h1>{title}</h1>
 		</div>
 		<div class="bottom">
-			<!-- <img src={imgsrc} alt={imgalt} /> -->
-			<video src={imgsrc} loop autoplay></video>
+			{#if vidsrc}
+				<video src={vidsrc} loop autoplay muted></video>
+			{:else}
+				<img src={imgsrc} alt={imgalt} />
+			{/if}
 			<div class="side">
 				<div class="desc">
 					<div class="pillHolder">

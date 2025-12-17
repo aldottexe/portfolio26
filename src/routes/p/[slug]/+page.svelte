@@ -23,7 +23,12 @@
 
 <div class="relative">
 	<div class="grid h-screen w-full place-content-center">
-		<img class="rounded-5xl max-h-screen px-5 py-20" src={meta.featureImage} />
+		{#if meta.featureVid}
+			<video class="rounded-5xl max-h-screen px-5 py-20" src={meta.featureVid} loop autoplay muted
+			></video>
+		{:else}
+			<img class="rounded-5xl max-h-screen px-5 py-20" src={meta.featureImage} />
+		{/if}
 	</div>
 	<div
 		class="content sticky top-20 right-2 bottom-8 left-2 mx-5 flex h-[52px] flex-wrap items-baseline justify-between px-5"

@@ -85,7 +85,7 @@
 			max-width 400ms ease-in-out,
 			width 400ms ease-in-out;
 		&:hover {
-			background-color: var(--color-main-green);
+			background-color: var(--color-dark-green);
 		}
 	}
 	svg {

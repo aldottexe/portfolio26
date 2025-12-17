@@ -9,7 +9,7 @@
    --color-alt-black: #2a3937;
    --color-main-green: #11c69b;
    --color-light-green: #147f35;
-   --color-dark-green: #008f6d;
+   --color-dark-green: #00856d;
    --color-old-orange: #c94a24;
    --color-main-orange: #27caa3;
    --color-main-blue: #4964D1;
@@ -42,7 +42,7 @@
    }
 
    .gold-text {
-      background: linear-gradient(to bottom, #eeb32d, #90603f);
+      background: linear-gradient(to bottom, #f5c863ff, #b1754dff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
