@@ -28,7 +28,7 @@
 	</div>
 {/if}
 
-<div class="mx-auto max-w-310">
+<div class="mx-auto max-w-310" id="projects">
 	<Squiggle className="max-w-310 mx-2">
 		<div class="mx-auto p-8">
 			<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Projects</h2>
