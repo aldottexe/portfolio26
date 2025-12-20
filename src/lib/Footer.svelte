@@ -17,7 +17,7 @@
 		</LinkWidgets>
 		<div>
 			<ContactCta
-				href="https://cal.com/alex-lutz-zenutu"
+				href="https://cal.com/alex-lutz"
 				title="Book a meeting"
 				copyVal="https://cal.com/alex-lutz-zenutu"
 				clickVal="book now"
