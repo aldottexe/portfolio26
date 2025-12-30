@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
 	import type { Action } from 'svelte/action';
 	import Pill from './Pill.svelte';
-	import Arrow from './Arrow.svelte';
-	import div from './Glass.svelte';
 
 	interface p {
 		title: string;
@@ -36,11 +33,13 @@
 			<h1>{title}</h1>
 		</div>
 		<div class="bottom">
-			{#if vidsrc}
-				<video src={vidsrc} loop autoplay muted></video>
-			{:else}
-				<img src={imgsrc} alt={imgalt} />
-			{/if}
+			<a href={link} class="imgHolder">
+				{#if vidsrc}
+					<video src={vidsrc} loop autoplay muted></video>
+				{:else}
+					<img src={imgsrc} alt={imgalt} />
+				{/if}
+			</a>
 			<div class="side">
 				<div class="desc">
 					<div class="pillHolder">
@@ -95,7 +94,8 @@
 		width: var(--col-w);
 	}
 	img,
-	video {
+	video,
+	.imgHolder {
 		position: relative;
 		min-width: 0;
 		min-height: 0;

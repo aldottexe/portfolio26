@@ -72,8 +72,12 @@ export function PostProcess() {
       }
 
       vec3 colorRamp(vec3 colorIn) {
+
+         // rgb(222.,222.,222.)
          vec3 c3 = vec3(222.,222.,222.) / 255.;
-         vec3 c2 = vec3(10, 135, 120) / 255.;
+         // rgb(9 121 107)
+         vec3 c2 = vec3(9, 121, 107) / 255.;
+         // rgb(37.,37.,37.)
          vec3 c1 = vec3(37.,37.,37.) / 255.;
          if(colorIn.r > .6) {
             return c3;
