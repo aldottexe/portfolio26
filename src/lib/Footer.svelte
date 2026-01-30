@@ -8,7 +8,7 @@
 	class="relative flex h-screen w-full flex-col items-center justify-center overflow-clip"
 >
 	<div>
-		<LinkWidgets copyVal="alexanderlutz@yahoo.com" linkVal="mailto:alexanderlutz@yahoo.com">
+		<LinkWidgets copyVal="me@alexlutz.com" linkVal="mailto:me@alexlutz.com">
 			<a
 				href="mailto:me@alexlutz.com"
 				class="relative text-[12vw] leading-[14vw] font-bold tracking-tight [text-decoration-thickness:4px] [text-underline-offset:3px] hover:underline"
