@@ -1,5 +1,5 @@
 ---
-featureImage: '/hparty/mocks/hp2.png'
+featureImage: '/hparty/hp_angle.png'
 title: HParty
 desc: realtime web app for tabletop gaming
 tags: Nextjs,Supabase Realtime
