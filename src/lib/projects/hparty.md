@@ -14,3 +14,9 @@ HParty is a companion web app for the tabletop rollplaying game Dungeons & Drago
     <img src="/hparty/mocks/hp2.png" style="margin: 0"/>
     <img src="/hparty/mocks/res2.png" style="margin: 0"/>
 </div>
+
+## Developement
+HParty was designed in Figma, Developed in NextJS and uses Supabases as a realtime Postgres Database. The app is hosted on vercel, and free to use [here](https://hparty2.vercel.app).
+<div style="margin: 100px 0">
+    <img src="/hparty/wireframe.png" style="margin: 0; display: block; width: 100%; max-height: unset;"/>
+    </div>
