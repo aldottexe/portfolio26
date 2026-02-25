@@ -1,15 +1,12 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
 	import * as THREE from 'three';
-	import {
-		EffectComposer,
-		FilmPass,
-		GLTFLoader,
-		RenderPass,
-		ShaderPass
-	} from 'three/examples/jsm/Addons.js';
+	import { EffectComposer, GLTFLoader, RenderPass, ShaderPass } from 'three/examples/jsm/Addons.js';
 	import { PostProcess } from './postProcessing';
-	import { myMat } from './myMat';
+	import { stripeMat } from './stripeMat';
+	import { circlesMat } from './circlesMat';
+
+	let { isProject = false }: { isProject: boolean } = $props();
 
 	const init: Action<HTMLCanvasElement> = (canvas) => {
 		const renderer = new THREE.WebGLRenderer({
@@ -51,18 +48,13 @@
 			onScroll();
 		});
 
-		const computerMat = myMat();
-		// let computer: THREE.Group<THREE.Object3DEventMap> | undefined;
-		// new GLTFLoader().load('/computer.glb', (m) => {
-		// 	computer = m.scene;
-		// 	const scale = 0.3;
-		// 	computer.scale.set(scale, scale, scale);
-		// 	computer.children[0].material = simpleMat;
-		// 	computer.children[1].material = computerMat;
-		// 	scene.add(computer);
-		// });
-		let computer = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), computerMat);
-		scene.add(computer);
+		const stripeM = stripeMat();
+		let stripes = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), stripeM);
+		scene.add(stripes);
+
+		const circleM = circlesMat();
+		let circles = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), circleM);
+		scene.add(circles);
 
 		const composer = new EffectComposer(renderer);
 		composer.addPass(new RenderPass(scene, camera));
@@ -73,6 +65,11 @@
 
 		//event listeners
 		function resize() {
+			circleM.uniforms.u_resolution.value = new THREE.Vector2(
+				window.innerWidth * devicePixelRatio,
+				window.innerHeight * devicePixelRatio
+			);
+
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			composer.setSize(window.innerWidth, window.innerHeight);
 			camera.aspect = window.innerWidth / window.innerHeight;
@@ -83,14 +80,26 @@
 
 		let lastScroll = 0;
 		function onScroll() {
-			if (computer) {
+			if (stripes) {
 				const v =
 					(-document.body.scrollHeight + window.scrollY + window.innerHeight) / window.innerHeight;
-				computer.position.y = v;
-				computer.rotation.y = v;
+				stripes.position.y = v;
+				stripes.rotation.y = v;
 				const r = 1.75 + 4 * v;
-				computer.position.z = r < 0.5 ? 0.5 : r;
+				stripes.position.z = r < 0.2 ? 0.2 : r;
 			}
+
+			if (circles) {
+				const t =
+					(((window.scrollY / document.body.scrollHeight) * window.innerWidth) /
+						window.innerWidth) *
+					3;
+				circles.position.y = t * 10;
+				circles.position.z = -t * 10;
+
+				circleM.uniforms.u_dy.value = (-window.scrollY / document.body.scrollHeight) * 6;
+			}
+
 			if (logo) {
 				logo.position.y = window.scrollY / window.innerHeight + 0.2;
 				logo.rotation.z += (window.scrollY - lastScroll) / 100;
@@ -106,9 +115,18 @@
 			myEffect.uniforms.u_time.value = t.getElapsed();
 			myEffect.needsSwap = true;
 
-			computerMat.uniforms.u_time.value = t.getElapsed();
-			computerMat.needsUpdate = true;
-			computerMat.uniformsNeedUpdate = true;
+			circleM.uniforms.u_time.value = t.getElapsed();
+			circleM.needsUpdate = true;
+			circleM.uniformsNeedUpdate = true;
+
+			stripeM.uniforms.u_time.value = t.getElapsed();
+			stripeM.needsUpdate = true;
+			stripeM.uniformsNeedUpdate = true;
+
+			if (logo) {
+				logo.visible = !isProject;
+				circles.visible = isProject;
+			}
 
 			logo?.rotateZ(t.getDelta() / 2);
 			composer.render();

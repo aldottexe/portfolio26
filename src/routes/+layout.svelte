@@ -4,16 +4,19 @@
 	import Footer from '$lib/Footer.svelte';
 	import PageTransition from '$lib/PageTransition.svelte';
 	import Background from '$lib/Background.svelte';
+	import { page } from '$app/state';
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
+
+	$inspect(page.url.pathname);
 </script>
 
 <svelte:head>
 	<!-- <link rel="icon" href={favicon} /> -->
 </svelte:head>
 <PageTransition />
-<Background />
+<Background isProject={/\/p\//.test(page.url.pathname)} />
 
 <Nav></Nav>
 

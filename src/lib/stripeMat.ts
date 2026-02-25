@@ -1,5 +1,5 @@
 import { ShaderMaterial } from "three";
-export function myMat() {
+export function stripeMat() {
    return new ShaderMaterial({
 
       uniforms: {
