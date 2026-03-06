@@ -15,5 +15,6 @@
 		padding: 0px 10px 1px;
 		width: fit-content;
 		display: block;
+		background-color: var(--color-main-black);
 	}
 </style>
