@@ -81,12 +81,15 @@
 		let lastScroll = 0;
 		function onScroll() {
 			if (stripes) {
-				const v =
-					(-document.body.scrollHeight + window.scrollY + window.innerHeight) / window.innerHeight;
+				const v = Math.min(
+					0,
+					(-document.body.scrollHeight + window.scrollY + window.innerHeight) / window.innerHeight
+				);
 				stripes.position.y = v;
 				stripes.rotation.y = v;
 				const r = 1.75 + 4 * v;
-				stripes.position.z = r < 0.2 ? 0.2 : r;
+				stripes.position.z = Math.min(Math.max(0.2, r), 1.75);
+				console.log(r, v);
 			}
 
 			if (circles) {
