@@ -18,8 +18,8 @@
 
 	const { skills }: { skills: skillList } = $props();
 
-	let width = $state(500);
-	let height = $state(500);
+	let width = $state(25);
+	let height = $state(25);
 
 	let skillNodes: node_T[] = $state(
 		skills.map((skill) => ({
@@ -65,8 +65,8 @@
 		attraction: 0.01,
 		damping: 0.8,
 		idealLength: 100,
-		centerAttraction: 0.012,
-		idealLengthFromCenter: 50
+		border_repulsion: 0.05,
+		border: 100
 	};
 
 	function step() {
@@ -109,15 +109,15 @@
 			// coerse towards center
 			const dx = node.x - width / 2;
 			const dy = node.y - height / 2;
-			// const dist = Math.sqrt(dx * dx + dy * dy) || 0.01;
-			// const force = options.centerAttraction * (dist - options.idealLengthFromCenter);
-			// const fx = ((dx / dist) * force) / (window.innerWidth / window.innerHeight);
-			// const fy = (dy / dist) * force;
 
-			const aspect = width / height;
-
-			const fx = (dx * options.centerAttraction) / aspect;
-			const fy = dy * options.centerAttraction;
+			const fx =
+				Math.sign(dx) *
+				Math.max(0, Math.abs(dx) - width / 2 + options.border) *
+				options.border_repulsion;
+			const fy =
+				Math.sign(dy) *
+				Math.max(0, Math.abs(dy) - height / 2 + options.border) *
+				options.border_repulsion;
 
 			node.vx -= fx;
 			node.vy -= fy;
@@ -127,8 +127,8 @@
 			node.vy *= options.damping;
 			node.x += node.vx;
 			node.y += node.vy;
-			// node.x = Math.min(Math.max(node.x, 0), width);
-			// node.y = Math.min(Math.max(node.y, 0), height);
+			// node.x = Math.min(Math.max(node.x, 20), width - 20);
+			// node.y = Math.min(Math.max(node.y, 20), height - 20);
 		});
 	}
 
@@ -144,8 +144,10 @@
 	const graph: Action<HTMLDivElement> = (e) => {
 		nodes = nodes.map((node) => ({
 			...node,
-			x: Math.random() * e.clientWidth,
-			y: Math.random() * e.clientHeight
+			x: Math.random() * (e.clientWidth / 2 + e.clientWidth / 4),
+			y: Math.random() * (e.clientHeight / 2 + e.clientHeight / 4),
+			vx: 0,
+			vy: 0
 		}));
 		animate();
 	};
@@ -165,7 +167,12 @@
 	}
 </script>
 
-<div class="relative h-150" use:graph bind:clientWidth={width} bind:clientHeight={height}>
+<div
+	class="relative h-150 w-full rounded-2xl border-2 border-main-orange"
+	use:graph
+	bind:clientWidth={width}
+	bind:clientHeight={height}
+>
 	<svg
 		class="absolute"
 		{width}
@@ -200,7 +207,7 @@
 			style:transform="translate(-50%, -50%)"
 			style={showNode(node) ? 'opacity: 1' : 'opacity: 0.5; filter: saturate(0)'}
 		>
-			<Pill big={node.isCategory}>{node.name}</Pill>
+			<Pill big={node.isCategory} clickable={true}>{node.name}</Pill>
 		</button>
 	{/each}
 </div>

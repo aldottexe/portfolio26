@@ -1,14 +1,17 @@
 <script>
-	const { children, big = false } = $props();
+	const { children, big = false, clickable = false } = $props();
 </script>
 
-<span class="pill {big ? 'big' : ''}">
+<span
+	class="pill border-2 border-main-orange transition-colors {big ? 'big' : ''} {clickable
+		? 'hover:border-alt-black'
+		: ''}"
+>
 	{@render children()}
 </span>
 
 <style>
 	.pill {
-		border: 2px var(--color-main-orange) solid;
 		color: var(--color-main-orange);
 		font-size: 0.7rem;
 		border-radius: 100px;
