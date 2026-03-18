@@ -70,7 +70,7 @@
 {/if}
 
 <!-- Projects -->
-<div class="mx-auto mb-30 max-w-310" id="projects">
+<div class="mx-auto mb-30 max-w-310 md:px-10" id="projects">
 	<Squiggle className="max-w-310 mx-2">
 		<div class="mx-auto p-8">
 			<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Projects</h2>

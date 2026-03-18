@@ -168,7 +168,7 @@
 </script>
 
 <div
-	class="relative h-190 min-h-120 w-full rounded-2xl border-2 border-main-orange md:h-[90vh]"
+	class="relative h-190 min-h-120 w-full rounded-2xl border-2 border-main-orange md:h-[80vh]"
 	use:graph
 	bind:clientWidth={width}
 	bind:clientHeight={height}
