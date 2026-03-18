@@ -171,7 +171,7 @@
 						type="translate"
 						to="{wl * 2}, 0"
 						dur={duration}
-						repeatDur="indefinite"
+						repeatCount="indefinite"
 					/>
 				</path>
 			</pattern>
@@ -199,7 +199,7 @@
 						type="translate"
 						to="{-wl * 2}, 0"
 						dur={duration}
-						repeatDur="indefinite"
+						repeatCount="indefinite"
 					/>
 				</path>
 			</pattern>
@@ -221,7 +221,7 @@
 						type="translate"
 						to="0,{-wl * 2}"
 						dur={duration}
-						repeatDur="indefinite"
+						repeatCount="indefinite"
 					/>
 				</path>
 			</pattern>
@@ -250,29 +250,29 @@
 						type="translate"
 						to="0,{wl * 2}"
 						dur={duration}
-						repeatDur="indefinite"
+						repeatCount="indefinite"
 					/>
 				</path>
 			</pattern>
 		</defs>
 
 		<!-- top -->
-		<rect x={amp} width={wRounded - 2 * amp} height={amp} fill="url(#tpattern)" />
+		<rect x={amp} width={Math.abs(wRounded - 2 * amp)} height={amp} fill="url(#tpattern)" />
 		<!-- bottom -->
 		<rect
 			x={amp}
 			y={hRounded - amp}
-			width={wRounded - 2 * amp}
+			width={Math.abs(wRounded - 2 * amp)}
 			height={amp}
 			fill="url(#bpattern)"
 		/>
 		<!-- left -->
-		<rect y={amp} height={hRounded - 2 * amp} width={amp} fill="url(#lpattern)" />
+		<rect y={amp} height={Math.abs(hRounded - 2 * amp)} width={amp} fill="url(#lpattern)" />
 		<!-- right -->
 		<rect
 			x={wRounded - amp}
 			y={amp}
-			height={hRounded - 2 * amp}
+			height={Math.abs(hRounded - 2 * amp)}
 			width={amp}
 			fill="url(#rpattern)"
 		/>
@@ -287,7 +287,7 @@
 				<animate
 					attributeName="d"
 					dur={duration}
-					repeatDur="indefinite"
+					repeatCount="indefinite"
 					values="
                {Object.values(c).map(keyframeToString).join('\n') + keyframeToString(c.f1)}"
 					calcMode="spline"

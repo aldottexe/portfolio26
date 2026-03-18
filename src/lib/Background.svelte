@@ -89,7 +89,6 @@
 				stripes.rotation.y = v;
 				const r = 1.75 + 4 * v;
 				stripes.position.z = Math.min(Math.max(0.2, r), 1.75);
-				console.log(r, v);
 			}
 
 			if (circles) {

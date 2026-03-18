@@ -1,8 +1,8 @@
 <script>
-	const { children } = $props();
+	const { children, big = false } = $props();
 </script>
 
-<span class="pill">
+<span class="pill {big ? 'big' : ''}">
 	{@render children()}
 </span>
 
@@ -16,5 +16,11 @@
 		width: fit-content;
 		display: block;
 		background-color: var(--color-main-black);
+	}
+	.big {
+		font-size: 1.4em;
+		font-style: italic;
+		font-weight: lighter;
+		color: var(--clor-main-white);
 	}
 </style>
