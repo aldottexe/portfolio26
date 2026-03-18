@@ -197,8 +197,8 @@
 		<button
 			onmousemove={(e) => {
 				const rect = e.currentTarget.getBoundingClientRect();
-				node.vx += (rect.x - e.x + rect.width / 2) / 50;
-				node.vy += (rect.y - e.y + rect.height / 2) / 50;
+				node.vx -= (rect.x - e.x + rect.width / 2) / 10;
+				node.vy -= (rect.y - e.y + rect.height / 2) / 10;
 			}}
 			onclick={() => (selectedName = node.name)}
 			class="absolute transition-opacity"
