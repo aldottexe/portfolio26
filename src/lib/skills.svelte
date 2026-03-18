@@ -61,11 +61,11 @@
 	);
 
 	const options = {
-		repultion: 3500,
-		attraction: 0.01,
+		repultion: 3000,
+		attraction: 0.008,
 		damping: 0.8,
 		idealLength: 100,
-		border_repulsion: 0.05,
+		border_repulsion: 0.03,
 		border: 100
 	};
 
