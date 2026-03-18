@@ -11,6 +11,7 @@
 		{ name: 'Sveltekit', categories: ['Dev'] },
 		{ name: 'Threejs', categories: ['Dev', 'Motion'] },
 		{ name: 'NextJS', categories: ['Dev'] },
+		{ name: 'React', categories: ['Dev'] },
 		{ name: 'PostgreSQL', categories: ['Dev'] },
 		{ name: 'Supabase', categories: ['Dev'] },
 		{ name: 'Bash', categories: ['Dev'] },
