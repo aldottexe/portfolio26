@@ -179,7 +179,7 @@
 <svelte:window
 	onmousemove={(e) => (mouse = { x: e.x, y: e.y })}
 	onmouseup={() => (grabbedNode = undefined)}
-	ontouchmove={(e) => (mouse = { x: e.touches[0].pageX, y: e.touches[0].pageY })}
+	ontouchmove={(e) => (mouse = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
 	ontouchend={() => (grabbedNode = undefined)}
 />
 <div
