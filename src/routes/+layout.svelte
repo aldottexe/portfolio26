@@ -8,8 +8,6 @@
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
-
-	$inspect(page.url.pathname);
 </script>
 
 <svelte:head>
