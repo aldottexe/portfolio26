@@ -80,16 +80,15 @@
 </div>
 
 <!-- Skills -->
-<div class="mx-auto mb-10 max-w-310 overflow-x-hidden px-10" id="skills">
+<div class="mx-auto mb-10 max-w-310 overflow-x-visible px-10" id="skills">
 	<div class="flex flex-col gap-10 md:max-w-400 md:flex-row">
 		<div>
 			<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Skills</h2>
 			<p class="leading-6 md:max-w-60">
-				I build for the web with a focus on SvelteKit and Three.js — reactive interfaces that aren't
-				afraid of a little depth and motion. I'm comfortable across the full stack, from custom GLSL
-				shaders to backend work with Supabase and PostgreSQL. On the design side, I move between
-				Figma, Blender, and Rive to keep the gap between concept and reality small. I like work that
-				lives at the intersection of code and craft.
+				I build for the web with a focus on motion and play. Create something that is fun to use and
+				explore, and intake will happen almost subconciously. I'm comfortable across the full stack,
+				from custom WebGL shaders to backend work with Supabase and PostgreSQL. On the design side,
+				I move between Figma, Blender, and Rive to keep the gap between concept and reality small.
 			</p>
 		</div>
 		<Skills {skills} />

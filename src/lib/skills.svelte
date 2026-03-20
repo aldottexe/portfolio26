@@ -136,6 +136,12 @@
 
 	function animate() {
 		step();
+
+		if (grabbedNode) {
+			const rect = grabbedNode.e.getBoundingClientRect();
+			grabbedNode.node.vx -= (rect.x - mouse.x + rect.width / 2) / 10;
+			grabbedNode.node.vy -= (rect.y - mouse.y + rect.height / 2) / 10;
+		}
 		// frames--;
 		// if (frames)
 		requestAnimationFrame(animate);
@@ -144,8 +150,8 @@
 	const graph: Action<HTMLDivElement> = (e) => {
 		nodes = nodes.map((node) => ({
 			...node,
-			x: Math.random() * (e.clientWidth / 2 + e.clientWidth / 4),
-			y: Math.random() * (e.clientHeight / 2 + e.clientHeight / 4),
+			x: Math.random() * (e.clientWidth / 2) + e.clientWidth / 4,
+			y: Math.random() * (e.clientHeight / 2) + e.clientHeight / 4,
 			vx: 0,
 			vy: 0
 		}));
@@ -153,6 +159,9 @@
 	};
 
 	let selectedName = $state('');
+	let grabbedNode: { e: EventTarget & HTMLButtonElement; node: node_T } | undefined = $state();
+	let mouse = $state({ x: 0, y: 0 });
+
 	function showNode(node: node_T): boolean {
 		return (
 			selectedName === '' ||
@@ -167,6 +176,10 @@
 	}
 </script>
 
+<svelte:window
+	onmousemove={(e) => (mouse = { x: e.x, y: e.y })}
+	onmouseup={() => (grabbedNode = undefined)}
+/>
 <div
 	class="relative h-190 min-h-120 w-full rounded-2xl border-2 border-main-orange md:h-[80vh]"
 	use:graph
@@ -195,17 +208,13 @@
 	</svg>
 	{#each nodes as node (node.name)}
 		<button
-			onmousemove={(e) => {
-				const rect = e.currentTarget.getBoundingClientRect();
-				node.vx -= (rect.x - e.x + rect.width / 2) / 10;
-				node.vy -= (rect.y - e.y + rect.height / 2) / 10;
-			}}
 			onclick={() => (selectedName = node.name)}
 			class="absolute transition-opacity"
 			style:top="{node.y}px"
 			style:left="{node.x}px"
 			style:transform="translate(-50%, -50%)"
 			style={showNode(node) ? 'opacity: 1' : 'opacity: 0.5; filter: saturate(0)'}
+			onmousedown={(e) => (grabbedNode = { e: e.currentTarget, node: node })}
 		>
 			<Pill big={node.isCategory} clickable={true}>{node.name}</Pill>
 		</button>
