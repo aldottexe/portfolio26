@@ -179,7 +179,10 @@
 <svelte:window
 	onmousemove={(e) => (mouse = { x: e.x, y: e.y })}
 	onmouseup={() => (grabbedNode = undefined)}
-	ontouchmove={(e) => (mouse = { x: e.touches[0].clientX, y: e.touches[0].clientY })}
+	ontouchmove={(e) => {
+		mouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+		if (grabbedNode) e.preventDefault();
+	}}
 	ontouchend={() => (grabbedNode = undefined)}
 />
 <div
@@ -217,7 +220,10 @@
 			style:transform="translate(-50%, -50%)"
 			style={showNode(node) ? 'opacity: 1' : 'opacity: 0.5; filter: saturate(0)'}
 			onmousedown={(e) => (grabbedNode = { e: e.currentTarget, node: node })}
-			ontouchstart={(e) => (grabbedNode = { e: e.currentTarget, node: node })}
+			ontouchstart={(e) => {
+				grabbedNode = { e: e.currentTarget, node: node };
+				mouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+			}}
 		>
 			<Pill big={node.isCategory} clickable={true}>{node.name}</Pill>
 		</button>
