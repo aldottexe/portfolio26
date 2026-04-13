@@ -54,6 +54,7 @@
 
 		const circleM = circlesMat();
 		let circles = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), circleM);
+		circles.visible = false;
 		scene.add(circles);
 
 		const composer = new EffectComposer(renderer);
