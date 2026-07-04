@@ -6,7 +6,7 @@ export const load: PageLoad = async ({ params }) => {
 
    let post;
    try {
-      post = await import(`../../../lib/blogPosts/${slug}.md`);
+      post = await import(`../../../lib/blogs/${slug}.md`);
    } catch (err) {
       throw new Error(`project not found: ${slug}
 ${err}`,);
