@@ -14,7 +14,7 @@
 	<!-- <link rel="icon" href={favicon} /> -->
 </svelte:head>
 <PageTransition />
-<Background isProject={/\/p\//.test(page.url.pathname)} />
+<Background isProject={/\/p\//.test(page.url.pathname)} isBlog={/blog/.test(page.url.pathname)} />
 
 <Nav></Nav>
 

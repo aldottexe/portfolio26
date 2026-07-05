@@ -6,7 +6,7 @@
 	import { stripeMat } from './stripeMat';
 	import { circlesMat } from './circlesMat';
 
-	let { isProject = false }: { isProject: boolean } = $props();
+	let { isProject = false, isBlog = false }: { isProject: boolean; isBlog: boolean } = $props();
 
 	const init: Action<HTMLCanvasElement> = (canvas) => {
 		const renderer = new THREE.WebGLRenderer({
@@ -154,5 +154,7 @@
 	};
 </script>
 
-<canvas use:init class="fixed inset-0 z-[-1] h-screen w-screen [image-rendering:pixelated]"
-></canvas>
+{#if !isBlog}
+	<canvas use:init class="fixed inset-0 z-[-1] h-screen w-screen [image-rendering:pixelated]"
+	></canvas>
+{/if}

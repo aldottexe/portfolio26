@@ -1,6 +1,6 @@
 ---
 emoji: 🍔
-featureImage: /200kmi/200kmiHero.gif
+featureImage: /bigArch/arch.png
 title: Big Arch Review
 desc: A RAW UNFILTERED review of McDonald's new burger💪
 tags: etc
