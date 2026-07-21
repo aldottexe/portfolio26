@@ -8,13 +8,17 @@ My full-stack web portfolio built with SvelteKit, Three.js, WebGL, Tailwind CSS,
 If you're intersted in looking around, here's some highlights
 ### Threejs Background
 The animated background that spans the website
-https://github.com/aldottexe/portfolio26/blob/main/src/lib/Background.svelte
+
+[Background.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/Background.svelte)
 ### Squiggle Border
 The border around the project section. It might seem subtle, but notice how it can scale in both height and width without deforming. And of course, it's paramentric. You can change adjust the amplitude, wavelength, and period and the calculations will be handled automatically. Once the resize handler has completed, the boarder is just an animated SVG, so the performance impact is negligable. 
-https://github.com/aldottexe/portfolio26/blob/main/src/lib/squiggle.svelte
+
+[Squiggle.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/squiggle.svelte)
 ### Post Processing
 A WebGL post-processing shader that is the heart of the site's *vibes*.
-https://github.com/aldottexe/portfolio26/blob/main/src/lib/postProcessing.ts
+
+[postprocessing.ts](https://github.com/aldottexe/portfolio26/blob/main/src/lib/postProcessing.ts)
 ### No libraries? No problem.
 This component uses minimal js for state management, but all motion is done through vanilla css.
-https://github.com/aldottexe/portfolio26/blob/main/src/lib/FeaturePost.svelte
+
+[FeaturePost.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/FeaturePost.svelte)
