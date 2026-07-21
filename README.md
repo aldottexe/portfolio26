@@ -5,9 +5,9 @@ My full-stack web portfolio built with SvelteKit, Three.js, WebGL, Tailwind CSS,
 **Live:** [alexlutz.com](https://alexlutz.com)
 
 ## Explore the codebase
-If you're intersted in looking around, here's some highlights
+If you're intersted in looking around, here's some highlights:
 ### Threejs Background
-The animated background that spans the website
+The animated background that spans the website. The component persists through navigation to minimize load times, and changes state based on routing.
 
 [Background.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/Background.svelte)
 ### Squiggle Border
@@ -19,6 +19,6 @@ A WebGL post-processing shader that is the heart of the site's *vibes*.
 
 [postprocessing.ts](https://github.com/aldottexe/portfolio26/blob/main/src/lib/postProcessing.ts)
 ### No libraries? No problem.
-This component uses minimal js for state management, but all motion is done through vanilla css.
+This component uses minimal js for state management, and all motion is done through vanilla css.
 
 [FeaturePost.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/FeaturePost.svelte)
