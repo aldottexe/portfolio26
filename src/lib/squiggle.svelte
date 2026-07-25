@@ -150,7 +150,10 @@
 </script>
 
 <div class="relative {className}" bind:clientWidth bind:clientHeight>
-	{@render children()}
+	<div class="relative" style="top: {(hRounded - clientHeight) / 2}px;">
+		{@render children()}		
+	</div>
+
 	<svg viewBox="0 0 {wRounded} {hRounded}" class="absolute inset-0 z-[-1]">
 		<defs>
 			<!-- top -->
