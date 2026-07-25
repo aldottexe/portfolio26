@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { fade } from 'svelte/transition';
 	const { children, className = 'p-5 p-5' }: { children: Snippet; className?: string } = $props();
 
 	const wl = 15; // squiggle width
@@ -150,11 +151,12 @@
 </script>
 
 <div class="relative {className}" bind:clientWidth bind:clientHeight>
-	<div class="relative" style="top: {(hRounded - clientHeight) / 2}px;">
+	<div class="relative transition-opacity duration-600 ease-out" style="top: {(hRounded - clientHeight) / 2}px; opacity: {clientWidth > 0 ? 1 : 0}">
 		{@render children()}		
 	</div>
 
-	<svg viewBox="0 0 {wRounded} {hRounded}" class="absolute inset-0 z-[-1]">
+	{#if clientWidth > 0 && clientHeight > 0}
+	<svg viewBox="0 0 {wRounded} {hRounded}" class="absolute inset-0 z-[-1]" transition:fade={{ duration: 600 }}>
 		<defs>
 			<!-- top -->
 			<pattern id="tpattern" width={2 * wl} height={amp} patternUnits="userSpaceOnUse" x={amp - wl}>
@@ -302,4 +304,5 @@
 			</path>
 		{/each}
 	</svg>
+	{/if}
 </div>
