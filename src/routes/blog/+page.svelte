@@ -61,6 +61,8 @@
 		
 		node.style.transition = `transform 1200ms cubic-bezier(.2,.8,.2,1), scale 1200ms cubic-bezier(.2,.8,.2,1) ${Math.floor(Math.random() * 200)}ms`;
 		let lastDeg = 0;
+		let currentScale = 0;
+		let timeout: NodeJS.Timeout | null = null;
 		$effect(() => {
 			const atan = Math.atan2(
 				mouse.current.y - node.offsetTop - node.offsetHeight / 2,
@@ -76,7 +78,16 @@
 
 			lastDeg = newdeg;
 			const scale = mouse.current.x > node.offsetLeft + node.offsetWidth / 2 ? 0 : 180;
-			node.style.transform = `rotate(${newdeg}deg) rotateY(${scale}deg) rotateX(${scale}deg)`;
+			
+			if (currentScale !== scale) {
+				if (timeout) clearTimeout(timeout);
+				timeout = setTimeout(() => {
+					currentScale = scale;
+					node.style.transform = `rotate(${newdeg}deg) rotateY(${scale}deg) rotateX(${scale}deg)`;
+				}, Math.random() * 500);
+			}
+			node.style.transform = `rotate(${newdeg}deg) rotateY(${scale}deg) rotateX(${currentScale}deg)`;
+			
 		});
 	};
 </script>
