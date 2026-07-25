@@ -12,13 +12,14 @@
 
 	interface Props {
 		projects: projects_T;
+		subDir?: string;
 	}
 
 	let img = $state('');
 
 	let pos = new Spring({ x: 10000, y: 10000 });
 
-	const { projects }: Props = $props();
+	const { projects, subDir = 'p/' }: Props = $props();
 </script>
 
 <svelte:window
@@ -32,7 +33,7 @@
 		<div class="mb-10 lg:mb-5">
 			<a
 				class="relative flex flex-col justify-center rounded-xl p-2 transition-all duration-300 hover:scale-102 hover:border-main-white lg:h-20"
-				href={resolve(`/p/${p.slug}`)}
+				href={`/${subDir}${p.slug}`}
 				onmouseenter={() => (img = (p.metadata?.featureImage as string) || '')}
 				onmouseleave={() => (img = '')}
 			>

@@ -144,7 +144,7 @@
 			</Squiggle>
 		</div>
 
-		<ProjectList projects={data.projects} />
+		<ProjectList projects={data.projects} subDir="blog/" />
 	</div>
 </div>
 
