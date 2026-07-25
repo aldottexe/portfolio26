@@ -90,6 +90,7 @@
 			<div class="item-list">
 				<a href={resolve('/')}> Home</a>
 				<a href={resolve('/#projects')}> Projects</a>
+				<a href={resolve('/blog')}> Blog</a>
 				<a href={resolve('/#contact')}> Contact</a>
 			</div>
 			<hr class="my-2 border-1 border-main-orange" />

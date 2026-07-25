@@ -2,9 +2,9 @@
 	import ProjectList from '$lib/ProjectList.svelte';
 	import type { Action } from 'svelte/action';
 	import { scale } from 'svelte/transition';
-	import { onMount } from 'svelte';
 	import { Spring } from 'svelte/motion';
-	import type { DOMAttributes, UIEventHandler } from 'svelte/elements';
+	import type { UIEventHandler } from 'svelte/elements';
+	import Squiggle from '$lib/squiggle.svelte';
 	const { data } = $props();
 
 	const patternDistance = 120;
@@ -101,6 +101,7 @@
 					<span
 						class="rounded-xs px-1 text-xs text-main-black"
 						use:fieldPoint
+						style="animation: pulse 3s ease-in-out {Math.floor(Math.random() * 2000)}ms infinite"
 					>
 							<svg 
 								class="fill-main-green" width="34" height="24" 						
@@ -122,14 +123,28 @@
 
 
 <div class="pt-[35vh]">
-	<div class="relative z-5 mx-auto box-content max-w-200 px-10 pb-3" use:mask>
+	<div class="relative z-5 mx-auto box-content max-w-200 px-5 pb-3" use:mask>
 			<div class="py-5 px-2" 
 			onresize={updateMask}
 			>
-				<h1 class="mb-1">Alex's Blog</h1>
-				<p class="mb-5">Hi I'm alex, and this is my blog. Here you can find all kinds of ramblings. From experiments in tech, to life updates, to opinion pieces. Whatever you're looking for, I hope you find something you like.</p>
+				<h1 class="mb-5">Alex's Blog</h1>
+				<Squiggle>
+					<p class="p-5">Hi I'm Alex, and this is my blog. Here you can find all kinds of ramblings ~ from experiments in tech, to life updates, to opinion pieces. Whatever you're looking for, I hope you find something you like :-)</p>
+				</Squiggle>
+				
 			</div>
 
 		<ProjectList projects={data.projects} />
 	</div>
 </div>
+
+<style lang="postcss">
+	@keyframes pulse {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+</style>
