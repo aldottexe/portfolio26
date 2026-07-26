@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
-	import type { Action } from '@sveltejs/kit';
 	import { tick } from 'svelte';
 
 	const frames: Record<string, ()=>Promise<unknown>> = import.meta.glob('/static/transition/*')
 	const links = ["", ...Object.keys(frames).map(k => k.replaceAll(/\/static/g, ""))];
 	console.log(frames);
 
-	let transitioning = $state(false);
 	let frame = $state(0);
 
 	function animate(inc: boolean = true) {
@@ -32,13 +30,13 @@
 
 	onNavigate((nav) => {
 		return new Promise(async (res) => {
-			transitioning = true;
 			await animate(true);
 			res();
 			await nav.complete;
+			randomizeRotation();
 			await tick();
 			await animate(false);
-			transitioning = false;
+			randomizeRotation();
 		});
 	});
 
@@ -52,12 +50,14 @@
 </svelte:head>
 
 {#if frame > 0}
-<img
-	class={`fixed h-full object-cover z-50 w-full transition-[height] duration-300 pointer-events-none`}
-	src={links[frame]}
-	alt="Page is Loading"
-	style:background={frame === links.length ? "#d9d9d9" : "transparent"}
-/>
+	<img
+		class="fixed h-full object-cover z-50 w-full"
+		src={links[frame]}
+		alt="Page is Loading"	
+	/>
+{/if}
+{#if frame == links.length}
+	<div class="fixed h-full z-51 w-full bg-main-black"></div>
 {/if}
 
 <style lang="postcss">
