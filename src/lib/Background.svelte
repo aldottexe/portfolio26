@@ -17,6 +17,8 @@
 		renderer.setPixelRatio(devicePixelRatio);
 		renderer.setClearColor(0x000000);
 
+		console.log("device pixel ratio", devicePixelRatio)
+
 		const camera = new THREE.PerspectiveCamera();
 		camera.near = 0.001;
 		camera.position.setZ(2);
@@ -60,7 +62,7 @@
 		const composer = new EffectComposer(renderer);
 		composer.addPass(new RenderPass(scene, camera));
 		const pp = PostProcess();
-		pp.uniforms.u_resolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
+		// pp.uniforms.u_resolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
 		const myEffect = new ShaderPass(pp);
 		composer.addPass(myEffect);
 
