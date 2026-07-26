@@ -1,10 +1,8 @@
-import { Vector2 } from "three";
 export function PostProcess() {
    return {
 
       uniforms: {
          "tDiffuse": { type: "t", value: null },
-         "u_resolution": { type: "vec2", value: new Vector2(1920, 1080) },
          "u_time": { value: 1 }
       },
 
@@ -29,8 +27,8 @@ export function PostProcess() {
       precision mediump float;
       #endif
       
-      uniform vec2 u_resolution;
       uniform float u_time;
+
       
       float random(vec2 st) {
           return fract(sin(dot(st, vec2(12.9898,78.233))) * 43758.5453123);
@@ -89,27 +87,28 @@ export function PostProcess() {
       }
       
       void main() {
-          vec2 st = gl_FragCoord.xy / u_resolution.xy;
-          st.x *= u_resolution.x / u_resolution.y;
+         vec2 u_resolution = vec2(1920.0, 1080.0) * vec2(0.5);
+         vec2 st = gl_FragCoord.xy / u_resolution.xy;
+         st.x *= u_resolution.x / u_resolution.y;
       
-          // ── ANIMATED FBM DOMAIN ──
-          vec2 q = st * 2.0;
-          q += vec2(u_time * 0.569, u_time * 0.07);
+         // ── ANIMATED FBM DOMAIN ──
+         vec2 q = st * 2.0;
+         q += vec2(u_time * 0.569, u_time * 0.07);
       
-          float n = noise(q);
-          vec3 color = vec3(n);
+         float n = noise(q);
+         vec3 color = vec3(n);
       
-          // ── ORIGINAL SCENE ──
-          vec4 texel = texture2D(tDiffuse, vUv);
+         // ── ORIGINAL SCENE ──
+         vec4 texel = texture2D(tDiffuse, vUv);
       
-          // —— GRAIN ——
-          float grn = grain(st*300.);
+         // —— GRAIN ——
+         float grn = grain(st*300.);
       
-          // ── COMPOSITE ──
-          texel.rgb *= 2.2;
-          texel.rgb += color / 4. * abs(step(0.01, texel.r)-1.);
-          texel.rgb += grn / 2.;
-          gl_FragColor = vec4(colorRamp(texel.rgb), 1);
+         // ── COMPOSITE ──
+         texel.rgb *= 2.2;
+         texel.rgb += color / 4. * abs(step(0.01, texel.r)-1.);
+         texel.rgb += grn / 2.;
+         gl_FragColor = vec4(colorRamp(texel.rgb), 1);
       }
 `
    };
