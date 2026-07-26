@@ -4,7 +4,7 @@
 	import { tick } from 'svelte';
 
 	const frames: Record<string, ()=>Promise<unknown>> = import.meta.glob('/static/transition/*')
-	const links = Object.keys(frames).map(k => k.replaceAll(/\/static/g, ""));
+	const links = ["", ...Object.keys(frames).map(k => k.replaceAll(/\/static/g, ""))];
 	console.log(frames);
 
 	let transitioning = $state(false);
@@ -14,14 +14,14 @@
 		function step(inc: boolean = true, res: () => void) {
 			if (inc) {
 				frame++;
-				if (frame < links.length - 1)
-					setTimeout(animate, 1000 / 3);
+				if (frame < links.length + 1)
+					setTimeout(()=>step(inc, res), 50);
 				else
 					res();
 			} else {
 				frame--;
 				if (frame > 0)
-					setTimeout(animate, 1000 / 3);
+					setTimeout(()=>step(inc, res), 50);
 				else
 					res();
 			}	
@@ -51,11 +51,14 @@
 	{/each}
 </svelte:head>
 
+{#if frame > 0}
 <img
-	class={`fixed h-full object-cover z-50 w-full bg-main-orange transition-[height] duration-300`}
+	class={`fixed h-full object-cover z-50 w-full transition-[height] duration-300 pointer-events-none`}
 	src={links[frame]}
 	alt="Page is Loading"
+	style:background={frame === links.length ? "#d9d9d9" : "transparent"}
 />
+{/if}
 
 <style lang="postcss">
 	@reference "tailwindcss";
