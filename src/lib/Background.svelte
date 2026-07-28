@@ -5,8 +5,10 @@
 	import { PostProcess } from './postProcessing';
 	import { stripeMat } from './stripeMat';
 	import { circlesMat } from './circlesMat';
+	import { threeState } from './siteState.svelte';
 
-	let { isProject = false }: { isProject: boolean } = $props();
+	let { isProject = false, onLoad}: { isProject: boolean, onLoad?: ()=>void} = $props();
+
 
 	const init: Action<HTMLCanvasElement> = (canvas) => {
 		const renderer = new THREE.WebGLRenderer({
@@ -138,6 +140,8 @@
 			t.update();
 		});
 
+		threeState.loaded = true;
+
 		//teardown
 		$effect(() => {
 			return () => {
@@ -155,6 +159,5 @@
 		});
 	};
 </script>
-
 <canvas use:init class="fixed inset-0 z-[-1] h-screen w-screen [image-rendering:pixelated]"
 ></canvas>
