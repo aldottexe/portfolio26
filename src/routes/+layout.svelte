@@ -8,13 +8,14 @@
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
-</script>
+	</script>
 
 <svelte:head>
 	<!-- <link rel="icon" href={favicon} /> -->
 </svelte:head>
-<PageTransition />
-<Background isProject={/\/p\//.test(page.url.pathname)} />
+
+<PageTransition/>
+<Background isProject={/\/p\//.test(page.url.pathname)}/>
 
 <Nav></Nav>
 
