@@ -59,18 +59,21 @@
 {/if}
 {#if !threeState.loaded}
 	<div 
-		class="fixed z-51 h-full w-full flex items-center justify-center"
+		class="fixed z-51 h-full w-full flex items-center justify-center flex-col gap-5"
 		in:fade|global={{duration: 1000}}
 	>
+<img src="logo.svg" class="w-20"/>
+		<div>
 		{#each "Loading..." as l, i (i)}
 			<span 
-				class="animate-bounce" 
+				class="animate-bounce inline-block" 
 				style="animation-delay: {i * 10}ms" 
 				
 			>
 				{l}
 			</span>
 		{/each}
+		</div>
 	</div>
 {/if}
 
