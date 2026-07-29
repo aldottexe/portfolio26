@@ -52,8 +52,8 @@
 
 <div class="grid h-[calc(100vh-50px)] w-screen place-content-center">
 	<p class="mt-60 max-w-120 px-10 text-center text-xl sm:mt-50">
-		Hey there, I’m Alex—a designer, developer, and dungeon delver based out of Philadelphia, PA.
-		Feel free to explore my work, or <a href="/#contact" class="gold-text"> get in touch!</a>
+		Hey there, I’m Alex—a designer, developer, and tinkerer based out of Philadelphia, PA. Feel free
+		to explore my work, or <a href="/#contact" class="gold-text"> get in touch!</a>
 	</p>
 </div>
 

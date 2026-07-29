@@ -19,8 +19,6 @@
 		renderer.setPixelRatio(devicePixelRatio);
 		renderer.setClearColor(0x000000);
 
-		console.log("device pixel ratio", devicePixelRatio)
-
 		const camera = new THREE.PerspectiveCamera();
 		camera.near = 0.001;
 		camera.position.setZ(2);

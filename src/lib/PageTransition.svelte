@@ -26,7 +26,6 @@
 	let loaded = $state(false);
 	let to: NodeJS.Timeout | undefined;
 	$effect(() => {
-		console.log('hello!');
 		if (threeState.loaded && !loaded && !to) {
 			to = setTimeout(() => {
 				loaded = true;
