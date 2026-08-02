@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
 	import { threeState } from './siteState.svelte';
-	import { fade } from 'svelte/transition';
 
 	const frames: Record<string, () => Promise<unknown>> = import.meta.glob('/static/transition/*');
 	const links = ['', ...Object.keys(frames).map((k) => k.replaceAll(/\/static/g, ''))];
@@ -50,6 +49,7 @@
 	{#each links as i (i)}
 		<link rel="preload" href={i} as="image" />
 	{/each}
+	<link rel="preload" href="/logo.svg"/>
 </svelte:head>
 
 {#if frame > 0}
@@ -60,14 +60,14 @@
 {/if}
 {#if !loaded}
 	<div class="fadein fixed z-51 flex h-full w-full flex-col items-center justify-center gap-5">
-		<img src="/logo.svg" class="block w-20" />
-		<div class="pl-1">
+		<img src="/logo.svg" class="block w-20" alt="welcome!"/>
+		<p class="pl-1">
 			{#each 'Loading...' as l, i (i)}
 				<span class="inline-block animate-bounce" style="animation-delay: {i * 10}ms">
 					{l}
 				</span>
 			{/each}
-		</div>
+			</p>
 	</div>
 {/if}
 
