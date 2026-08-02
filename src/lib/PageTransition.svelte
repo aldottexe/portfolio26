@@ -74,7 +74,7 @@
 <style lang="postcss">
 	@reference "tailwindcss";
 	.fadein {
-		animation: f 200ms;
+		animation: f 200ms 200ms both;
 	}
 	@keyframes f {
 		0% {
