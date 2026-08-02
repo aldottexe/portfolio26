@@ -85,9 +85,9 @@
 <!-- Skills -->
 <div class="mx-auto mb-10 max-w-310 overflow-x-visible px-10" id="skills">
 	<div class="flex flex-col gap-10 md:max-w-400 md:flex-row">
-		<div>
+		<div class="min-w-45 md:max-w-55 md:w-[50vw]">
 			<h2 class="mb-10 text-5xl font-thin text-main-orange italic">Skills</h2>
-			<p class="leading-6 md:max-w-60">
+			<p class="leading-6">
 				I build for the web with a focus on motion and play. Create something that is fun to use and
 				explore, and intake will happen almost subconciously. I'm comfortable across the full stack,
 				from custom WebGL shaders to backend work with Supabase and PostgreSQL. On the design side,
