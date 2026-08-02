@@ -49,7 +49,7 @@
 	{#each links as i (i)}
 		<link rel="preload" href={i} as="image" />
 	{/each}
-	<link rel="preload" href="/logo.svg"/>
+	<link rel="preload" href="/logo.svg" as="image"/>
 </svelte:head>
 
 {#if frame > 0}
