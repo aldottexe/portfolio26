@@ -10,8 +10,8 @@ If you're intersted in looking around, here's some highlights:
 The animated background that spans the website. The component persists through navigation to minimize load times, and changes state based on routing.
 
 [Background.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/Background.svelte)
-### Squiggle Border
-The border around the project section. It might seem subtle, but notice how it can scale in both height and width without deforming. And of course, it's paramentric. You can change adjust the amplitude, wavelength, and period and the calculations will be handled automatically. Once the resize handler has completed, the boarder is just an animated SVG, so the performance impact is negligable. 
+### Dynamic Animations
+The border around the project section. It might seem subtle, but notice how it can scale in both height and width without deforming. And of course, it's paramentric. You can adjust the amplitude, wavelength, and period and the calculations will be handled automatically. Once the resize handler has completed, the border is just an animated SVG, so the performance impact is negligable. 
 
 [Squiggle.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/squiggle.svelte)
 ### Post Processing
@@ -19,6 +19,6 @@ A WebGL post-processing shader that is the heart of the site's *vibes*.
 
 [postprocessing.ts](https://github.com/aldottexe/portfolio26/blob/main/src/lib/postProcessing.ts)
 ### No libraries? No problem.
-This component uses minimal js for state management, and all motion is done through vanilla css.
+The feature component uses minimal js for state management, and all motion is done through vanilla css.
 
 [FeaturePost.svelte](https://github.com/aldottexe/portfolio26/blob/main/src/lib/FeaturePost.svelte)
