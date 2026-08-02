@@ -6,9 +6,10 @@
 	import { stripeMat } from './stripeMat';
 	import { circlesMat } from './circlesMat';
 	import { threeState } from './siteState.svelte';
+	import { Spring } from 'svelte/motion';
+	import { onNavigate } from '$app/navigation';
 
-	let { isProject = false, onLoad}: { isProject: boolean, onLoad?: ()=>void} = $props();
-
+	let { isProject = false, onLoad }: { isProject: boolean; onLoad?: () => void } = $props();
 
 	const init: Action<HTMLCanvasElement> = (canvas) => {
 		const renderer = new THREE.WebGLRenderer({
@@ -49,6 +50,7 @@
 			scene.add(logo);
 			onScroll();
 		});
+	
 
 		const stripeM = stripeMat();
 		let stripes = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), stripeM);
@@ -82,37 +84,16 @@
 		window.addEventListener('resize', resize);
 
 		let lastScroll = 0;
+		let scroll = new Spring(window?.scrollY || 0, { stiffness: 0.02, damping: 0.5 });
 		function onScroll() {
-			if (stripes) {
-				const v = Math.min(
-					0,
-					(-document.body.scrollHeight + window.scrollY + window.innerHeight) / window.innerHeight
-				);
-				stripes.position.y = v;
-				stripes.rotation.y = v;
-				const r = 1.75 + 4 * v;
-				stripes.position.z = Math.min(Math.max(0.2, r), 1.75);
-			}
-
-			if (circles) {
-				const t =
-					(((window.scrollY / document.body.scrollHeight) * window.innerWidth) /
-						window.innerWidth) *
-					3;
-				circles.position.y = t * 10;
-				circles.position.z = -t * 10;
-
-				circleM.uniforms.u_dy.value = (-window.scrollY / document.body.scrollHeight) * 6;
-			}
-
-			if (logo) {
-				logo.position.y = window.scrollY / window.innerHeight + 0.2;
-				logo.rotation.z += (window.scrollY - lastScroll) / 100;
-				lastScroll = window.scrollY;
-			}
+			scroll.set(window.scrollY);
 		}
 		window.addEventListener('scroll', onScroll);
 		onScroll();
+
+		onNavigate(()=> {
+			setTimeout(()=>scroll.set(0, {instant: true}), 300)	
+		})
 
 		//animation
 		const t = new THREE.Timer();
@@ -131,7 +112,35 @@
 			if (logo) {
 				logo.visible = !isProject;
 				circles.visible = isProject;
+				if (!isProject) {
+					logo.position.y = scroll.current / window.innerHeight + 0.2;
+					logo.rotation.z += ((scroll.current - lastScroll) / window.innerHeight) * 6;
+				}
 			}
+
+			if (stripes) {
+				const v = Math.min(
+					0,
+					(-document.body.scrollHeight + scroll.current +  1.05 * window.innerHeight) / window.innerHeight
+				);
+				stripes.position.y = v;
+				stripes.rotation.y = v;
+				const r = 1.75 + 4 * v;
+				stripes.position.z = Math.min(Math.max(0.2, r), 1.75);
+			}
+
+			if (circles) {
+				const t =
+					(((scroll.current / document.body.scrollHeight) * window.innerWidth) /
+						window.innerWidth) *
+					3;
+				circles.position.y = t * 10;
+				circles.position.z = -t * 10;
+
+				circleM.uniforms.u_dy.value = (-scroll.current / document.body.scrollHeight) * 6;
+			}
+
+			lastScroll = scroll.current;
 
 			logo?.rotateZ(t.getDelta() / 2);
 			composer.render();
@@ -157,5 +166,6 @@
 		});
 	};
 </script>
+
 <canvas use:init class="fixed inset-0 z-[-1] h-screen w-screen [image-rendering:pixelated]"
 ></canvas>
