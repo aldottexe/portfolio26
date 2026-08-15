@@ -1,4 +1,4 @@
-I'm in my late 20s now, and I've been spending a lot of the past year reflecting on how to live a good life. How to maximize the things that fulfill me, and keep myself in a mindset so that I can appreciate/be present for/experience good things when they come my way.
+I'm in my late 20s now, and I've been spending a lot of the past year reflecting on how to living intentionally. How to maximize the things that fulfill me, and keep myself in a mindset so that I can be present for good things when they come my way.
 
 This article is a list of tips and practices that have helped me to live life.
 
@@ -39,3 +39,10 @@ Boredom is something you have to choose now.
 
 ## More Good Things != More Joy
 It doesn't matter how many good things you have if you're not in the mind
+
+## Cultivate some digital hygiene
+
+## What leisure is good leisure?
+ultimately comes down to your values. 
+
+## What something can do versus how it does it
