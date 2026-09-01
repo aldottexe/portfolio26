@@ -1,171 +1,339 @@
 <script lang="ts">
-	import type { Action } from 'svelte/action';
-	import * as THREE from 'three';
-	import { EffectComposer, GLTFLoader, RenderPass, ShaderPass } from 'three/examples/jsm/Addons.js';
-	import { PostProcess } from './postProcessing';
-	import { stripeMat } from './stripeMat';
-	import { circlesMat } from './circlesMat';
-	import { threeState } from './siteState.svelte';
-	import { Spring } from 'svelte/motion';
-	import { onNavigate } from '$app/navigation';
+   import * as THREE from "three";
+   import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+   import { type Snippet, type SvelteComponent, onDestroy } from "svelte";
+   import { spring } from "svelte/motion";
+   import { clamp } from "three/src/math/MathUtils.js";
+   import { threeState } from './siteState.svelte';
 
-	let { isProject = false, onLoad }: { isProject: boolean; onLoad?: () => void } = $props();
+   let {
+      children,
+      progress = $bindable(0),
+	  onLoad = () => {}
+   }: { children: Snippet; progress: number, onLoad: ()=>void} = $props();
 
-	const init: Action<HTMLCanvasElement> = (canvas) => {
-		const renderer = new THREE.WebGLRenderer({
-			powerPreference: 'high-performance',
-			canvas: canvas,
-			antialias: false
-		});
-		renderer.setPixelRatio(devicePixelRatio);
-		renderer.setClearColor(0x000000);
+   const PI = 3.141592;
 
-		const camera = new THREE.PerspectiveCamera();
-		camera.near = 0.001;
-		camera.position.setZ(2);
-		camera.aspect = window.innerHeight / window.innerWidth;
+   THREE.DefaultLoadingManager.onProgress = (_, itemsLoaded, itemsTotal) =>
+      (progress = (itemsLoaded / itemsTotal) * 100);
 
-		const scene = new THREE.Scene();
-		scene.add(camera);
-		// scene.add(new THREE.GridHelper());
+   //animations function in delta time
+   const clock = new THREE.Clock();
 
-		const ambient = new THREE.AmbientLight(0xffffff, 0.1);
-		scene.add(ambient);
-		const l = new THREE.PointLight(0xffffff, 10);
-		l.position.set(1, 1, 3);
-		scene.add(l);
+   let virtualPagePos = 0;
 
-		const simpleMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(0xffffff) });
-		let logo: THREE.Group<THREE.Object3DEventMap> | undefined;
-		new GLTFLoader().load('/ovallogo.glb', (m) => {
-			logo = m.scene;
-			const scale = 0.3;
-			logo.scale.set(scale, scale, scale);
-			logo.rotateX(Math.PI / 2);
-			logo.traverse((c) => {
-				if (c.isMesh) {
-					c.material = simpleMat;
-				}
-			});
-			scene.add(logo);
-			onScroll();
-		});
-	
+   let mousePos = { x: 0, y: 0 };
 
-		const stripeM = stripeMat();
-		let stripes = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), stripeM);
-		scene.add(stripes);
+   let charPositionPixels = spring(
+      { x: 0, y: 0 },
+      { stiffness: 0.01, damping: 0.73 },
+   );
 
-		const circleM = circlesMat();
-		let circles = new THREE.Mesh(new THREE.SphereGeometry(1.5, 8, 8), circleM);
-		circles.visible = false;
-		scene.add(circles);
+   let safeZone = {
+      minTarget: new THREE.Vector2(0, 0),
+      maxTarget: new THREE.Vector2(0, 0),
+      width: 0,
+      height: 0,
+   };
 
-		const composer = new EffectComposer(renderer);
-		composer.addPass(new RenderPass(scene, camera));
-		const pp = PostProcess();
-		// pp.uniforms.u_resolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
-		const myEffect = new ShaderPass(pp);
-		composer.addPass(myEffect);
+   let characterRotation = spring(0, { stiffness: 0.1, damping: 0.73 });
+   let characterSpeed = 0;
 
-		//event listeners
-		function resize() {
-			circleM.uniforms.u_resolution.value = new THREE.Vector2(
-				window.innerWidth * devicePixelRatio,
-				window.innerHeight * devicePixelRatio
-			);
+   function init(canvas: HTMLElement) {
+      (async () => {
+         // create the renderer
+         const renderer = new THREE.WebGLRenderer({
+            alpha: true,
+            antialias: false,
+            canvas,
+         });
 
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			composer.setSize(window.innerWidth, window.innerHeight);
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-		}
-		resize();
-		window.addEventListener('resize', resize);
+         renderer.shadowMap.enabled = true;
+         renderer.setPixelRatio(devicePixelRatio);
 
-		let lastScroll = 0;
-		let scroll = new Spring(window?.scrollY || 0, { stiffness: 0.02, damping: 0.5 });
-		function onScroll() {
-			scroll.set(window.scrollY);
-		}
-		window.addEventListener('scroll', onScroll);
-		onScroll();
+         // create the scene
+         const scene: THREE.Scene = new THREE.Scene();
 
-		onNavigate(()=> {
-			setTimeout(()=>scroll.set(0, {instant: true}), 300)	
-		})
+         //when the scene is destroyed, run the cleanup function
+         onDestroy(() => {
+            console.log(renderer.info);
+            scene.traverse((o) => {
+               if (o instanceof THREE.Mesh) {
+                  o.geometry.dispose();
+                  o.material.dispose();
+                  if (o.material.map) {
+                     console.log(o.material.map);
+                  }
+               }
+            });
+            renderer.dispose();
+            renderer.info.programs[0].destroy();
+            while (scene.children.length > 0) {
+               scene.remove(scene.children[0]);
+            }
+            setTimeout(() => {
+               console.log(renderer.info);
 
-		//animation
-		const t = new THREE.Timer();
-		renderer.setAnimationLoop(() => {
-			myEffect.uniforms.u_time.value = t.getElapsed();
-			myEffect.needsSwap = true;
+               console.log(scene.children.length);
+            }, 1000);
+         });
 
-			circleM.uniforms.u_time.value = t.getElapsed();
-			circleM.needsUpdate = true;
-			circleM.uniformsNeedUpdate = true;
+         // create the camera
+         const fov: number = 50;
+         const aspect: number = window.innerWidth / window.innerHeight;
+         const near: number = 0.1;
+         const far: number = 100;
 
-			stripeM.uniforms.u_time.value = t.getElapsed();
-			stripeM.needsUpdate = true;
-			stripeM.uniformsNeedUpdate = true;
+         let camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(
+            fov,
+            aspect,
+            near,
+            far,
+         );
 
-			if (logo) {
-				logo.visible = !isProject;
-				circles.visible = isProject;
-				if (!isProject) {
-					logo.position.y = scroll.current / window.innerHeight + 0.2;
-					logo.rotation.z += ((scroll.current - lastScroll) / window.innerHeight) * 6;
-				}
-			}
+         // scene.add(new THREE.GridHelper(10));
 
-			if (stripes) {
-				const v = Math.min(
-					0,
-					(-document.body.scrollHeight + scroll.current +  1.05 * window.innerHeight) / window.innerHeight
-				);
-				stripes.position.y = v;
-				stripes.rotation.y = v;
-				const r = 1.75 + 4 * v;
-				stripes.position.z = Math.min(Math.max(0.2, r), 1.75);
-			}
+         //Position the camera
+         camera.position.y = 10;
+         camera.rotation.x = -PI / 2;
+         scene.add(camera);
 
-			if (circles) {
-				const t =
-					(((scroll.current / document.body.scrollHeight) * window.innerWidth) /
-						window.innerWidth) *
-					3;
-				circles.position.y = t * 10;
-				circles.position.z = -t * 10;
+         const spot: THREE.DirectionalLight = new THREE.DirectionalLight(
+            0xffffff,
+            300,
+         );
 
-				circleM.uniforms.u_dy.value = (-scroll.current / document.body.scrollHeight) * 6;
-			}
+         spot.position.set(5, 5, 5);
+         spot.rotation.z = 1;
+         spot.castShadow = true;
 
-			lastScroll = scroll.current;
+         spot.shadow.mapSize.width = 2048;
+         spot.shadow.mapSize.height = 2048;
+         spot.shadow.camera.near = 0.5;
+         spot.shadow.camera.far = 100;
+         spot.shadow.camera.left = -9;
+         spot.shadow.camera.right = 9;
+         spot.shadow.camera.top = 9;
+         spot.shadow.camera.bottom = -9;
 
-			logo?.rotateZ(t.getDelta() / 2);
-			composer.render();
-			t.update();
-		});
+         scene.add(spot);
+         // scene.add(new THREE.DirectionalLightHelper(spot));
 
-		threeState.loaded = true;
+         const p: THREE.PlaneGeometry = new THREE.PlaneGeometry(20, 20);
+         const m: THREE.Material = new THREE.ShadowMaterial();
+         m.opacity = 0.2;
+         const shadowCatcher: THREE.Mesh = new THREE.Mesh(p, m);
+         shadowCatcher.rotateX(-PI / 2);
+         shadowCatcher.receiveShadow = true;
+         scene.add(shadowCatcher);
 
-		//teardown
-		$effect(() => {
-			return () => {
-				window.removeEventListener('resize', resize);
-				window.removeEventListener('scroll', onScroll);
-				renderer?.dispose();
-				scene.traverse((obj) => {
-					if (obj.geometry) obj.geometry.dispose();
-					if (obj.material) {
-						if (obj.material.map) obj.material.map.dispose();
-						obj.material.dispose();
-					}
-				});
-			};
-		});
-	};
+         //CHARACTER
+         let { character, mixer, animationList } = await loadCharacter(scene);
+
+         animationList.run.play();
+         animationList.idle.play();
+
+         resize(camera, renderer);
+         window.onresize = () => resize(camera, renderer);
+
+         startAnimation(
+            renderer,
+            scene,
+            mixer,
+            animationList,
+            camera,
+            shadowCatcher,
+            spot,
+            character,
+         );
+
+         window.addEventListener("mousemove", mouseMove);
+         window.onscroll = scroll;
+         scroll();
+		 onLoad();
+       threeState.loaded = true;
+      })();
+   }
+
+   interface CharacterData {
+      character: THREE.Mesh;
+      mixer: THREE.AnimationMixer;
+      animationList: AnimationList;
+   }
+   interface AnimationList {
+      idle: THREE.AnimationAction;
+      run: THREE.AnimationAction;
+      walk: THREE.AnimationAction;
+   }
+
+   function loadCharacter(scene: THREE.Scene): Promise<CharacterData> {
+      return new Promise((res) => {
+         new GLTFLoader().load("/little alex.glb", (f: any) => {
+            let character = f.scene.children[0];
+            character.scale.set(0.2, 0.2, 0.2);
+            character.rotateY(PI);
+
+            character.children[0].children.forEach(
+               (m: THREE.Mesh) => (m.castShadow = true),
+            );
+
+            character.position.y = 0.6;
+            scene.add(character);
+
+            let mixer = new THREE.AnimationMixer(character);
+            let animationList = {
+               idle: mixer.clipAction(f.animations[0]),
+               run: mixer.clipAction(f.animations[1]),
+               walk: mixer.clipAction(f.animations[2]),
+            };
+
+            res({ character, mixer, animationList });
+         });
+      });
+   }
+
+   function startAnimation(
+      renderer: THREE.WebGLRenderer,
+      scene: THREE.Scene,
+      mixer: THREE.AnimationMixer,
+      animationList: AnimationList,
+      camera: THREE.Camera,
+      shadowCatcher: THREE.Mesh,
+      light: THREE.DirectionalLight,
+      character: THREE.Mesh,
+   ) {
+      renderer.setAnimationLoop(() => {
+         const delta = clock.getDelta();
+         mixer.update(delta);
+
+         shadowCatcher.position.z =
+            (virtualPagePos / window.innerHeight) * safeZone.height;
+         light.position.z =
+            5 + (virtualPagePos / window.innerHeight) * safeZone.height;
+         light.target.position.z =
+            (virtualPagePos / window.innerHeight) * safeZone.height;
+         light.target.updateMatrixWorld();
+         shadowCatcher.addEventListener;
+         moveCharacter(character, animationList);
+         moveCamera(camera);
+         renderer.render(scene, camera);
+      });
+   }
+
+   function moveCamera(camera: THREE.Camera) {
+      let rotation = clamp(window.scrollY / window.innerHeight, 0, 1);
+
+      camera.position.z =
+         (virtualPagePos / window.innerHeight) * safeZone.height;
+      if (rotation <= 1) {
+         camera.rotation.x = (-PI / 2) * rotation;
+         camera.position.z += 10 * Math.cos((PI / 2) * rotation);
+         camera.position.y = 10 * Math.sin((PI / 2) * rotation);
+      }
+   }
+
+   function moveCharacter(
+      character: THREE.Mesh,
+      animationList: AnimationList,
+   ): void {
+      const x =
+         ($charPositionPixels.x / window.innerWidth) * safeZone.width +
+         safeZone.minTarget.x;
+      const y =
+         ($charPositionPixels.y / window.innerHeight) * safeZone.height +
+         safeZone.minTarget.y;
+
+      const dx = x - character.position.x;
+      const dy = y - character.position.z;
+
+      character.position.setX(x);
+      character.position.setZ(y);
+
+      characterSpeed = Math.sqrt(dx * dx + dy * dy);
+      tweenAnimations(animationList, characterSpeed);
+
+      let newRotation = Math.atan2(dy, dx);
+
+      if (characterSpeed < 0.002 && characterSpeed > -0.002)
+         newRotation = PI / 2;
+
+      if (newRotation - ($characterRotation % (2 * PI)) > PI) {
+         newRotation -= 2 * PI;
+      } else if (($characterRotation % (2 * PI)) - newRotation > PI) {
+         newRotation += 2 * PI;
+      }
+
+      newRotation += $characterRotation - ($characterRotation % (2 * PI));
+
+      characterRotation.set(newRotation);
+      character.rotation.y = $characterRotation - PI / 2;
+   }
+
+   function tweenAnimations(animationList: AnimationList, speed: number): void {
+      let blend = clamp(speed * 70, 0, 10);
+      // when the character isnt moving fast, blend between the idle and walk animations,
+      // effectively making the steps smaller. when the character is moving quickly,
+      // use full walk animation, and change animation speed to match.
+      animationList.idle.setEffectiveWeight(80 - blend * 100);
+      animationList.run.setEffectiveWeight(blend * 100);
+      animationList.run.setEffectiveTimeScale(25 * speed + 0.2);
+   }
+
+   async function mouseMove(e: MouseEvent) {
+      // esentially the mouse position smoothed, plus the scroll position
+      // since the character needs to move further down depending on how far is scrolled.
+      if (window.scrollY > window.innerHeight * 1.15)
+         charPositionPixels.set({ x: e.x, y: e.y + virtualPagePos });
+      // also store the mouse position in case the user scrolls without moving the mouse.
+      mousePos.x = e.x;
+      mousePos.y = e.y;
+   }
+   async function scroll() {
+      if (window.scrollY > window.innerHeight * 1.15)
+         charPositionPixels.set({
+            x: mousePos.x,
+            y: mousePos.y + virtualPagePos,
+         });
+      else
+         charPositionPixels.set({
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2 - 25,
+         });
+
+      virtualPagePos = Math.max(window.scrollY - window.innerHeight, 0);
+   }
+
+   let lastResizedDim = { height: 0, width: 0 };
+   function resize(camera: THREE.PerspectiveCamera, renderer: THREE.Renderer) {
+      if (
+         window.innerWidth > 500 ||
+         lastResizedDim.width != window.innerWidth ||
+         Math.abs(lastResizedDim.height - window.innerHeight) > 80
+      ) {
+         lastResizedDim.height = window.innerHeight;
+         lastResizedDim.width = window.innerWidth;
+         camera.aspect = window.innerWidth / window.innerHeight;
+         camera.updateProjectionMatrix();
+         renderer.setSize(window.innerWidth, window.innerHeight);
+
+         // the safezone variable stores what area in the 3d scene is visable by the camera.
+         camera.getViewBounds(10, safeZone.minTarget, safeZone.maxTarget); //!!!!!!!!!!!!!!
+         safeZone.height = safeZone.maxTarget.y - safeZone.minTarget.y;
+         safeZone.width = safeZone.maxTarget.x - safeZone.minTarget.x;
+      }
+   }
 </script>
 
-<canvas use:init class="fixed inset-0 z-[-1] h-screen w-screen [image-rendering:pixelated]"
-></canvas>
+<canvas use:init></canvas>
+
+<style>
+   canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      /* image-rendering: pixelated; */
+      /* filter:grayscale() */
+   }
+</style>

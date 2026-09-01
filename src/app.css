@@ -2,16 +2,16 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-   --color-main-white: #ccc;
+   --color-main-white: #252525;
    --color-border-gray: #cbcbcb;
    --color-main-gray: #d9d9d9;
-   --color-main-black: #252525;
-   --color-alt-black: #2a3937;
-   --color-main-green: #11c69b;
+   --color-main-black: #eee;
+   --color-alt-black: #ccc;
+   --color-main-green: #10bc94;
    --color-light-green: #147f35;
    --color-dark-green: #00856d;
    --color-old-orange: #c94a24;
-   --color-main-orange: #27caa3;
+   --color-main-orange: #10bc94;
    --color-main-blue: #4964D1;
    --color-main-yellow: #f9e042;
 }
