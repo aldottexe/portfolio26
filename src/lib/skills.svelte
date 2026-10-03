@@ -186,7 +186,7 @@
 	ontouchend={() => (grabbedNode = undefined)}
 />
 <div
-	class="relative min-h-130 w-full rounded-2xl border-2 border-main-orange"
+	class="relative min-h-130 w-full rounded-2xl border-2 border-main-white"
 	use:graph
 	bind:clientWidth={width}
 	bind:clientHeight={height}
@@ -206,8 +206,8 @@
 				y1={edge.category.y}
 				x2={edge.skill.x}
 				y2={edge.skill.y}
-				style="stroke-width:3; opacity: 0.2;"
-				style:stroke={show ? 'var(--color-main-orange)' : 'var(--color-main-white)'}
+				style="stroke-width:3; opacity: 0.4;"
+				style:stroke="var(--color-alt-black)"
 			></line>
 		{/each}
 	</svg>
@@ -225,7 +225,7 @@
 				mouse = { x: e.touches[0].clientX, y: e.touches[0].clientY };
 			}}
 		>
-			<Pill big={node.isCategory} clickable={true}>{node.name}</Pill>
+			<Pill big={node.isCategory} clickable={node.isCategory}>{node.name}</Pill>
 		</button>
 	{/each}
 </div>

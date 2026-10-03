@@ -3,8 +3,8 @@
 </script>
 
 <span
-	class="pill border-2 border-main-orange transition-colors {big ? 'big' : ''} {clickable
-		? 'hover:border-alt-black'
+	class="pill border-2 border-transparent transition-all {big ? 'big' : ''} {clickable
+		? 'hover:border-old-orange'
 		: ''}"
 >
 	{@render children()}
@@ -12,18 +12,20 @@
 
 <style>
 	.pill {
-		color: var(--color-main-orange);
+		color: var(--color-main-white);
 		font-size: 0.7rem;
-		border-radius: 100px;
+		border-radius: 5px;
 		padding: 0px 10px 1px;
 		min-width: max-content;
 		display: block;
-		background-color: var(--color-main-black);
+		background-color: var(--color-alt-black);
 	}
 	.big {
 		font-size: 1.4em;
+		padding: 0px 15px 1px;
+		border-radius: 10px;
 		font-style: italic;
 		font-weight: lighter;
-		color: var(--clor-main-white);
+		color: var(--color-old-orange);
 	}
 </style>
