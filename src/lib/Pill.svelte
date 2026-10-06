@@ -4,7 +4,7 @@
 
 <span
 	class="pill border-2 border-transparent transition-all {big ? 'big' : ''} {clickable
-		? 'hover:border-old-orange'
+		? 'hover:border-main-orange'
 		: ''}"
 >
 	{@render children()}
@@ -26,6 +26,6 @@
 		border-radius: 10px;
 		font-style: italic;
 		font-weight: lighter;
-		color: var(--color-old-orange);
+		color: var(--color-dark-green);
 	}
 </style>

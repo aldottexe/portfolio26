@@ -186,7 +186,7 @@
 	ontouchend={() => (grabbedNode = undefined)}
 />
 <div
-	class="relative min-h-130 w-full rounded-2xl border-2 border-main-white"
+	class="relative min-h-130 w-full rounded-2xl"
 	use:graph
 	bind:clientWidth={width}
 	bind:clientHeight={height}
