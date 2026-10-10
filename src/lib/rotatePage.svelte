@@ -8,8 +8,6 @@
 		scrollPos: number;
 	}
 	let { children, angle, scrollPos = $bindable(0) }: p = $props();
-
-	$inspect(scrollPos);
 	const onscroll: UIEventHandler<HTMLDivElement> = (e) => {
 		scrollPos = e.currentTarget.scrollTop;
 	};
@@ -35,7 +33,7 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		transition: transform 200ms ease-in-out;
+		transition: transform 400ms ease-in-out;
 	}
 	div {
 		flex-grow: 1;

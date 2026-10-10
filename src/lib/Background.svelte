@@ -2,15 +2,28 @@
 	import * as THREE from 'three';
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 	import { type Snippet, type SvelteComponent, onDestroy } from 'svelte';
-	import { spring } from 'svelte/motion';
+	import { spring, Tween } from 'svelte/motion';
 	import { clamp } from 'three/src/math/MathUtils.js';
 	import { threeState } from './siteState.svelte';
 
 	let {
-		children,
 		progress = $bindable(0),
-		onLoad = () => {}
-	}: { children: Snippet; progress: number; onLoad: () => void } = $props();
+		onLoad = () => {},
+      rotate, 
+      pagePos,
+	}: { rotate: boolean; pagePos: number; progress: number; onLoad: () => void } = $props();
+
+   let cameraRotation = new Tween(0, {duration: 400});
+
+   $effect(() => {
+      cameraRotation.set(rotate ? 0: 1);
+   });
+   $effect(() => {
+		charPositionPixels.set({
+			x: mousePos.x,
+			y: mousePos.y + pagePos
+		});
+   });
 
 	const PI = 3.141592;
 
@@ -19,8 +32,6 @@
 
 	//animations function in delta time
 	const clock = new THREE.Clock();
-
-	let virtualPagePos = 0;
 
 	let mousePos = { x: 0, y: 0 };
 
@@ -128,8 +139,6 @@
 			startAnimation(renderer, scene, mixer, animationList, camera, shadowCatcher, spot, character);
 
 			window.addEventListener('mousemove', mouseMove);
-			window.onscroll = scroll;
-			scroll();
 			onLoad();
 			threeState.loaded = true;
 		})();
@@ -184,9 +193,9 @@
 			const delta = clock.getDelta();
 			mixer.update(delta);
 
-			shadowCatcher.position.z = (virtualPagePos / window.innerHeight) * safeZone.height;
-			light.position.z = 5 + (virtualPagePos / window.innerHeight) * safeZone.height;
-			light.target.position.z = (virtualPagePos / window.innerHeight) * safeZone.height;
+			shadowCatcher.position.z = (pagePos / window.innerHeight) * safeZone.height;
+			light.position.z = 5 + (pagePos / window.innerHeight) * safeZone.height;
+			light.target.position.z = (pagePos / window.innerHeight) * safeZone.height;
 			light.target.updateMatrixWorld();
 			shadowCatcher.addEventListener;
 			moveCharacter(character, animationList);
@@ -196,13 +205,11 @@
 	}
 
 	function moveCamera(camera: THREE.Camera) {
-		let rotation = clamp(window.scrollY / window.innerHeight, 0, 1);
-
-		camera.position.z = (virtualPagePos / window.innerHeight) * safeZone.height;
-		if (rotation <= 1) {
-			camera.rotation.x = (-PI / 2) * rotation;
-			camera.position.z += 10 * Math.cos((PI / 2) * rotation);
-			camera.position.y = 10 * Math.sin((PI / 2) * rotation);
+		camera.position.z = (pagePos / window.innerHeight) * safeZone.height;
+		if (cameraRotation.current <= 1) {
+			camera.rotation.x = (-PI / 2) * cameraRotation.current;
+			camera.position.z += 10 * Math.cos((PI / 2) * cameraRotation.current);
+			camera.position.y = 10 * Math.sin((PI / 2) * cameraRotation.current);
 		}
 	}
 
@@ -248,25 +255,10 @@
 	async function mouseMove(e: MouseEvent) {
 		// esentially the mouse position smoothed, plus the scroll position
 		// since the character needs to move further down depending on how far is scrolled.
-		if (window.scrollY > window.innerHeight * 1.15)
-			charPositionPixels.set({ x: e.x, y: e.y + virtualPagePos });
+		charPositionPixels.set({ x: e.x, y: e.y + pagePos });
 		// also store the mouse position in case the user scrolls without moving the mouse.
 		mousePos.x = e.x;
 		mousePos.y = e.y;
-	}
-	async function scroll() {
-		if (window.scrollY > window.innerHeight * 1.15)
-			charPositionPixels.set({
-				x: mousePos.x,
-				y: mousePos.y + virtualPagePos
-			});
-		else
-			charPositionPixels.set({
-				x: window.innerWidth / 2,
-				y: window.innerHeight / 2 - 25
-			});
-
-		virtualPagePos = Math.max(window.scrollY - window.innerHeight, 0);
 	}
 
 	let lastResizedDim = { height: 0, width: 0 };

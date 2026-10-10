@@ -39,6 +39,7 @@
 	},
 	"dependencies": {
 		"@types/three": "^0.180.0",
+		"linus": "^0.0.6",
 		"three": "^0.180.0"
 	}
 }

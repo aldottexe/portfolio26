@@ -4,7 +4,11 @@
 	import type { PageProps } from './$types';
 	import Squiggle from '$lib/squiggle.svelte';
 	import Skills from '$lib/skills.svelte';
-	const { data }: PageProps = $props();
+	import { getContext } from 'svelte';
+   
+   const scrollPos = getContext<{y: number}>('scroll');
+	
+   const { data }: PageProps = $props();
 	const featuredProject = data.projects.find((e) => e.slug === '200kmi');
 
 	const skills = [

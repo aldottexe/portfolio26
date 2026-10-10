@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Action } from 'svelte/action';
 	import Pill from './Pill.svelte';
+	import { getContext } from 'svelte';
 
 	interface p {
 		title: string;
@@ -13,9 +14,11 @@
 	}
 
 	const { title, tags, link, desc, vidsrc, imgsrc, imgalt }: p = $props();
+   const scroll = getContext('scroll');
 
 	const activateOnScroll: Action<HTMLElement> = (node) => {
-		window.addEventListener('scroll', () => {
+		$effect(() => {
+         scroll.y;
 			const rect = node.getBoundingClientRect();
 			if (rect.y < window.innerHeight / 2) open = true;
 			else if (rect.y > (3 * window.innerHeight) / 4) open = false;
@@ -25,7 +28,7 @@
 	let open = $state(false);
 </script>
 
-<div className="p-2 pt-0 w-fit mx-auto">
+<div class="mx-auto w-fit p-2 pt-0">
 	<div class="holder {open ? 'open' : ''}" use:activateOnScroll>
 		<div class="top">
 			<span class="featured">Featured</span>
