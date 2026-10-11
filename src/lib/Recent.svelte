@@ -127,9 +127,13 @@
 		font-style: italic;
 		transition: background-color 300ms;
 		color: var(--color-main-black);
+      box-shadow: 0px 0px 0px #00a98a;
 		&:hover {
-			background-color: var(--color-dark-green);
-		}
+			background-color: #0ea985;
+         transform: translateY(-5px);
+         box-shadow: 0px 5px 0px var(--color-dark-green);
+      }
+   transition: all 200ms ease-out;
 	}
 	.pillHolder {
 		display: flex;

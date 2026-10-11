@@ -13,7 +13,7 @@
       pagePos,
 	}: { rotate: boolean; pagePos: number; progress: number; onLoad: () => void } = $props();
 
-   let cameraRotation = new Tween(0, {duration: 400});
+   let cameraRotation = new Tween(0, {duration: 600});
 
    $effect(() => {
       cameraRotation.set(rotate ? 0: 1);

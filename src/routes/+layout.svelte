@@ -7,6 +7,7 @@
 	import { page } from '$app/state';
 	import RotatePage from '$lib/rotatePage.svelte';
 	import { setContext } from 'svelte';
+	import ChatPrompt from '$lib/chat/chatPrompt.svelte';
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
@@ -29,8 +30,11 @@
 
 <Nav></Nav>
 
-<button onclick={()=>flip = !flip} class="fixed z-999 left-0 right-0 bottom-5 bg-main-blue max-w-fit mx-auto px-5">ask little alex</button>
-<RotatePage angle={flip ? 90 : 0} bind:scrollPos>
+<div class="fixed z-999 left-0 right-0 bottom-5 max-w-fit mx-auto px-5">
+   <ChatPrompt onSend={(msg)=>console.log(msg)} bind:focused={flip} />
+</div>
+
+<RotatePage {flip} bind:scrollPos>
 	<div>
 		{@render children?.()}
 	</div>
