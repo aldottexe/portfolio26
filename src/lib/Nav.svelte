@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { expoOut } from 'svelte/easing';
+   import ChatPrompt from './chat/chatPrompt.svelte';
+	import { fly } from 'svelte/transition';
 	let open = $state(false);
 
 	function whoosh(
@@ -42,6 +44,8 @@
 				`
 		};
 	}
+
+   let { chatOpen = $bindable(false) } : {chatOpen: boolean} = $props();
 </script>
 
 <svelte:head>
@@ -55,7 +59,30 @@
 	</svg>
 </a>
 
-<button class="nav" onclick={() => (open = !open)}>
+<div class="fixed z-10 left-0 right-0 top-0 md:my-8 mt-4 max-w-fit mx-auto px-5">
+   <ChatPrompt onSend={(msg)=>console.log(msg)} bind:focused={chatOpen} />
+</div>
+
+{#if chatOpen}
+<button class="nav z-2" onclick={() => (chatOpen = false)}>
+		<svg
+			width="15"
+			height="12"
+			viewBox="0 0 12 12"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			transition:fly={{y:5}}
+         class="relative top-1"
+		>
+			<path d="M1 11L11 0.999999" stroke="var(--color-main-white)" stroke-width="2" stroke-linecap="round" />
+			<path d="M1.00781 1L11.0078 11" stroke="var(--color-main-white)" stroke-width="2" stroke-linecap="round" />
+		</svg>
+</button>
+
+{:else}
+<button class="nav" onclick={() => (open = !open)}
+			transition:fly={{y:-5}}
+>
 	<span class="relative bottom-[.5px] block pr-2 text-sm text-main-white"> Menu </span>
 	{#if open}
 		<svg
@@ -66,8 +93,8 @@
 			xmlns="http://www.w3.org/2000/svg"
 			transition:wide={{}}
 		>
-			<path d="M1 11L11 0.999999" stroke="white" stroke-width="2" stroke-linecap="round" />
-			<path d="M1.00781 1L11.0078 11" stroke="white" stroke-width="2" stroke-linecap="round" />
+			<path d="M1 11L11 0.999999" stroke="var(--color-main-white)" stroke-width="2" stroke-linecap="round" />
+			<path d="M1.00781 1L11.0078 11" stroke="var(--color-main-white)" stroke-width="2" stroke-linecap="round" />
 		</svg>
 	{:else}
 		<svg width="15" height="15" class="stroke-main-white stroke-2" transition:wide={{}}>
@@ -77,6 +104,7 @@
 		</svg>
 	{/if}
 </button>
+{/if}
 
 {#if open}
 	<div class="menu-holder" onclick={() => (open = false)} transition:whoosh={{}}>
@@ -134,7 +162,7 @@
 		content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 11L11 0.999999' stroke='rgb(15 128 100)' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M1.00781 1L11.0078 11' stroke='rgb(15 128 100)' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A") !important;
 	}
 	.nav {
-		@apply fixed right-0 z-10 mx-5 my-4 box-border flex w-fit items-center justify-center rounded-sm bg-main-black px-2 py-1 md:mx-10 md:my-8;
+		@apply fixed right-0 z-10 mx-5 my-4 box-border flex w-fit items-center justify-center rounded-sm px-2 py-1 md:mx-10 md:my-8;
 		transition: width 200ms ease-in-out;
 	}
 </style>

@@ -120,7 +120,7 @@
 		transition: width 400ms;
 	}
 	.button {
-		background-color: var(--color-main-green);
+		background-color: var(--color-main-orange);
 		color: var(--color-main-white);
 		padding: 10px;
 		border-radius: 7px;

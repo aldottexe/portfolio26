@@ -7,7 +7,6 @@
 	import { page } from '$app/state';
 	import RotatePage from '$lib/rotatePage.svelte';
 	import { setContext } from 'svelte';
-	import ChatPrompt from '$lib/chat/chatPrompt.svelte';
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
@@ -28,11 +27,8 @@
 <PageTransition />
 <Background isProject={/\/p\//.test(page.url.pathname)} rotate={flip} pagePos={scrollPos}/>
 
-<Nav></Nav>
+<Nav bind:chatOpen={flip}></Nav>
 
-<div class="fixed z-999 left-0 right-0 bottom-5 max-w-fit mx-auto px-5">
-   <ChatPrompt onSend={(msg)=>console.log(msg)} bind:focused={flip} />
-</div>
 
 <RotatePage {flip} bind:scrollPos>
 	<div>

@@ -138,7 +138,8 @@
 
 			startAnimation(renderer, scene, mixer, animationList, camera, shadowCatcher, spot, character);
 
-			window.addEventListener('mousemove', mouseMove);
+         // ignore mouse movement if in chat view
+			window.addEventListener('mousemove', (e) => rotate || mouseMove(e));
 			onLoad();
 			threeState.loaded = true;
 		})();
@@ -198,6 +199,9 @@
 			light.target.position.z = (pagePos / window.innerHeight) * safeZone.height;
 			light.target.updateMatrixWorld();
 			shadowCatcher.addEventListener;
+
+         if(rotate) charPositionPixels.set({x: window.innerWidth / 2, y: window.innerHeight / 2 + pagePos});
+
 			moveCharacter(character, animationList);
 			moveCamera(camera);
 			renderer.render(scene, camera);

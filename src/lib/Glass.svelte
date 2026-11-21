@@ -16,7 +16,7 @@
 	const { children, radius = 14, className = '' }: p = $props();
 	const shaderid = $props.id();
 
-	const border = 3;
+	const border = 1.5;
 
 	onMount(() => {
 		const c = document.createElement('canvas');
@@ -81,7 +81,7 @@
 			<feDisplacementMap
 				in="SourceGraphic"
 				in2="map"
-				scale="55"
+				scale="65"
 				xChannelSelector="R"
 				yChannelSelector="G"
 				result="dispRed"
@@ -119,7 +119,7 @@
 			<feDisplacementMap
 				in="SourceGraphic"
 				in2="map"
-				scale="35"
+				scale="25"
 				xChannelSelector="R"
 				yChannelSelector="G"
 				result="dispBlue"

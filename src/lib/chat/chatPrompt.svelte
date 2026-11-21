@@ -1,84 +1,99 @@
 <script lang="ts">
+	import Glass from "$lib/Glass.svelte";
+
    interface p {
       onSend: (msg: string) => void
       focused: boolean
+      loading: boolean
    }
-   let {onSend, focused = $bindable(false)} : p = $props();
+   let {onSend, focused = $bindable(false), loading = $bindable(false)} : p = $props();
 
-   let value = $state("");
+   let value = $state("<br>");
    let sent = $state(false);
+   $inspect(value)
    
    function sendClicked() {
       sent=true;
       onSend(value);
-      setTimeout(() => 
-      value = "", 400);
-
+      setTimeout(() => {
+         value = "<br>";
+         loading = true;
+         sent = false;
+      }, 400
+      );
    }
 </script>
-<div>
-   <input type="text" bind:value bind:focused placeholder="Ask little Alex" class={sent ? "sending" : ""}/>
-   <button onclick={sendClicked} disabled={sent || value.length === 0}>↩</button>
+
+<Glass>
+<div class="field">
+   <div class="fieldContent">
+   {#if loading}
+   ...
+   {:else}
+      <img src="/chat.svg" class="max-w-4 top-0.25 relative"/>
+      <div class="flex">
+      {#if value.length == 0 || value === "<br>"}
+         <p class="text-sm opacity-90 w-0 text-nowrap pointer-events-none bottom-px relative">
+         Ask Little Alex</p>
+      {/if}
+      <div contenteditable=true bind:innerHTML={value} bind:focused role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
+      </div>
+      <button onclick={sendClicked} disabled={sent || value.length === 0 || value === "<br>"} >↩</button>
+   {/if}
+   </div>
 </div>
+</Glass>
 
 <style lang="postcss">
-div {
+	@reference "../../app.css";
+.field {
    --row-height: 30px;
    display: flex;
-   position: relative;
-   padding: 6px 6px 6px 12px;
+   padding: 2px;
    gap: 10px;
-   background-color: var(--color-main-blue);
-   align-items: stretch;
-   min-width: 200px;
-   border-radius: 10px;
-   &:hover {
-      transform: translateY(-5px) scale(105%);
+   overflow: visible;
+   border-radius: 12px;
+   &:hover, &:focus-within {
+      padding: 5px;
    }
-   transition: transform 300ms ease-out;
-
-   &::after{
-      --offset: -3px;
-      border-radius: 13px;
-      content: '';
-      background: linear-gradient(-12deg, #2343be, #c8cee5);
-      position: absolute; 
-      top: var(--offset);
-      bottom: var(--offset);
-      left: var(--offset);
-      right: var(--offset);
-      z-index: -1;
-   }
+   transition: all 200ms ease-out;
 }
 
-input {
-   color: var(--color-main-black);
+.fieldContent {
+padding: 4px;
+   display: flex;
+   gap: 5px;
+}
+
+.input {
    &:focus {
    border: none;
    outline: none;
+   padding: 0;
    }
+   min-width: 130px;
+   max-width: 200px;
+   position: relative;
+   bottom: 1px;
 }
 
 button {
-   width: var(--row-height);
-   aspect-ratio: 1 / 1;
-   background: var(--color-main-black);
-   border-radius: 5px;
-   &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0px 3px 0px #9ebcc0;
-   }
-   box-shadow: 0px 0px 0px var(--color-main-gray);
+   @apply text-sm;
+   width: 50px;
+   border-radius: 8px;
    transition: all 200ms ease-in-out, opacity 100ms ease-in-out;
+   overflow:hidden;
+   position: relative;
+   top: 1px;
 }
 
 button:disabled{
-   opacity: 0%;
+   width: 0;
 }
 
 .sending {
    transform: translateY(-5px);
    opacity: 0%;
-   transition: all 00ms ease-out;
+   transition: all 200ms ease-out;
 }
 </style>
