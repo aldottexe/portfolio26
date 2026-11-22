@@ -4,7 +4,7 @@
   <defs>
     <style>
     * {
-      --accent: #23ba96;    }
+      --accent: #f66a3f;    }
       .st0 {
         fill: none;
         stroke: var(--accent);
@@ -13,7 +13,7 @@
       }
 
       .st1 {
-        fill: #23ba96;
+        fill: var(--accent);
       }
       #logo {
       transform: scale(1.35);

@@ -7,6 +7,8 @@
 	import { page } from '$app/state';
 	import RotatePage from '$lib/rotatePage.svelte';
 	import { setContext } from 'svelte';
+	import ChatBubble from '$lib/chat/chatBubble.svelte';
+	import Chat from '$lib/chat/chat.svelte';
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
@@ -28,6 +30,8 @@
 <Background isProject={/\/p\//.test(page.url.pathname)} rotate={flip} pagePos={scrollPos}/>
 
 <Nav bind:chatOpen={flip}></Nav>
+
+<Chat chatOpen={flip}/>
 
 
 <RotatePage {flip} bind:scrollPos>

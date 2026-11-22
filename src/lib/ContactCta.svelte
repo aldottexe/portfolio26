@@ -18,7 +18,7 @@
 		aria-label="copy"
 	>
 		<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M9 4H13V13H4V9H0V0H9V4ZM9 9H6V11H11V6H9V9ZM2 2V7H7V2H2Z" fill="white" />
+			<path d="M9 4H13V13H4V9H0V0H9V4ZM9 9H6V11H11V6H9V9ZM2 2V7H7V2H2Z" fill="#252525" />
 		</svg>
 	</button>
 	<a class="button grow" {href} aria-label="go to link" target="_blank">
@@ -85,9 +85,7 @@
 			max-width 400ms ease-in-out,
 			width 400ms ease-in-out;
 		&:hover {
-			span {
-				color: var(--color-dark-green);
-			}
+				background-color: var(--color-main-orange);
 		}
 	}
 	svg {

@@ -7,16 +7,16 @@
 		children: Snippet;
 		radius?: number;
 		className?: string;
+      border?: number;
+      blur?: number;
 	}
 
 	let w = $state(0);
 	let h = $state(0);
 	let imgUrl = $state('');
 
-	const { children, radius = 14, className = '' }: p = $props();
+	const { children, radius = 14, border= 1.5, className = '', blur = 1.5}: p = $props();
 	const shaderid = $props.id();
-
-	const border = 1.5;
 
 	onMount(() => {
 		const c = document.createElement('canvas');
@@ -65,7 +65,7 @@
 	bind:offsetWidth={w}
 	bind:offsetHeight={h}
 	style:border-radius={radius + 'px'}
-	style:backdrop-filter="url(#shader{shaderid}) blur(1px)"
+	style:backdrop-filter="url(#shader{shaderid}) blur({blur}px) contrast(90%)"
 >
 	{@render children()}
 </div>
