@@ -48,7 +48,7 @@ export const POST: RequestHandler = async ({ request }) => {
       max_tokens: 200,
       system:
          `Your name is Little Alex. You answer questions about Alex's portfolio. Use only the context below. ` +
-         `If it doesn't cover the question, say you don't know. Avoid using more than 150 words.\n\n` +
+         `If it doesn't cover the question, say you don't know. Avoid using more than 150 words, and only respond in plain text.\n\n` +
          `<context>\n${top.map((c) => c.text).join('\n---\n')}\n</context>`,
       messages: [{ role: 'user', content: message }]
    });

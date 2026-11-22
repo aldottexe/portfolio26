@@ -22,6 +22,13 @@
          sent = false;
       }
    }
+
+   function handleKeydown(event: KeyboardEvent) {
+      if (event.key === "Enter" && !event.shiftKey) {
+         event.preventDefault();
+         void sendMessage();
+      }
+   }
 </script>
 
 <Glass>
@@ -36,7 +43,7 @@
          <p class="text-sm opacity-90 w-0 text-nowrap pointer-events-none bottom-px relative">
          Ask Little Alex</p>
       {/if}
-      <div contenteditable=true bind:innerHTML={value} onfocus={onFocus} role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
+      <div contenteditable=true bind:innerHTML={value} onfocus={onFocus} onkeydown={handleKeydown} role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
       </div>
       <button onclick={sendMessage} disabled={sent || value.length === 0 || value === "<br>"} >↩</button>
    {/if}

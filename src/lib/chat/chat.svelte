@@ -7,6 +7,18 @@
 
    let message: string = $state(`Hi! I'm Little Alex. If you have any questions, I might be able to help! (I'm still a work in progress but I'm trying my best)`);
    let loading: boolean = $state(false);
+   let promptElement: HTMLDivElement;
+
+   $effect(() => {
+      if (!chatOpen) return;
+      function closeOnOutsideClick(event: MouseEvent) {
+         if (promptElement && !event.composedPath().includes(promptElement)) {
+            chatOpen = false;
+         }
+      }
+      window.addEventListener('click', closeOnOutsideClick, true);
+      return () => window.removeEventListener('click', closeOnOutsideClick, true);
+   });
 
    async function onSend(msg: string) {
       loading = true;
@@ -29,7 +41,7 @@
 
 </script>
 
-<div class="fixed z-10 left-0 right-0 top-0 md:my-8 mt-4 max-w-fit mx-auto px-5">
+<div bind:this={promptElement} class="fixed z-10 left-0 right-0 top-0 md:my-8 mt-4 max-w-fit mx-auto px-5">
    <ChatPrompt {onSend} onFocus={() => (chatOpen = true)} {loading}/>
 </div>
 
