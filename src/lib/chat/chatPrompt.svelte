@@ -10,9 +10,8 @@
 
    let value = $state("<br>");
    let sent = $state(false);
-   $inspect(value)
-   
-   function sendClicked() {
+
+   function sendMessage() {
       sent=true;
       onSend(value);
       setTimeout(() => {
@@ -38,7 +37,7 @@
       {/if}
       <div contenteditable=true bind:innerHTML={value} bind:focused role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
       </div>
-      <button onclick={sendClicked} disabled={sent || value.length === 0 || value === "<br>"} >↩</button>
+      <button onclick={sendMessage} disabled={sent || value.length === 0 || value === "<br>"} >↩</button>
    {/if}
    </div>
 </div>

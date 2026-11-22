@@ -60,10 +60,6 @@
 	</svg>
 </a>
 
-<div class="fixed z-10 left-0 right-0 top-0 md:my-8 mt-4 max-w-fit mx-auto px-5">
-   <ChatPrompt onSend={(msg)=>console.log(msg)} bind:focused={chatOpen} />
-</div>
-
 {#if chatOpen}
 <button class="nav z-2 hover:scale-110 transition-all scale-100 duration-1000" onclick={() => (chatOpen = false)}>
 		<svg

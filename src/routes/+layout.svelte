@@ -31,7 +31,7 @@
 
 <Nav bind:chatOpen={flip}></Nav>
 
-<Chat chatOpen={flip}/>
+<Chat bind:chatOpen={flip}/>
 
 
 <RotatePage {flip} bind:scrollPos>
