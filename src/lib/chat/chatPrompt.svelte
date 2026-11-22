@@ -2,24 +2,25 @@
 	import Glass from "$lib/Glass.svelte";
 
    interface p {
-      onSend: (msg: string) => void
-      focused: boolean
+      onSend: (msg: string) => Promise<void>
+      onFocus: () => void
       loading: boolean
    }
-   let {onSend, focused = $bindable(false), loading = $bindable(false)} : p = $props();
+   let {onSend, onFocus, loading} : p = $props();
 
    let value = $state("<br>");
    let sent = $state(false);
 
-   function sendMessage() {
-      sent=true;
-      onSend(value);
-      setTimeout(() => {
-         value = "<br>";
-         loading = true;
+   async function sendMessage() {
+      if (loading || sent) return;
+      sent = true;
+      const msg = value;
+      value = "<br>";
+      try {
+         await onSend(msg);
+      } finally {
          sent = false;
-      }, 400
-      );
+      }
    }
 </script>
 
@@ -35,7 +36,7 @@
          <p class="text-sm opacity-90 w-0 text-nowrap pointer-events-none bottom-px relative">
          Ask Little Alex</p>
       {/if}
-      <div contenteditable=true bind:innerHTML={value} bind:focused role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
+      <div contenteditable=true bind:innerHTML={value} onfocus={onFocus} role="textbox" class={(sent ? "sending" : "") + " text-sm input"}></div>
       </div>
       <button onclick={sendMessage} disabled={sent || value.length === 0 || value === "<br>"} >↩</button>
    {/if}

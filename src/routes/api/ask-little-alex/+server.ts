@@ -45,10 +45,10 @@ export const POST: RequestHandler = async ({ request }) => {
 
    const reply = await anthropic.messages.create({
       model: 'claude-haiku-5-5',
-      max_tokens: 400,
+      max_tokens: 200,
       system:
          `Your name is Little Alex. You answer questions about Alex's portfolio. Use only the context below. ` +
-         `If it doesn't cover the question, say you don't know in a friendly manner\n\n` +
+         `If it doesn't cover the question, say you don't know. Avoid using more than 150 words.\n\n` +
          `<context>\n${top.map((c) => c.text).join('\n---\n')}\n</context>`,
       messages: [{ role: 'user', content: message }]
    });

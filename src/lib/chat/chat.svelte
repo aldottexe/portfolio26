@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import ChatBubble from "./chatBubble.svelte";
 	import ChatPrompt from "./chatPrompt.svelte";
 
@@ -7,25 +8,29 @@
    let message: string = $state(`Hi! I'm Little Alex. If you have any questions, I might be able to help! (I'm still a work in progress but I'm trying my best)`);
    let loading: boolean = $state(false);
 
-   function onSend() {
-      generateResponse().then(() => loading = false);
-   }
-
-   async function generateResponse() {
-      const res = await fetch("https://dev.alexlutz.com/api/ask-little-alex", {
-        method: "POST",
-        body: JSON.stringify({ "message": "hello world" }),
-      });
-      if (res.ok && res.body) {
-         console.log(res)
-         message = JSON.parse(res.body.toString()).answer;
+   async function onSend(msg: string) {
+      loading = true;
+      try {
+         const res = await fetch(resolve("/api/ask-little-alex"), {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify({ message: msg }),
+         });
+         if (res.ok) {
+            const data = await res.json();
+            message = data.answer;
+         }
+      } catch (err) {
+         console.error(err);
+      } finally {
+         loading = false;
       }
    }
 
 </script>
 
 <div class="fixed z-10 left-0 right-0 top-0 md:my-8 mt-4 max-w-fit mx-auto px-5">
-   <ChatPrompt {onSend} bind:focused={chatOpen} {loading}/>
+   <ChatPrompt {onSend} onFocus={() => (chatOpen = true)} {loading}/>
 </div>
 
 {#if chatOpen}
