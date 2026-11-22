@@ -4,7 +4,8 @@
   <defs>
     <style>
     * {
-      --accent: #f66a3f;    }
+      --accent: #10bc94;
+      }
       .st0 {
         fill: none;
         stroke: var(--accent);

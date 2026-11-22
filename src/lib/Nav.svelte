@@ -106,9 +106,8 @@
 {#if open}
 	<div class="menu-holder" onclick={() => (open = false)} transition:whoosh={{}}>
 		<!-- <div class="menu"> -->
-      <Glass border={3} blur={2}>
-      <div class="p-2 bg-[#eeeeeebb] rounded-[14px]">
-      <div class="border-old-orange border-2 rounded-md p-4 ">
+      <div class="p-2 bg-main-black rounded-[14px]">
+      <div class="border-main-white border-2 rounded-md p-4 ">
 			<img
 				src="/logoAnimated.svg"
 				class="mb-3 block w-full max-w-50 opacity-90"
@@ -120,12 +119,11 @@
 				<a href={resolve('/#projects')}> Projects</a>
 				<a href={resolve('/#contact')}> Contact</a>
 			</div>
-			<hr class="my-2 border-1 border-old-orange" />
+			<hr class="my-2 border-1 border-main-white" />
 			<button class="close">Close</button>
       </div>
 		<!-- </div> -->
       </div>
-      </Glass>
 	</div>
 {/if}
 
@@ -150,7 +148,7 @@
 	/* } */
 	.item-list a,
 	.close {
-		@apply mb-1 flex w-full transform justify-between gap-20 hover:bg-alt-black;
+		@apply mb-1 flex w-full transform justify-between gap-20 hover:bg-main-orange px-2 rounded-sm;
 		&::after {
 			content: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.707159 0.999814C0.707328 0.447708 1.15492 -2.17056e-05 1.70705 -7.94046e-05L10.7075 -7.95521e-05C11.2595 8.94357e-05 11.7072 0.447777 11.7074 0.999814V10.0002C11.7073 10.5524 11.2596 11 10.7075 11.0001C10.1552 11.0001 9.70764 10.5525 9.70758 10.0002L9.70689 3.41461L1.41427 11.7072L5.16866e-05 10.293L8.29267 2.0004L1.70705 1.99971C1.15482 1.99965 0.707159 1.55206 0.707159 0.999814Z' fill='rgb(37 37 37)' /%3E%3C/svg%3E%0A");
 

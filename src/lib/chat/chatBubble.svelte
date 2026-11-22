@@ -5,7 +5,9 @@ let { msg } : { msg: string } = $props();
 </script>
 {#key msg}
 
-<div transition:fly|global={{y:10, duration: 200}}>
+<div 
+out:fly|global={{y:10, duration: 300}}
+in:fly|global={{y:10, duration: 300, delay: 1000}}>
    {#each msg as l, i (i)}
       <span style:animation-delay="{i*20}ms">{l}</span>
    {/each}
@@ -16,7 +18,7 @@ let { msg } : { msg: string } = $props();
 
    div {
       max-width: 400px;
-      border: solid 2px var(--color-main-blue);
+      border: solid 2px var(--color-main-white);
       border-radius: 12px;
       border-bottom-width: 5px;
       border-right-width: 5px;
