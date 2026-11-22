@@ -35,9 +35,9 @@
 <div class="field">
    <div class="fieldContent">
    {#if loading}
-   <img src="/loading.svg" class="h-[30px] object-contain object-center px-3 bg-[#ffffff88]" alt="loading"/>
+   <img src="/icons/loading.svg" class="h-[30px] object-contain object-center px-3 bg-[#ffffff88]" alt="loading"/>
    {:else}
-      <img src="/chat.svg" class="max-w-4 top-0.25 relative"/>
+      <img src="/icons/chat.svg" class="max-w-4 top-0.25 relative"/>
       <div class="flex">
       {#if value.length == 0 || value === "<br>"}
          <p class="text-sm opacity-90 w-0 text-nowrap pointer-events-none bottom-px relative">

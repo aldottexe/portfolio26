@@ -50,13 +50,13 @@
 </script>
 
 <svelte:head>
-	<link rel="preload" as="image" href="/x.svg" />
+	<link rel="preload" as="image" href="/icons/x.svg" />
 </svelte:head>
 
 <a href="/" class="fixed z-10 mx-5 my-4 md:mx-10 md:my-8">
-	<!-- <img src="/logo small.svg" alt="site logo" width="50" /> -->
+	<!-- <img src="/brand/logo-small.svg" alt="site logo" width="50" /> -->
 	<svg class="fill-main-white" width="50" height="34">
-		<use href="/logo small.svg#shape" class="scale-[0.4]" />
+		<use href="/brand/logo-small.svg#shape" class="scale-[0.4]" />
 	</svg>
 </a>
 
@@ -109,7 +109,7 @@
       <div class="p-2 bg-main-black rounded-[14px]">
       <div class="border-main-white border-2 rounded-md p-4 ">
 			<img
-				src="/logoAnimated.svg"
+				src="/brand/logoAnimated.svg"
 				class="mb-3 block w-full max-w-50 opacity-90"
 				style="image-rendering: pixelated;"
 				alt="logo"

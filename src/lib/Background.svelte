@@ -158,7 +158,7 @@
 
 	function loadCharacter(scene: THREE.Scene): Promise<CharacterData> {
 		return new Promise((res) => {
-			new GLTFLoader().load('/little alex.glb', (f: any) => {
+			new GLTFLoader().load('/models/little-alex.glb', (f: any) => {
 				let character = f.scene.children[0];
 				character.scale.set(0.2, 0.2, 0.2);
 				character.rotateY(PI);

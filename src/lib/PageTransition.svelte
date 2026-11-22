@@ -49,7 +49,7 @@
 	{#each links as i (i)}
 		<link rel="preload" href={i} as="image" />
 	{/each}
-	<link rel="preload" href="/logo.svg" as="image"/>
+	<link rel="preload" href="/brand/logo.svg" as="image"/>
 </svelte:head>
 
 {#if frame > 0}
@@ -60,7 +60,7 @@
 {/if}
 {#if !loaded}
 	<div class="fadein fixed z-51 flex h-full w-full flex-col items-center justify-center gap-5">
-		<img src="/logo.svg" class="block w-20" alt="welcome!"/>
+		<img src="/brand/logo.svg" class="block w-20" alt="welcome!"/>
 		<p class="pl-1">
 			{#each 'Loading...' as l, i (i)}
 				<span class="inline-block animate-bounce" style="animation-delay: {i * 10}ms">
