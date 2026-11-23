@@ -51,6 +51,8 @@
       prose-a:hover:text-main-blue
       prose-img:mx-auto
       prose-img:max-h-[calc(100vh-80px)]
+      prose-video:mx-auto
+      prose-video:max-h-[calc(100vh-80px)]
       prose-p:[&:has(>img:first-child)]:max-w-170"
 	>
 		<Post />

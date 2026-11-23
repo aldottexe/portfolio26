@@ -2,7 +2,7 @@
 emoji: 👾
 featureImage: /projects/hackoff/boxt.png
 title: Hackoff!
-desc: combining 3D rendering with colage to create a cardgame that brings movies to life
+desc: Combining 3D rendering with colage to create a cardgame that brings movies to life
 accent: 6bd1d0 
 tags: Blender, Indesign
 ---
