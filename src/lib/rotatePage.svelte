@@ -6,16 +6,22 @@
 		children: Snippet;
 		flip: boolean;
 		scrollPos: number;
+		scrollTo: () => void;
 	}
-	let { children, flip, scrollPos = $bindable(0) }: p = $props();
+	let { children, flip, scrollPos = $bindable(0), scrollTo = $bindable(() => {}) }: p = $props();
+
 	const onscroll: UIEventHandler<HTMLDivElement> = (e) => {
 		scrollPos = e.currentTarget.scrollTop;
 	};
+
+	let content: HTMLDivElement | null = $state(null);
+
+	scrollTo = () => content?.scrollTo({top: 0, behavior: 'instant'});
 </script>
 
 <div class="viewport">
 	<div class="body {flip ? 'flip' : ''}">
-		<div class="content" {onscroll}>
+		<div class="content" {onscroll} bind:this={content}>
 			{@render children()}
 		</div>
 	</div>

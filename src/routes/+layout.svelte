@@ -9,6 +9,7 @@
 	import { setContext } from 'svelte';
 	import ChatBubble from '$lib/chat/chatBubble.svelte';
 	import Chat from '$lib/chat/chat.svelte';
+	import { onNavigate } from '$app/navigation';
 	// import favicon from '$lib/assets/favicon.svg';
 
 	let { children } = $props();
@@ -17,7 +18,14 @@
    setContext<{y: number}>('scroll', ctx);
 
 	let scrollPos = $state(0)
-   $inspect(scrollPos);
+   let scrollTo = $state<() => void>(() => {});
+   onNavigate((nav) => {
+      nav.complete.then(() => {
+         scrollTo();
+         scrollPos = 0;
+      });
+   });
+
    $effect(() => {ctx.y = scrollPos});
    let flip = $state(false);
 </script>
@@ -33,8 +41,7 @@
 
 <Chat bind:chatOpen={flip}/>
 
-
-<RotatePage {flip} bind:scrollPos>
+<RotatePage {flip} bind:scrollPos bind:scrollTo>
 	<div>
 		{@render children?.()}
 	</div>
