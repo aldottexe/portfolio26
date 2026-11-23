@@ -46,6 +46,9 @@
       prose-p:mx-auto
       prose-p:max-w-150
       prose-p:text-main-white
+      prose-ol:mx-auto
+      prose-ol:max-w-150
+      prose-ol:text-main-white
       prose-a:text-main-green
       prose-a:no-underline
       prose-a:hover:text-main-blue

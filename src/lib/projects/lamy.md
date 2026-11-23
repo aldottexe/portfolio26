@@ -5,6 +5,12 @@ desc: Social media and motion Design Concept
 tags: Figma Motion, Photoshop
 ---
 
+## Approach
+Lamy is a company that, in my opinion, makes beautiful products. They also have a wide consumerbase ranging from high-end collectors, to artists, to school children. Taking these things into account, I had 3 goals for the project.
+1. Do not compete with or detract from the beauty of Lamy's products.
+2. Portray an element of playfulness that reflects the creativity and self expression their products enable.
+3. Reflect the respect and prestige of the brand.
+
 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 50px; max-width: 1000px; margin: 100px auto;">
     <img src="/projects/lamy/lamy 1.png" style="margin: 0"/>
     <img src="/projects/lamy/lamy 2.png" style="margin: 0"/>
