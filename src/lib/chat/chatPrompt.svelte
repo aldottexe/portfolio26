@@ -35,7 +35,7 @@
 <div class="field">
    <div class="fieldContent">
    {#if loading}
-   <img src="/icons/loading.svg" class="h-[30px] object-contain object-center px-3 bg-[#ffffff88]" alt="loading"/>
+   <img src="/icons/loading.svg" class="h-[30px] object-contain object-center px-3" alt="loading"/>
    {:else}
       <img src="/icons/chat.svg" class="max-w-4 top-0.25 relative"/>
       <div class="flex">
